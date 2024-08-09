@@ -5,6 +5,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{hyperref}
 \usepackage{booktabs}
+\usepackage{multirow}
 
 \title{Investigating the Impact of Macroeconomic Indicators 
 on the FTSE 250 Index Using Machine Learning Methods}
@@ -23,7 +24,7 @@ on the FTSE 250 Index Using Machine Learning Methods}
 
 The stock market has played a central role in the economy and political ascent of many European states such as Britain and the Netherlands ever since its inception during the Age of Discovery. Accordingly, any instabilities that have arisen in the stock market throughout history have had far-reaching destabilising effects on the economy; the Mississippi Bubble (1717-1720) was an early example of the dangers that stock markets carry, where the French colonial administration in America went bankrupt as a result of a speculative bubble; with the growing interconnectedness of markets, the stock market as an institution has also contributed significantly to global disasters such as the Great Depression and the Global Financial Crisis of 2008/9. Thus, economic policymakers and administrators must take into careful consideration both the impacts of their macroeconomic policies, and the general trend of the economy to ensure that any instability is corrected before it may have a destabilising effect. In addition, investors and traders are indirectly affected by the fluctuations of economic factors by virtue of their effect on companies. Therefore, examining the determinants of the stock market’s movements is important both for informing economic policymakers and financial services companies. Over time the FTSE 250 has gained a reputation for being a more accurate mirror of the UK economy than its higher-cap counterpart the FTSE 100, mainly because unlike the latter its overseas share of earnings is roughly a half - which is similar to the S\&P 500, instead of the nearly $80\%$ of the FTSE $100$'s earnings being overseas. This is also reflected in the constitutions of the respective indices, with the FTSE 250 historically commensurating more greatly with the structure of the UK economy. Within this context, the study has a twofold aim:
 \begin{enumerate}
-    \item To investigate which macroeconomic variables influence the stock market price significantly, and quantify the effects of the following selection of relevant macroeconomic indicators on the FTSE 250, chosen as a more representative measure of the UK stock market. An Auto-regressive Delayed Lag (ARDL) model is utilised, in conjunction with an Error Correction Model, over the January 1993 - March 2024 period: interest rate, inflation, USD exchange rate, and M3 money supply. 
+    \item To investigate which macroeconomic variables influence the stock market price significantly, and quantify the effects of the following selection of relevant macroeconomic indicators on the FTSE 250, chosen as a more representative measure of the UK stock market. An Auto-regressive Distributed Lag (ARDL) model is utilised, in conjunction with an Error Correction Model, over the January 1993 - March 2024 period: interest rate, inflation, USD exchange rate, and M3 money supply. 
     \item To investigate the efficacy of machine learning methods, in particular an RBF neural network (RBF-NN), in predicting stock price movements based on the same macroeconomic indicators. 
 \end{enumerate}
 
@@ -122,7 +123,7 @@ adjusted using the following recipe:
         \toprule
         \textbf{Variable} & \textbf{Notation} & \textbf{Source} \\
         \midrule
-        FTSE 250 Index & FTSE250 & Yahoo Finance (link) \\
+        FTSE 250 Index & FTSE$_{250}$ & Yahoo Finance (link) \\
         Consumer Price Index & CPI & Office for National Statistics (ONS) (link) \\
         USD/GBP Exchange Rate (£) & EXCHG & Federal Reserve of St Louis (link)\\
         Interest Rate ($\%$) & INT & Bank of England (link) \\
@@ -131,7 +132,25 @@ adjusted using the following recipe:
     \end{tabular}
 \end{table}
 
-Table 2 displays some basic descriptive statistics on the raw data. Insert analysis of descriptive statistics and historical behaviour.
+Randomtext
+Randomtext
+Randomtext
+Randomtext
+Randomtext
+RandomtextRandomtextRandomtext
+RandomtextRandomtextRandomtextRandomtext
+RandomtextRandomtextRandomtextRandomtext
+RandomtextRandomtextRandomtextRandomtext
+RandomtextRandomtextRandomtextRandomtext
+RandomtextRandomtextRandomtextRandomtext
+RandomtextRandomtextRandomtextRandomtext
+RandomtextRandomtextRandomtextRandomtext
+RandomtextRandomtextRandomtextRandomtext
+RandomtextRandomtextRandomtextRandomtext
+
+Table 2 displays some basic descriptive statistics on the raw data. 
+Insert analysis of descriptive statistics and historical behaviour, 
+brief notes on why the indicators are relevant
 
 \begin{table}[h!]
     \centering
@@ -149,14 +168,258 @@ Table 2 displays some basic descriptive statistics on the raw data. Insert analy
     \end{tabular}
 \end{table}
 
-\section{ARDL Bounds Test}
+Sample size discussion
 
-\section{RBF-NN}
+RandomtextRandomtextRandomtextRandomtextRandomtext
+RandomtextRandomtextRandomtext
+RandomtextRandomtextRandomtextRandomtext
+RandomtextRandomtextRandomtextRandomtext
+RandomtextRandomtextRandomtextRandomtext
+RandomtextRandomtextRandomtextRandomtext
+RandomtextRandomtextRandomtextRandomtext
+RandomtextRandomtextRandomtextRandomtext
+RandomtextRandomtextRandomtextRandomtext
+RandomtextRandomtextRandomtextRandomtext
+RandomtextRandomtextRandomtextRandomtext
+\section{ARDL Model}
+
+Based on the empirical research and characteristics of the UK economy, we 
+define the stock market index function as:
+
+\begin{equation}
+    FTSE_{250} = f\biggl(CPI, EXCHG, INT, M3\biggr)
+\end{equation}
+
+The study uses an autoregressive distributed lag (ARDL) model to determine 
+whether a long-term dependence exists for the FTSE250 and our macroeconomic 
+indicators, and if so to quantify the long-run and short-run relationships
+between the former and the latter (Panopoulou and Pittis 2004).
+
+\subsection{Methodology}
+
+Before constructing the ARDL model we first apply a natural logarithmic transform
+on the variables, this is done because in a log-transformed model,
+the coefficients can be interpreted as elasticities. Put simply, 
+a coefficient in a model, where both the dependent and independent variables
+are in logarithmic form, represents the percentage change in the 
+dependent variable for a one percent change in an independent variable, 
+which furnishes us with easily interpretable results. Having done this,
+we must then check at which level the variables are stationary (sidenote) at.
+Stationarity refers to the statistical property of a time-series where 
+its mean, variance, and autocorrelation structure do not change over time; 
+either a variable is stationary at level ($I(0)$), requiring no alteration,
+or it is stationary after taking the first difference ($I(1)$). 
+Non-stationarity leads to spurious regression, where relationships that 
+are not actually present between two time-series are produced. Various
+techniques exist for stationarity testing, however in this study the 
+Augmented Dickey-Fuller (ADF) unit root test, developed by (link), was used. 
+
+As the ARDL model involves lagged values of the dependent and independent 
+variables, we are required to determine the optimum lag for the variables 
+that minimises error; this was done using the Schwarz
+Information Criterion.
+
+The implicit form (2) is represented in the ARDL model as:
+
+\begin{align*}
+    \Delta \text{FTSE}_{250_t} &= \alpha_0 + \sum_{i=1}^{p} \alpha_i \Delta \text{FTSE}_{250_{t-i}} + \sum_{j_{1}=0}^{q_1} \beta_{1j_{1}} \Delta \text{CPI}_{t-j_{1}} + \sum_{j_{2}=0}^{q_2} \beta_{2j_{2}} \Delta \text{INT}_{t-j_{2}} \\
+                               & \sum_{j_{3}=0}^{q_3} \beta_{3j_{3}} \Delta \text{EXCHG}_{t-j_{3}} + \sum_{j_{4}=0}^{q_4} \beta_{4j_{4}} \Delta \text{M3}_{t-j_{4}} + \varepsilon_t + \phi_{1} FTSE_{250_{t-1}} \\
+                               & + \phi_{2} CPI_{t-1} + \phi_{3} INT_{t-1} +\phi_4 EXCHG_{t-1} + \phi_5 M3_{t-1}
+\end{align*}
+
+Here, the intercept term, denoting so and so, is given by $\alpha_0$; the 
+remaining $\alpha_i$ terms represent the short-run relationships 
+between the variables, and $\phi_j$ represent the long-run relationships. 
+
+In the ARDL bounds test, the null and alternate hypothesis are:
+ 
+\begin{align*}
+    H_{0}: \phi_i &= \phi_j\\
+    H_{1}: \phi_i &\neq \phi_j
+\end{align*}
+
+for, $i,j = 1,2,3,4,5$, with $i\neq j$. The F-statistic is computed for the joint
+significance of the lagged variables and compared against the critical values
+given by Pesaran et. al. (2001) to determine whether cointegration exists, 
+and at what significance level. If cointegration exists, then we estimate 
+the long-run coefficients $\kappa_i$ by estimating the cointegration equation:
+
+\begin{align}
+    FTSE_{250} = \kappa_0 + \kappa_1 CPI + \kappa_2 INT + \kappa_3 EXCHG + \kappa_4 M3 + \varepsilon 
+\end{align}
+
+Then, an Error Correction Model (ECM) is constructed:
+
+\begin{align*}
+    \Delta \text{FTSE}_{250_t} &= \alpha_0 + \sum_{i=1}^{p} \alpha_i \Delta \text{FTSE}_{250_{t-i}} + \sum_{j_{1}=0}^{q_1} \beta_{1j_{1}} \Delta \text{CPI}_{t-j_{1}} + \sum_{j_{2}=0}^{q_2} \beta_{2j_{2}} \Delta \text{INT}_{t-j_{2}} \\
+                               & \sum_{j_{3}=0}^{q_3} \beta_{3j_{3}} \Delta \text{EXCHG}_{t-j_{3}} + \sum_{j_{4}=0}^{q_4} \beta_{4j_{4}} \Delta \text{M3}_{t-j_{4}} + \gamma\text{ECT}_{t-1} + \varepsilon_t
+\end{align*}
+
+where the error correction term ECT is found by calculating the residual 
+produced by (3):
+
+\begin{align*}
+    ECT_{t-1} = FTSE_{250_{t-1}} - \biggl(\kappa_0 + \kappa_1 CPI + \kappa_2 INT + \kappa_3 EXCHG + \kappa_4 M3 + \varepsilon \biggr)
+\end{align*}
+
+The parameter $\gamma$ describes the speed at which short-run deviations from the long-run equilibrium
+are adjusted. A negative $\gamma$ implies that there exists a correction mechanism that converges the deviation 
+to the long-run equilibrium. To estimate the short-run coefficients, $\alpha_i$ and $\beta_k$, as 
+well as the short-run correction speed $\gamma$ we use OLS regression.
+
+\subsection{Results}
+
+We began by applying a natural logarithmic transform on the variables, and 
+then conducting the ADF unit root test on the data. The null hypothesis of the 
+ADF Unit Root test is that of non-stationarity, and the alternate hypothesis 
+is that the variables are stationary\footnote{All of the variables are tested in logarithmic form. The asterisks *, **, ***, and **** denote statistical significance
+at the 1$\%$, 2.5$\%$, 5$\%$ and 10$\%$ significance levels.}.
+
+
+\begin{table}[h!]
+    \centering
+    \caption{Augmented Dickey-Fuller (ADF) Unit Root Test}
+    \begin{tabular}{lccc}
+        \toprule
+        \textbf{Variable} & \textbf{Level ADF} & \textbf{First Difference ADF} & \textbf{Stationarity} \\
+        \midrule
+        FTSE$_{250}$ & $-3.2646^{****}$ & $-6.6892^{*}$ & At first difference \\
+        CPI          & $-1.4594$ & $-4.705^{*}$ & At first difference \\
+        EXCHG        & $-2.2467$ & $-7.3855^{*}$ & At first difference \\
+        INT          & $-2.0946$ & $-4.1156^{*}$ & At first difference \\
+        M3           & $-0.70827$ & $-6.3806^{*}$ & At first difference \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+
+Subsequently, the optimum lag of the variables was calculated using the 
+Schwarz Information Criterion, to obtain the optimum model 
+of ARDL(5, 4, 7, 7, 4). The resulting F-statistic of $4.0798$ was compared against the critical values
+given by Pesaran et. al. (2001), providing evidence of cointegration 
+at the $10\%$, $5\%$ and $2.5\%$ significance levels, but not at the $1\%$ 
+level.
+
+\begin{table}[h!]
+    \centering
+    \caption{ARDL Bounds Test Critical Values}
+    \begin{tabular}{lcccc}
+        \toprule
+        \textbf{Order} & \textbf{10$\%$} & \textbf{5$\%$} & \textbf{2.5$\%$} & \textbf{1$\%$} \\
+        \midrule
+        I(0) & $2.20$ & $2.56$ & $2.88$ & $3.29$ \\
+        I(1) & $3.09$ & $3.49$ & $3.87$  & $4.37$ \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+The long-run and short-run coefficients were then estimated, and presented 
+alonsgide the diagnostic test results which confirm that the model does not
+display autocorrelation, heteroskedascity, non-normality and the cumulative 
+sum of residuals and squared residuals are both stable, indicating that the 
+relationship between the variables has not changed over time. The error
+correction term is also given, and it is negative, as expected.
+
+\begin{table}[h!]
+    \centering
+    \caption{Coefficients Estimates}
+    \begin{tabular}{llll}
+        \toprule
+        \textbf{Variable} & \textbf{Long-Run Coefficient} & \textbf{Variable} & \textbf{Short-Run Coefficient} \\
+        \midrule
+        FTSE$_{250}$ & N/A & FTSE$_{250}$ $(-5)$  & $-0.033089$ \\
+        CPI & $3.157179$ & CPI $(-4)$ & $-0.921235$ \\
+        INT & $-0.1341097$ & INT $(-7)$ & $-0.034572^{****}$\\
+        EXCHG &  $-0.890146$ & EXCHG $(-7)$ & $0.122318$ \\
+        M3 & $-0.1141114$ & M3 $(-4)$ & $-0.527798^{***}$ \\
+         & & ECT $(-1)$ & $-0.002$ \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \caption{Diagnostic Tests}
+    \begin{tabular}{llll}
+        \toprule
+        \textbf{Condition} & \textbf{Test} & \textbf{p-value} & \textbf{Result} \\
+        \midrule
+        Autocorrelation & Box-Ljung Test & $0.9926$ & No autocorrelation \\
+        Heteroskedascity & Breusch-Pagan Test & $0.3635$ & Homoskedascity \\
+        Normality & Shapiro-Wilk Test & $3.889$e-$08$ & Normality \\
+        CUSUM & CUSUM Test & N/A & Stable \\
+        CUSUM$^2$ & CUSUM$^2$ Test & N/A & Stable \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\section{RBF Neural Network}
+
+\subsection{Model Architecture}
+
+The exact interpolation problem, which forms the motivation for RBF-NNs, 
+involves mapping a $d$-dimensional input space $\boldsymbol{\mathrm{x}}$ t
+o a one-dimensional target space $t$. The dataset consists of $N$ input
+ vectors $\boldsymbol{\mathrm{x_n}}$, along with corresponding target 
+ values $t_n$. The objective is to find a function
+  $h(\boldsymbol{\mathrm{x}})$ such that:
+
+
+\begin{align}
+  h(\boldsymbol{\mathrm{x_n}}) = t_n, \quad \text{for } n = 1, \ldots, N
+\end{align}
+
+The radial basis function approach (Powell, 1987) 
+introduces a set of $N$ basis functions, one for each 
+data point, which are functions of the distance
+$||\boldsymbol{\mathrm{x}} - \boldsymbol{\mathrm{x_n}}||$, where
+the basis function $\phi(\cdot)$ is some non-linear function. The output of the mapping is then expressed as a linear combination of these basis functions:
+
+\begin{align}
+    h(\boldsymbol{\mathrm{x}}) = \sum_{n=1}^{N} w_n \phi(||\boldsymbol{\mathrm{x}} - \boldsymbol{\mathrm{x_n}}||)
+\end{align}
+
+By introducing several modifications to the exact interpolation 
+procedure, we obtain the RBF-NN
+model first constructed in (Broomhead and Lowe, 1988). 
+The RBF-NN mapping takes the following form:
+
+\begin{align}
+    y(\boldsymbol{\mathrm{x}}) =  \sum_{j=1}^{M} w_{j} \phi_j(\boldsymbol{\mathrm{x}}) + w_{0}
+\end{align}
+
+where the radial basis function $\phi$ is the Inverse Multi-Quadric:
+
+\[
+\phi(r) = \left(r^2 + \sigma^2 \right)^{-\beta}
+\]
+
+where $r = \|\boldsymbol{\mathrm{x}} - \boldsymbol{\mathrm{c}}\|$ is the Euclidean distance between the input vector 
+\(\boldsymbol{\mathrm{x}}\) and the center of the basis function 
+\(\boldsymbol{\mathrm{c}}\). The constant $\sigma$ represents the
+spread of the basis function at each centre.
+- 
+
+An image of the network should be added, include courtesy of Bishop.
+
+\subsection{Methodology}
+
+The methodology should include a reference to the ARDL test
+so that we are linking everythnig together, and then go through why we must normalise the data for the RBF
+- one of the papers in my bookmarks talks about this. After this it should 
+go through how this was implemented in Python, and how we calculated the
+optimum hyperparameters, and which test error metric we utilised. Also explain
+the long-term and short-term prediction part.
+
+\subsection{Results}
+
+Present the results for the long term and short
 
 \section{Conclusion}
 
-This is the conclusion.
-
+What did this study achieve?
+How may it inform policymakers and investors?
+Areas for future work to build upon.
 \bibliographystyle{plainnat}
 \bibliography{references}
 
