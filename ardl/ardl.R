@@ -29,9 +29,13 @@ adf.test(data$CPI)
 dcpi <- diff(data$CPI)
 adf.test(dcpi)
 
-adf.test(monthly.data.m3$M3)
-dm3 <- diff(monthly.data.m3$M3)
+adf.test(data$M3)
+dm3 <- diff(data$M3)
 adf.test(dm3)
+
+adf.test(data$FTSE.250)
+dftse <- diff(data$FTSE.250)
+adf.test(dftse)
 
 max_lags <- 9
 results <- list()
@@ -87,9 +91,19 @@ monthly.data.m3$CointEq <- with(monthly.data.m3, FTSE.250 -
     long_run_intercept))
 
 
-ecm_model <- lm(diff(FTSE.250) ~ diff(INT) + diff(CPI) + diff(EXCHG) + diff(M3) + na.omit(lag(CointEq, 1)), data = monthly.data.m3)
+
+monthly.data.m3$ECT <- monthly.data.m3$FTSE.250 - monthly.data.m3$CointEq
+
+ecm_model <- dynlm(
+  diff(FTSE.250) ~ 
+    lag(diff(FTSE.250), 5) + lag(diff(CPI), 4) + lag(diff(INT), 7)  + lag(diff(EXCHG), 7) + lag(diff(M3), 4) + na.omit(lag(ECT, 1)), data = monthly.data.m3)
 summary(ecm_model)
 
+
+LR_INT
+LR_CPI
+LR_EXCHG
+LR_M3
 
 residuals <- residuals(model5)
 fitted_values <- fitted(model5)
