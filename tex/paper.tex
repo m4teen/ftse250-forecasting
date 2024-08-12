@@ -6,37 +6,81 @@
 \usepackage{hyperref}
 \usepackage{booktabs}
 \usepackage{multirow}
+\usepackage[numbers]{natbib}
+\usepackage{natbib}
+\usepackage{parskip}
+\usepackage{xcolor} \color{black}
+
 
 \title{Investigating the Impact of Macroeconomic Indicators 
 on the FTSE 250 Index Using Machine Learning Methods}
 \author{Mateen Khan}
-\date{\today}
+\date{}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-    This is the abstract of your paper. It should be a brief summary of your research.
+    Investment decisions and economic policy are highly influenced by 
+    macroeconomic variables and the stock market. Econometric models
+    have been the predominant tools in this context. The aim of this study is to analyse the impacts of some especially important macroeconomic
+    indicators on the FTSE250 
+    (Financial Times Stock Exchange 250 Index), using monthly data 
+    from  October 1993 to April 2024 using an ARDL model, obtaining 
+    quantifiable estimates for the long-term and short-term impacts of the variables
+    on the FTSE250. The efficacy of Radial Basis Function 
+    Neural Networks (RBF-NN) in this problem domain is then investigated. We find that 
+    the RBF-NN is a competent short-term forecasting tool, and is able to 
+    provide an alternative approach to standard econometric models in measuring the long-term influence of
+    macroeconomic variables on the stock market.
 \end{abstract}
 
 \section{Introduction}
 
-The stock market has played a central role in the economy and political ascent of many European states such as Britain and the Netherlands ever since its inception during the Age of Discovery. Accordingly, any instabilities that have arisen in the stock market throughout history have had far-reaching destabilising effects on the economy; the Mississippi Bubble (1717-1720) was an early example of the dangers that stock markets carry, where the French colonial administration in America went bankrupt as a result of a speculative bubble; with the growing interconnectedness of markets, the stock market as an institution has also contributed significantly to global disasters such as the Great Depression and the Global Financial Crisis of 2008/9. Thus, economic policymakers and administrators must take into careful consideration both the impacts of their macroeconomic policies, and the general trend of the economy to ensure that any instability is corrected before it may have a destabilising effect. In addition, investors and traders are indirectly affected by the fluctuations of economic factors by virtue of their effect on companies. Therefore, examining the determinants of the stock market’s movements is important both for informing economic policymakers and financial services companies. Over time the FTSE 250 has gained a reputation for being a more accurate mirror of the UK economy than its higher-cap counterpart the FTSE 100, mainly because unlike the latter its overseas share of earnings is roughly a half - which is similar to the S\&P 500, instead of the nearly $80\%$ of the FTSE $100$'s earnings being overseas. This is also reflected in the constitutions of the respective indices, with the FTSE 250 historically commensurating more greatly with the structure of the UK economy. Within this context, the study has a twofold aim:
+The stock market has played a central role in the economy and 
+political ascent of many states ever since its inception. 
+Accordingly, any instabilities that have arisen in the stock market 
+throughout history have had far-reaching destabilising effects on the 
+economy; the Mississippi Bubble (1717-1720) was an early example of the 
+dangers that stock markets carry, where the French colonial administration 
+in America went bankrupt as a result of a speculative bubble. Wth the
+growing interconnectedness of markets, the stock market as an institution 
+has also contributed significantly to global disasters such as the Great 
+Depression and the Global Financial Crisis of 2008/9. Thus, economic 
+policymakers and administrators must take into careful consideration 
+both the impacts of their macroeconomic policies on the stock market.
+
+Investors and traders are also affected by the 
+fluctuations of economic factors due to their effect on firms.
+The ability to forecast market trends allows 
+investors to optimise their trading strategies, allowing them to make
+informed decisions about when to buy or sell assets. 
+Additionally, in a globalised economy, the interconnectedness of 
+markets means that events in one region may have significant effects worldwide, 
+making it even more critical for investors to stay ahead of potential market movements.
+The traditional methods that have been leveraged in this context have been econometric, 
+however machine learning methods have emerged as powerful alternatives capable
+of capturing complex relationships in noisy financial data, and thereby providing more
+accurate forecasts.
+
+We utilise the FTSE 250 as our measure of the UK stock market, ecause unlike the 
+FTSE100 its overseas share of earnings is 
+roughly $50\%$, similar to the S\&P 500. In contrast, nearly $80\%$ of the FTSE $100$'s earnings 
+are from overseas. This is reflected in the constitution of the respective indices, with 
+the FTSE 250 historically resembling the structure 
+of the UK economy more closely. 
+
+Thus, the study has a twofold aim:
 \begin{enumerate}
     \item To investigate which macroeconomic variables influence the stock market price significantly, and quantify the effects of the following selection of relevant macroeconomic indicators on the FTSE 250, chosen as a more representative measure of the UK stock market. An Auto-regressive Distributed Lag (ARDL) model is utilised, in conjunction with an Error Correction Model, over the January 1993 - March 2024 period: interest rate, inflation, USD exchange rate, and M3 money supply. 
-    \item To investigate the efficacy of machine learning methods, in particular an RBF neural network (RBF-NN), in predicting stock price movements based on the same macroeconomic indicators. 
+    \item To investigate the efficacy of machine learning methods, in particular a radial basis function neural network, in predicting stock price movements based on the same macroeconomic indicators. 
 \end{enumerate}
+
 
 \section{Literature Review}
 
-There is a large and growing body of research investigating the impact of macroeconomic variables on the stock market; empirical research supports our selection of macroeconomic determinants:
-
-Louis Bachelier’s \textit{Théorie de la Spéculation} is generally considered to be one of the earliest contributions to the theory of financial markets and randomness.-source- Building on the concepts of Brownian motion, he introduced the random walk theory for stock prices, arguing that future price movements are independent of past movements. 
-This laid the foundation for modern portfolio theory in the form of 
-Markowitz’s conception of risk and return Sharpe’s Capital Asset Pricing 
-Model (1964) - source. Eugene Fama used these foundations to develop his 
-Efficient Market Hypothesis in 1970, which argues that asset prices fully 
+The Efficient Market Hypothesis in 1970 \cite{fama1970} argues that asset prices fully 
 reflect all available information; Fama outlined three forms of the EMH - 
 weak-form, semi-strong form and strong form EMH:
 \begin{enumerate}
@@ -45,7 +89,15 @@ weak-form, semi-strong form and strong form EMH:
     \item Strong-form: Stock markets are perfectly efficient, stock prices reflect all information, both public and private. This includes all publicly available information covered by the semi-strong form, insider information, and even future events that are not yet known to the public. This implies that it is impossible to enjoy a consistent advantage in predicting stock prices.
 \end{enumerate}
 
-The consistent success of investors such as Warren Buffett of Berkshire Hathaway and Jim Simons of Renaissance Technologies in the decades after the development of the EMH have challenged its central argument, and have shown the possibility of achieving consistent returns against the market. Even the creator of the hypothesis conceded in Fama (1991) that many stock returns are in fact predictable from previous values. Furthermore, the empirical research is not in agreement on whether the London Stock Exchange is efficient at any of the three levels. Rounaghi and Nassir Zadeh (2016) gives evidence that the FTSE100 and FTSE250 are efficient over the period 2007 - 2013, and Libberton (2010) also gives evidence that the FTSE100 is weak-form efficient over 1995 - 2007. However, Borges (2010) gives evidence to reject the EMH for both the French and UK stock markets over the period 1993 - 2007; the findings of Ullah and Asghar (2023) support Borges (2010) and reject EMH for the FTSE 100 over the period 2012 - 2020. Additionally, Bhavsar (2015) rejects the EMH for both the FTSE 100 and FTSE 250 over the 13-year period January 2002 - December 2014. Some studies such as Rosini and Shenai (2020) found that the efficiency of the FTSE100 and FTSE250 varied over time, giving support to Andrew Lo’s Adaptive Market Hypothesis. The empirical findings then suggest that it is not impossible to determine, to some degree, movements in the price of stock indices on the LSE using macroeconomic variables.
+The consistent success of investors such as Warren Buffett of 
+Berkshire Hathaway and Jim Simons of Renaissance Technologies 
+in the decades after the development of the EMH have challenged 
+its central argument, and have shown the possibility of achieving 
+consistent returns against the market. Even the creator of the 
+hypothesis conceded that many stock returns are in fact predictable from 
+previous values \cite{fama1991}. Furthermore, the empirical research is not in a
+greement on whether the London Stock Exchange is efficient at any of the three levels. 
+Rounaghi and Zadeh (2016) gives evidence that the FTSE100 and FTSE250 are efficient over the period 2007 - 2013, and Libberton (2010) also gives evidence that the FTSE100 is weak-form efficient over 1995 - 2007. However, Borges (2010) gives evidence to reject the EMH for both the French and UK stock markets over the period 1993 - 2007; the findings of Ullah and Asghar (2023) support Borges (2010) and reject EMH for the FTSE 100 over the period 2012 - 2020. Additionally, Bhavsar (2015) rejects the EMH for both the FTSE 100 and FTSE 250 over the 13-year period January 2002 - December 2014. Some studies such as Rosini and Shenai (2020) found that the efficiency of the FTSE100 and FTSE250 varied over time, giving support to Andrew Lo’s Adaptive Market Hypothesis. The empirical findings then suggest that it is not impossible to determine, to some degree, movements in the price of stock indices on the LSE using macroeconomic variables.
 
 The Fisher hypothesis, developed by the neoclassicist economist Irving Fisher, states that the nominal interest rate will adjust to accommodate any changes in expected inflation (Frank, Robert; Bernanke, Ben; Antonovics, Kate; Heffetz, Ori. Principles of Macroeconomics. McGraw-Hill. pp. 138–139). The implications of this in the stock market are that firms anticipate inflation correctly and adjust prices accordingly, and that the market is efficient, quickly incorporating inflation into prices. It was tested in the US stock market by Jaffe and Mandelker (1976) when they examined the relationship between monthly inflation and stock returns; they would find a negative relationship between inflation and stock returns over the period January 1951 - December 1971. In support of Jaffe and Mandelker is a large array of empirical research, including but not limited to, Bodie (1976) who found that stocks were not an effective hedge against inflation, as they were affected negatively by inflation; Fama and Schwert (1977) built on Bodie (1976), finding that over a roughly 20 year period stocks did not provide an effective hedge against inflation, and returns were negatively affected by inflation in this period; Mogdiliani and Cohn (1979) sought to root this phenomenon in economic theory, and came up with the Inflation Illusion Hypothesis, which posits that investors fail to correctly account for the impact of inflation on nominal earnings and interest rates, and consequently stock prices when they are valuing stocks, primarily through overestimating the correct discount rate in the Discounted Cash Flow valuation model (link in appendix?). Campbell and Vuolteenaho (2004) found empirical evidence to support this in the US, suggesting that nearly $80\%$ of stock-market time-series variation is caused by the level of inflation. Firth (1979) and Gultekin (1983) found that the relationship between nominal stock returns and inflation in the UK is positive, and that real returns on UK stocks have remained relatively stable even as inflation varied, in support of the generalised Fisher hypothesis. Hassan (2008) later found evidence against this when he investigated the relationship between stock returns and inflation in the UK, finding a significantly positive relationship between the two. Additionally, Cunado et. al. found no evidence of stocks acting as effective hedges over a roughly two-century period in the UK, providing further evidence against the Fisher hypothesis in the UK.
 
@@ -499,8 +551,9 @@ permissible because of the independence assumption,
     p(y|X,w) = \prod_{i=1}^{n} p(y_i|x_i ,w) = \mathcal{N}\bigl(X^T, \sigma_{n}^2 I\bigr)
 \end{align}
 
-In the Bayesian formalism we need to specify a prior over the parameters, expressing our beliefs about the prior
-parameters before we look at the observations. A covariance function or kernel
+As this is a Bayesian model we need to specify a \textit{prior distribution} over the parameters, 
+expressing our beliefs about the prior
+parameters before we examine the observations. A covariance function or kernel
 is specified according to the characteristics of the data; in our model this 
 is the generalised inverse multiquadric
 
@@ -528,7 +581,7 @@ predictive distribution, upon which predicted outputs are computed.
 A $4$-dimensional input space $X$
 passes inputs $\boldsymbol{\mathrm{x}}_1, \boldsymbol{\mathrm{x}}_2,\ldots \boldsymbol{\mathrm{x}}_{n}$
 and corresponding outputs \( y = \{y_1, y_2, \dots, y_n\} \), through the first
-of two hidden layers, in which the covariance function $(x,x')$
+layer, in which the covariance function $(x,x')$
 is applied, the goal being to determine the distribution of the weights. Prior to this,
 the optimal hyperparameters in the covariance function, which plays an analogous
 role to the RBF basis function, are calculated using GridSearch Cross Validation; these hyperparameters are:
@@ -548,15 +601,16 @@ averaging over all possible $w$, weighted by their likelihood according to (10).
 
 \subsection{Results}
 
-The model returned a mean absolute error (MAE)  MAE $=0.16$ and 
-$R^2 = 9\%$ for the long term prediction.
+The model returned a mean absolute error of MAE $=0.16$ and 
+$R^2 = 9\%$ for the long term prediction, outperforming the ARDL-Error Correction model by 
+$2.4\%$.
 
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{short-term.png}
-    \caption{}
-    \label{fig:}
+    \includegraphics[width=0.8\textwidth]{long-term-monthly.png}
+    \caption{Long-term predicted vs monthly real FTSE250 price changes}
+    \label{fig:lmonthly}
 \end{figure}
 
 The interpretation of this is that, historically, the variations in the 
@@ -571,31 +625,95 @@ is by no means exhaustive; commodity prices, international trade dynamics,
 economic growth, and many other variables also exert a non-insignificant 
 effect on the stock market.
 
+
 The short-term prediction yielded MAE = $0.07$ and 
 $R^2 = 61\%$, for a 5-month time horizon.
 The significantly better performance of the model in the short-run
 indicates that the selected macroeconomic variables possesses
 a stronger predictive power over shorter periods. This was highlighted 
 earlier in the ARDL model, with the interest rate and money supply significantly
-impacting the FTSE250 price. In the short-term, which we define as 5 months, 
+impacting the FTSE250 price. 
+
+In the short-term, which we define as 5 months, 
 as per the optimum lag for the FTSE250 in the ARDL model, the market movements
 are more closely tied to recent deviations in the economy, because theoretically
 the short-run is not exposed to the various unforeseen external shocks and structural changes
-that dilute the relationship between these variables and the stock market in the long-run. 
+that dilute the relationship between these variables and the stock market in the 
+long-run. Essentially, as we stretch our prediction window, we 
+introduce more uncertainty and unknowns, which translates into a 
+lower predictive quality.
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{long-term-daily.png}
+    \caption{Long-term predicted vs daily real FTSE250 price changes}
+    \label{fig:ldaily}
+\end{figure}
+
+Furthermore, as the time horizon extends into the long-run, fundamental factors 
+begin to matter a lot more. The compound effect of earnings, cash flows and
+managerial efficiencies begins to outweigh the 
+influence of fluctuating macroeconomic sentiment. Thus, in the long-term
+we see a different picture altogether.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{short-term-monthly.png}
+    \caption{Short-term predicted vs monthly real FTSE250 price changes}
+    \label{fig:smonthly}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{short-term-daily.png}
+    \caption{Short-term predicted vs daily real FTSE250 price changes}
+    \label{fig:sdaily}
+\end{figure}
 
 \section{Conclusion}
 
-What did this study achieve: it tested the findings of previous research on the 
-UK stock market, via the FTSE250, and was able to...
+This study first tested the findings of previous econometric research on the 
+UK stock market, relating the impact of some especially
+relevant macroeconomic factors on the FTSE250. 
 
-How may it inform policymakers and investors: the effect of the 
-Areas for future work to build upon: consider daily data with some kind of 
-stochastic interpolation to get daily data and try other networks. 
-Other variables. Autoregress on 
-FTSE itself in rbf, as this was not in scope of the project.
+Stock markets provide important information on the economy, 
+and economic policymakers are vigilant in tracking the fluctuations 
+in these markets, and try to forecast the 
+forthcoming fluctuations based on policy changes that affect the macroeconomy.
+Within this context, the study examined the 
+impacts of the interest rate, USD/GBP
+exchange rate, the consumer price index, and 
+M3 money supply market activity on
+the FTSE250 index over the October 1993 – April 2024 period.
+The results suggest a cointegrated long-run
+relationship between the macroeconomic variables and the stock market index. 
+The long-run coefficients imply that
+increases in the interest rate and depreciation in the exchange rate
+significantly depress the FTSE250 value. 
+Policymakers dealing with forecasting the UK stock markets
+should consider the factors in the study, and to raise the stock
+market's value, a lower interest rate regime should be adopted and 
+the Pound should be made more competitive.
+
+The the study also investigated the efficacy of machine learning methods in 
+the field of stock-econometric forecasting, and returned good results, providing investors
+with an accurate short-term forecast tool, and also providing economists
+with a quantitative non-econometric measure of the 
+long-term influence of the selected macroeconomic 
+variables on the FTSE250 that outperforms a standard econometric model.
+
+Further research should endeavour to include other macroeconomic variables such as 
+foreign direct and portfolio investment, commodity prices and economic growth.
+Falling outside the immediate scope of the current study, 
+an autoregresive model could also be tried, including the past values of the 
+FTSE250 in the input space to provide a more accurate model. In addition, 
+a more granular data set could be utilised by applying a 
+Brownian bridge algorithm to generate daily macroeconomic data and 
+subsequently testing the RBF-NN against other neural networks 
+such as auto-regressive LSTMs and GRUs, as well as other machine learning methods suited for 
+forecasting such as Support Vector Machines (SVM). 
 
 \bibliographystyle{plainnat}
-\bibliography{references}
+\bibliography{paper}
 
 \end{document}
