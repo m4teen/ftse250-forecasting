@@ -40,7 +40,7 @@ on the FTSE 250 Index Using Machine Learning Methods}
     from  October 1993 to April 2024 using an ARDL model, obtaining 
     quantifiable estimates for the long-term and short-term impacts of the variables
     on the FTSE250. The efficacy of Radial Basis Function 
-    Neural Networks (RBF-NN) in this problem domain is then investigated. We find that 
+    Neural Networks (RBF-NN) in this problem domain is then investigated. It is established 
     the RBF-NN is a competent short-term forecasting tool, and is able to 
     provide an alternative approach to standard econometric models in measuring the long-term influence of
     macroeconomic variables on the stock market.
@@ -75,20 +75,21 @@ Machine learning methods, particularly neural networks, have emerged as powerful
 of capturing complex relationships in financial data, and thereby providing more
 accurate forecasts than econometric models.
 
-In this study we first use an Autoregressive Distributed Lag (ARDL) model in conjunction with an Error Correction Model (ECM), to investigate 
+In this study, first an Autoregressive Distributed Lag (ARDL) model in conjunction with an Error Correction Model (ECM), is employed to investigate 
 the different effects of selected macroeconomic variables on the FTSE250 Index over the January 1993 - March 2024 period.
-Second, we test the efficacy of a Radial Basis Function Neural Network (RBF-NN) in forecasting the price movements of the FTSE250 based on the selected macroeconomic indicators, over the short-term 
-(5 months) and long-term (57 months). 
+Second, the efficacy of a Radial Basis Function Neural Network (RBF-NN) is tested in forecasting the price movements of the FTSE250 based on the selected macroeconomic indicators, over the short-term 
+(5 months) and long-term (57 months), the former intended to inform investors and the latter to provide
+economic policymakers with a tool to measure the influence of macroeconomic variables on the price of the stock market. 
 
 
-We utilise the FTSE 250 as our measure of the UK stock market, because unlike the 
+The FTSE 250 is utilised as the measure of the UK stock market, because unlike the 
 FTSE100 its overseas share of earnings is 
 roughly $50\%$, similar to the S\&P 500. In contrast, nearly $80\%$ of the FTSE $100$'s earnings 
 are from overseas. This is reflected in the constitution of the respective indices, with 
 the FTSE 250 historically resembling the structure 
 of the UK economy more closely than the FTSE100.
 
-The macroeconomic variables we consider are inflation, indicated by the Consumer Price
+The macroeconomic variables considered are inflation, indicated by the Consumer Price
 Index (CPI); interest rate, represented by the Bank of England policy rate; the exchange rate, 
 represented by the USD/GBP exchange rate; and the money supply, represented by the 
 M3 measure of money supply, preferred over other 
@@ -107,7 +108,8 @@ forecasts for the FTSE250 Index price movements, based on our selected macroecon
 
 \subsection{Stock Market-Macroeconomy Relationship}
 
-There are a number of works which investigate the impact of macroeconomic variables
+There are a number of works which investigate the impact of 
+the selected macroeconomic variables
 on the stock market.
 
 \subsubsection{Inflation}
@@ -226,7 +228,7 @@ used quarterly data from 2001 to 2023 to model the influence of economic
 policies on the quarterly prices of various stock markets including the 
 FTSE100 using an RBF-NN, finding that the model 
 achieved relative forecast error rates as low as 6.8$\%$ and an error of 
-27.2$\%$ in the case of the FTSE100. Thus, we find that the RBF-NN is a 
+27.2$\%$ in the case of the FTSE100. Thus, it is concluded that the RBF-NN is a 
 competent tool in the sphere of financial time-series forecasting, and 
 is able to operate effectively within the constraints placed by our 
 problem domain and data.
@@ -320,12 +322,12 @@ in response to the aforementioned crises. These programs aimed to inject liquidi
 
 \section{ARDL Model}
 
-Based on the empirical research and characteristics of the UK economy, we 
-define the stock market index function as:
+Based on the empirical research and characteristics of the UK economy,
+the stock market function is defined as:
 
-\begin{equation}
-    FTSE_{250} = f\biggl(CPI, EXCHG, INT, M3\biggr)
-\end{equation}
+\begin{align}
+    FTSE_{250} = f\biggl(CPI, EXCHG, INT, M3\biggr) \label{eq:implicit}
+\end{align}
 
 The study uses an autoregressive distributed lag (ARDL) model to determine 
 whether a long-term dependence exists for the FTSE250 and our macroeconomic 
@@ -334,29 +336,27 @@ between the former and the latter (Panopoulou and Pittis 2004).
 
 \subsection{Methodology}
 
-Before constructing the ARDL model we first apply a natural logarithmic transform
+Before constructing the ARDL model a natural logarithmic transform is applied
 on the variables, this is done because in a log-transformed model,
 the coefficients can be interpreted as elasticities. Put simply, 
 a coefficient in a model, where both the dependent and independent variables
 are in logarithmic form, represents the percentage change in the 
 dependent variable for a one percent change in an independent variable, 
 which furnishes us with easily interpretable results. Having done this,
-we must then check at which level the variables are stationary (sidenote) at.
-Stationarity refers to the statistical property of a time-series where 
-its mean, variance, and autocorrelation structure do not change over time; 
-either a variable is stationary at level ($I(0)$), requiring no alteration,
+the level at which the variables are stationary\footnote{Stationarity refers to the statistical property of a time-series where 
+its mean, variance, and autocorrelation structure do not change over time. Either a variable is stationary at level ($I(0)$), requiring no alteration,
 or it is stationary after taking the first difference ($I(1)$). 
-Non-stationarity leads to spurious regression, where relationships that 
-are not actually present between two time-series are produced. Various
-techniques exist for stationarity testing, however in this study the 
-Augmented Dickey-Fuller (ADF) unit root test, developed by (link), was used. 
+Non-stationarity leads to spurious regression where relationships that 
+are not actually present between two time-series are produced.} is checked.
+Various techniques exist for stationarity testing, however in this study the 
+Augmented Dickey-Fuller (ADF) unit root test, was used. 
 
 As the ARDL model involves lagged values of the dependent and independent 
-variables, we are required to determine the optimum lag for the variables 
+variables, it is necessary to determine the optimum lag for the variables 
 that minimises error; this was done using the Schwarz
 Information Criterion.
 
-The implicit form (2) is represented in the ARDL model as:
+The implicit form \eqref{eq:implicit} is represented in the ARDL model as:
 
 \begin{align*}
     \Delta \text{FTSE}_{250_t} &= \alpha_0 + \sum_{i=1}^{p} \alpha_i \Delta \text{FTSE}_{250_{t-i}} + \sum_{j_{1}=0}^{q_1} \beta_{1j_{1}} \Delta \text{CPI}_{t-j_{1}} + \sum_{j_{2}=0}^{q_2} \beta_{2j_{2}} \Delta \text{INT}_{t-j_{2}} \\
@@ -377,12 +377,12 @@ In the ARDL bounds test, the null and alternate hypothesis are:
 
 for, $i,j = 1,2,3,4,5$, with $i\neq j$. The F-statistic is computed for the joint
 significance of the lagged variables and compared against the critical values
-given by Pesaran et. al. (2001) to determine whether cointegration exists, 
-and at what significance level. If cointegration exists, then we estimate 
-the long-run coefficients $\kappa_i$ by estimating the cointegration equation:
+given by \citeboth{pesaran2001} to determine whether cointegration exists, 
+and at what significance level. If cointegration exists, then 
+the long-run coefficients $\kappa_i$ are estimating using the cointegration equation:
 
 \begin{align}
-    FTSE_{250} = \kappa_0 + \kappa_1 CPI + \kappa_2 INT + \kappa_3 EXCHG + \kappa_4 M3 + \varepsilon 
+    FTSE_{250} = \kappa_0 + \kappa_1 CPI + \kappa_2 INT + \kappa_3 EXCHG + \kappa_4 M3 + \varepsilon \label{eq:two}
 \end{align}
 
 Then, an Error Correction Model (ECM) is constructed:
@@ -393,7 +393,7 @@ Then, an Error Correction Model (ECM) is constructed:
 \end{align*}
 
 where the error correction term ECT is found by calculating the residual 
-produced by (3):
+produced by \eqref{eq:two}:
 
 \begin{align*}
     ECT_{t-1} = FTSE_{250_{t-1}} - \biggl(\kappa_0 + \kappa_1 CPI + \kappa_2 INT + \kappa_3 EXCHG + \kappa_4 M3 + \varepsilon \biggr)
@@ -402,11 +402,11 @@ produced by (3):
 The parameter $\gamma$ describes the speed at which short-run deviations from the long-run equilibrium
 are adjusted. A negative $\gamma$ implies that there exists a correction mechanism that converges the deviation 
 to the long-run equilibrium. To estimate the short-run coefficients, $\alpha_i$ and $\beta_k$, as 
-well as the short-run correction speed $\gamma$ we use OLS regression.
+well as the short-run correction speed $\gamma$ OLS regression is used.
 
 \subsection{Results}
 
-We began by applying a natural logarithmic transform on the variables, and 
+First, a natural logarithmic transform was applied on the variables, and 
 then conducting the ADF unit root test on the data. The null hypothesis of the 
 ADF Unit Root test is that of non-stationarity, and the alternate hypothesis 
 is that the variables are stationary.
@@ -433,7 +433,7 @@ is that the variables are stationary.
 Subsequently, the optimum lag of the variables was calculated using the 
 Schwarz Information Criterion, to obtain the optimum model 
 of ARDL(5, 4, 7, 7, 4). The resulting F-statistic of $4.0798$ was compared against the critical values
-given by Pesaran et. al. (2001), providing evidence of cointegration 
+given by \citeboth{pesaran2001}, providing evidence of cointegration 
 at the $10\%$, $5\%$ and $2.5\%$ significance levels, but not at the $1\%$ 
 level.
 
@@ -469,7 +469,7 @@ correction term is also given, and it is negative, as expected.
         INT & $-0.1341097^{***}$ & INT $(-7)$ & $-0.034572^{****}$\\
         EXCHG &  $-0.890146^{****}$ & EXCHG $(-7)$ & $0.122318$ \\
         M3 & $-0.1141114$ & M3 $(-4)$ & $-0.527798^{***}$ \\
-        Intercept & $-3.447767$ & ECT $(-1)$ & $-0.16^{**}$ \\
+        Intercept & $-3.447767$ & ECT $(-1)$ & $-0.1001^{**}$ \\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -492,7 +492,7 @@ correction term is also given, and it is negative, as expected.
 
 The long term coefficients show that the interest rate and exchange rate
 interest rate have significant long term effects on the stock market price
-while money supply and inflation are statistically insignificant. Neifar (2023) 
+while money supply and inflation are statistically insignificant. \citeboth{neifar2023}
 proposes that this is because deflation, that is the negative movements in the 
 CPI, is a statistically significant factor in the movement of the UK stock 
 market, but positive movements (inflation) are not. Nevertheless, the positive
@@ -501,7 +501,7 @@ inflation exerts a positive effect on the stock market in the long-term, but a n
 one in the short-run. 
 
 The insignificant long-term effect of the money supply 
-was noted by Picha (2017) and appears to be confirmed here. There are a few explanations
+was noted by \citeboth{pícha2017} and appears to be confirmed here. There are a few explanations
 for why this may be.
 
 Unsurprisingly, the USD/GBP exchange rate is significantly related to the FTSE 250's movements. It 
@@ -510,17 +510,17 @@ at times $50\%$ of the FTSE 250's earnings have come from abroad, indicating tha
 the value of the Pound has an important impact on this stock market. As the USD has been 
 the global reserve currency for many decades, the depreciation of the Pound 
 against it by $1\%$ has an impact of $-0.89\%$ on the FTSE 250. The findings 
-are in line with Neifar (2023), Liang and Willett (2015), and Khan and Khan (2018).
+are in line with \citeboth{neifar2023} and \citeboth{khan2018}.
 
 The interest rate was also found to have significant negative long-run effects on the 
 stock market, affirming the findings of the extant literature ().
 The mechanisms by which this occurs were discussed earlier in the literature review.
 
 
-Turning to the short-run dynamics, we find that the error correction term 
+Turning to the short-run dynamics, the error correction term 
 is negative and statistically significant ensuring that long-run equilibrium 
-can be achieved. The adjustment speed of $0.16$ indicates that 
-roughly $16\%$ of the fluctuation in the previous month's price, caused by the 
+can be achieved. The adjustment speed of $0.1001$ indicates that 
+roughly $10\%$ of the fluctuation in the previous month's price caused by the 
 macroeconomic variable movements, is adjusted back to the long-run equilibrium in the current month.
 However, only increases in the interest rate and money supply are able to 
 significantly contribute towards this correction, with $1\%$ increases in the former 
@@ -554,8 +554,8 @@ the basis function $\phi(\cdot)$ is some non-linear function. The output of the 
 \end{align}
 
 By introducing several modifications to the exact interpolation 
-procedure, we obtain the RBF-NN
-model first constructed in (Broomhead and Lowe, 1988). 
+procedure, the RBF-NN
+model is obtained, as outlined originally in \citeboth{broomhead1988}. 
 The RBF-NN mapping takes the following form:
 
 \begin{align}
@@ -616,17 +616,17 @@ spread of the basis function at each centre.
 The RBF-NN was utilised for both short-term and long-term 
 predictions. For short-term forecasting, 
 the model was tested over a 5-month horizon, based on the optimum lag calculated earlier, while the long-term predictions spanned 57 months. 
-We differenced the data based on the recommendations of the 
+The data was differenced based on the recommendations of the 
 unit root tests conducted earlier to achieve stationarity. 
 
-We began by normalising the data, using a z-score normalisation. This is because
+First, the data was normalised using a z-score normalisation. This is because
 neural networks work best with data
 that is between a specified range; it ensures that the data is roughly uniformly
 distributed between the network inputs and outputs 
 (Mendelsohn, 1993, Preprocessing Data for Neural Networks). Following this 
-we had to program the RBF-NN into Python. As no specific RBF package exists
-in Python, we used the kernel regression approach outlined by 
-Bishop, using the GaussianProcessRegressor (GPR) package in Python.
+it was necessary to program the RBF-NN into Python. As no specific RBF package exists
+in Python, the kernel regression approach outlined by 
+\citeboth{bishop1995}, using the GaussianProcessRegressor (GPR) package in Python.
 
 \subsubsection{The Gaussian Process Regressor}
 
@@ -653,9 +653,9 @@ permissible because of the independence assumption,
     p(y|X,w) = \prod_{i=1}^{n} p(y_i|x_i ,w) = \mathcal{N}\bigl(X^T, \sigma_{n}^2 I\bigr)
 \end{align}
 
-As this is a Bayesian model we need to specify a \textit{prior distribution} over the parameters, 
+As this is a Bayesian model a \textit{prior distribution} over the parameters must be specified, 
 expressing our beliefs about the prior
-parameters before we examine the observations. A covariance function or kernel
+parameters before the observations are used. A covariance function or kernel
 is specified according to the characteristics of the data; in our model this 
 is the generalised inverse multiquadric
 
@@ -671,12 +671,12 @@ By Bayes' Theorem,
 Using this, the posterior distribution is then obtained
 
 \begin{align}
-    p(w|y, X) \sim \mathcal{N}\bigl(\frac{A^{-1}Xy}{\sigma_{n}^{2}}, A^{-1}\bigr)
+    p(w|y, X) \sim \mathcal{N}\bigl(\frac{A^{-1}Xy}{\sigma_{n}^{2}}, A^{-1}\bigr) \label{eq:nine}
 \end{align}
 where the covariance matrix $A^{-1} = K^{-1} + \frac{XX^T}{\sigma_{n}^2}$.
 To make predictions on a test case all possible $w$
 values, weighted by their posterior probability, are averaged to obtain the
-predictive distribution, upon which predicted outputs are computed.
+predictive distribution, upon which predicted outputs are computed. \citep{rasmussen2006}
 
 \subsubsection{The Network}
 
@@ -699,7 +699,7 @@ role to the RBF basis function, are calculated using GridSearch Cross Validation
 \end{enumerate}
 following this the model uses the training observation $(y,X)$ to find
 the posterior predictive distribution, and with it the predicted output, after 
-averaging over all possible $w$, weighted by their likelihood according to (10). 
+averaging over all possible $w$, weighted by their likelihood according to \eqref{eq:nine}. 
 
 \subsection{Results}
 
@@ -715,35 +715,12 @@ $2.4\%$.
     \label{fig:lmonthly}
 \end{figure}
 
-The interpretation of this is that, historically, the variations in the 
+The interpretation of this is that, over the long-run (4-5 years), the variations in the 
 Consumer Price Index, interest rate, USD/GBP exchange rate, and M3 money 
-supply have explained or accounted for $9\%$ of the fluctuations of the
-FTSE250 value; in the context of a phenomenon as complex as the stock market,
-which is influenced by an inumerable quantity of factors such as investor sentiment
-- inherently irrational, 
-political instability, geopolitical shocks, corporate governance, and financial regulation, this is 
-unsurprising. Furthermore, the selection of economic variables in this study
-is by no means exhaustive; commodity prices, international trade dynamics,
-economic growth, and many other variables also exert a non-insignificant 
-effect on the stock market.
-
-
-The short-term prediction yielded MAE = $0.07$ and 
-$R^2 = 61\%$, for a 5-month time horizon.
-The significantly better performance of the model in the short-run
-indicates that the selected macroeconomic variables possesses
-a stronger predictive power over shorter periods. This was highlighted 
-earlier in the ARDL model, with the interest rate and money supply significantly
-impacting the FTSE250 price. 
-
-In the short-term, which we define as 5 months, 
-as per the optimum lag for the FTSE250 in the ARDL model, the market movements
-are more closely tied to recent deviations in the economy, because theoretically
-the short-run is not exposed to the various unforeseen external shocks and structural changes
-that dilute the relationship between these variables and the stock market in the 
-long-run. Essentially, as we stretch our prediction window, we 
-introduce more uncertainty and unknowns, which translates into a 
-lower predictive quality.
+supply explain or account for $9\%$ of the fluctuations of the
+FTSE250 value. This relates closely to the findings of \citeboth{conover1999}, 
+who used an econometric model to establish that $4\%$ of the variation in monthly UK stock returns can be 
+explained by variations in the money supply. 
 
 \begin{figure}[h]
     \centering
@@ -752,11 +729,14 @@ lower predictive quality.
     \label{fig:ldaily}
 \end{figure}
 
-Furthermore, as the time horizon extends into the long-run, fundamental factors 
-begin to matter a lot more. The compound effect of earnings, cash flows and
-managerial efficiencies begins to outweigh the 
-influence of fluctuating macroeconomic sentiment. Thus, in the long-term
-we see a different picture altogether.
+In the context of a phenomenon as complex as the stock market,
+which is influenced by an inumerable quantity of factors such as investor sentiment
+- inherently irrational, 
+political instability, geopolitical shocks, corporate governance, and financial regulation, this result 
+unsurprising. Furthermore, the selection of economic variables in this study
+is by no means exhaustive; commodity prices, international trade dynamics,
+economic growth, and many other variables also exert a non-insignificant 
+effect on the stock market.
 
 \begin{figure}[h]
     \centering
@@ -765,12 +745,38 @@ we see a different picture altogether.
     \label{fig:smonthly}
 \end{figure}
 
+The short-term prediction yielded MAE = $0.07$ and 
+$R^2 = 61\%$, for a 5-month time horizon.
+The significantly better performance of the model in the short-run
+indicates that the selected macroeconomic variables possesses
+a stronger predictive power over shorter periods. This was highlighted 
+earlier in the ARDL model, with the interest rate and money supply significantly
+impacting the FTSE250 price in the short-run. 
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{short-term-daily.png}
     \caption{Short-term predicted vs daily real FTSE250 price changes}
     \label{fig:sdaily}
 \end{figure}
+
+
+In the short-term, which defined as 5 months, 
+as per the optimum lag for the FTSE250 in the ARDL model, the market movements
+are more closely tied to recent deviations in the economy, because theoretically
+the short-run is not exposed to the various unforeseen external shocks and structural changes
+that dilute the relationship between these variables and the stock market in the 
+long-run. Essentially, as the prediction window expands, 
+more uncertainty and unknowns are introduced, which translates into 
+lower predictive quality. Furthermore, as the time horizon extends into the long-run, fundamental factors 
+begin to matter a lot more. The compound effect of earnings, cash flows and
+managerial efficiencies begins to outweigh the 
+influence of fluctuating macroeconomic sentiment. Thus, in the short-run 
+a different phenomenon is observed.
+
+
+
+
 
 \section{Conclusion}
 
@@ -798,11 +804,11 @@ market's value, a lower interest rate regime should be adopted and
 the Pound should be made more competitive.
 
 The the study also investigated the efficacy of machine learning methods in 
-the field of stock-econometric forecasting, and returned good results, providing investors
-with an accurate short-term forecast tool, and also providing economists
-with a quantitative non-econometric measure of the 
-long-term influence of the selected macroeconomic 
-variables on the FTSE250 that outperforms a standard econometric model.
+the field of stock-econometric forecasting. The RBF-NN performed well in
+short-term forecasting of the FTSE250, and offers investors with an accurate forecasting tool, 
+to leverage in their trading strategies. The long-term forecast was able to improve on the ARDL-ECM model, and provides 
+economists with a tool to compute non-econometric, quantitative measures of the 
+long-term influence of macroeconomic variables on the stock market. 
 
 Further research should endeavour to include other macroeconomic variables such as 
 foreign direct and portfolio investment, commodity prices and economic growth.
@@ -812,7 +818,7 @@ FTSE250 in the input space to provide a more accurate model. In addition,
 a more granular data set could be utilised by applying a 
 Brownian bridge algorithm to generate daily macroeconomic data and 
 subsequently testing the RBF-NN against other neural networks 
-such as auto-regressive LSTMs and GRUs, as well as other machine learning methods suited for 
+such as auto-regressive LSTMs, as well as other machine learning methods suited for 
 forecasting such as Support Vector Machines (SVM). 
 
 \bibliographystyle{plainnat}
