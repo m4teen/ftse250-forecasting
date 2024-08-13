@@ -54,40 +54,54 @@ Accordingly, any instabilities that have arisen in the stock market
 throughout history have had far-reaching destabilising effects on the 
 economy; the Mississippi Bubble (1717-1720) was an early example of the 
 dangers that stock markets carry, where the French colonial administration 
-in America went bankrupt as a result of a speculative bubble. Wth the
+in America went bankrupt as a result of a speculative bubble. With the
 growing interconnectedness of markets, the stock market as an institution 
 has also contributed significantly to global disasters such as the Great 
 Depression and the Global Financial Crisis of 2008/9. Thus, economic 
-policymakers and administrators must take into careful consideration 
-both the impacts of their macroeconomic policies on the stock market.
+policymakers and administrators require forecasts for how policy changes or 
+unexpected economic trends may impact the economy through the stock market. 
 
-Investors and traders are also affected by the 
-fluctuations of economic factors due to their effect on firms.
-The ability to forecast market trends allows 
-investors to optimise their trading strategies, allowing them to make
+Investors and traders are also intimately affected by the 
+fluctuations of economic factors due to their destabilising effect on firms.
+The ability to forecast stock index price changes allows 
+investors to optimise their trading strategies, enabling them to make
 informed decisions about when to buy or sell assets. 
 Additionally, in a globalised economy, the interconnectedness of 
 markets means that events in one region may have significant effects worldwide, 
 making it even more critical for investors to stay ahead of potential market movements.
-The traditional methods that have been leveraged in this context have been econometric, 
-however machine learning methods have emerged as powerful alternatives capable
-of capturing complex relationships in noisy financial data, and thereby providing more
-accurate forecasts. Although econometric methods are still valuable in informing us
-of the relevance of various macroeconomic variables.
 
-We utilise the FTSE 250 as our measure of the UK stock market, ecause unlike the 
+The traditional methods that have been leveraged in both of these contexts have been econometric.
+Machine learning methods, particularly neural networks, have emerged as powerful alternatives capable
+of capturing complex relationships in financial data, and thereby providing more
+accurate forecasts than econometric models.
+
+In this study we first use an Autoregressive Distributed Lag (ARDL) model in conjunction with an Error Correction Model (ECM), to investigate 
+the different effects of selected macroeconomic variables on the FTSE250 Index over the January 1993 - March 2024 period.
+Second, we test the efficacy of a Radial Basis Function Neural Network (RBF-NN) in forecasting the price movements of the FTSE250 based on the selected macroeconomic indicators, over the short-term 
+(5 months) and long-term (57 months). 
+
+
+We utilise the FTSE 250 as our measure of the UK stock market, because unlike the 
 FTSE100 its overseas share of earnings is 
 roughly $50\%$, similar to the S\&P 500. In contrast, nearly $80\%$ of the FTSE $100$'s earnings 
 are from overseas. This is reflected in the constitution of the respective indices, with 
 the FTSE 250 historically resembling the structure 
 of the UK economy more closely than the FTSE100.
 
-Thus, the study has a twofold aim:
-\begin{enumerate}
-    \item To investigate which macroeconomic variables influence the stock market price significantly, and quantify the effects of the following selection of relevant macroeconomic indicators on the FTSE 250, chosen as a more representative measure of the UK stock market. An Auto-regressive Distributed Lag (ARDL) model is utilised, in conjunction with an Error Correction Model (ARDL-ECM) over the January 1993 - March 2024 period: interest rate, inflation, USD exchange rate, and M3 money supply. 
-    \item To investigate the efficacy of machine learning methods, in particular a radial basis function neural network, in predicting stock price movements based on the same macroeconomic indicators. 
-\end{enumerate}
+The macroeconomic variables we consider are inflation, indicated by the Consumer Price
+Index (CPI); interest rate, represented by the Bank of England policy rate; the exchange rate, 
+represented by the USD/GBP exchange rate; and the money supply, represented by the 
+M3 measure of money supply, preferred over other 
+measures of the money supply because it considers more assets than M2 money supply 
+but does not include extremely illiquid assets as the M4 measure does. The selection 
+of these variables was based on the literature and the structure of the UK economy since 
+the establishment of the FTSE250 Index.
 
+The remainder of the paper is organised as follows. 
+Section 2 presents a review of the literature in this problem space, and explains the rationale behind our selection of macroeconomic variables.
+Section 3 covers the data utilised in the study. Section 4 outlines the ARDL-ECM model, our methodology, and our results describing
+the effect of the selected macroeconomic variables on the FTSE250. Section 5 constructs the RBF-NN model, and presents the short-term and long-term
+forecasts for the FTSE250 Index price movements, based on our selected macroeconomic variables. Section 6 concludes the study.
 
 \section{Literature Review}
 
@@ -286,31 +300,23 @@ various crises such as the Dotcom bubble burst, and geopolitical shocks.
 \end{table}
 
 
-The USD/GBP exchange rate has exhibited moderate variability, 
-ranging from 0.4831 to 0.8834, suggesting periods of both 
-appreciation and depreciation of the Sterling. The little variability 
-there is can be
-attributed to major events such as the 2008 financial crisis and Brexit, 
-which both greatly affected the value of the Pound. 
+The USD/GBP exchange rate has exhibited moderate variability, exhibiting the stable relations between 
+the two countries. Nevertheless, geopolitical shocks such as the 2008 financial crisis and Brexit both greatly affected the value of the Pound, 
+which accounts for the large range. 
 
+The CPI, with an average of 88.36, has 
+experienced significant fluctuations, highlight periods of high inflationary pressure such as in the late 2000s 
+near the global financial crisis, during 2021-22 as the Russia-Ukraine, and periods of stable, low
+inflation in the 2010s.
 
-The Consumer Price Index (CPI), with an average of 88.36, has 
-experienced significant inflationary fluctuations, ranging from 
-62.8 to 133.5. These fluctuations highlight varying price levels and 
-reflect periods of both high inflation, particularly in the late 2000s 
-near the global financial crisis, and also during 2021-22 as the Russia-Ukraine
-conflict destabilised energy and food markets, immediately after the devastation 
-of supply chains by the COVID-19 pandemic; and also low inflation in the 
-years of austerity in the UK and the global recession that onset during 
-the COVID19 pandemic. 
-
-Interest rates, averaging $3.21\%$, have varied widely from $0.1\%$ to $8.4\%$, with a standard deviation of $2.52\%$, reflecting the 
+Interest rates, have varied widely from $0.1\%$ to $8.4\%$, with a standard deviation of $2.52\%$, reflecting the 
 increasing role of monetary policy in the UK. The Bank of England was forced to adjust interest rates 
-many times in response to worsening economic conditions, examples being the steep rate cuts during the 2008 crisis to stimulate the economy and the gradual rate hikes in response to subsequent inflationary pressures. 
+several times in response to worsening economic conditions, examples being the steep rate cuts during the 2008 financial crisis to stimulate the economy and the gradual rate hikes in response to 
+subsequent post-COVID inflationary pressures. 
 
-The money supply (M3), averaging 1,861,958.47, has shown substantial variability, ranging from 494,181 to 3,704,873, 
+The M3 money supply has shown substantial variability, ranging from 494,181 to 3,704,873, 
 in large part influenced by the various Quantitative Easing (QE) programs implemented by the Bank of England 
-in response to the aforementioned crises. These programs aimed to inject liquidity into the economy, thus inflating the overall money supply.
+in response to the aforementioned crises. These programs aimed to inject liquidity into the economy to stimulate economic activity, thus inflating the overall money supply.
 
 \section{ARDL Model}
 
@@ -460,8 +466,8 @@ correction term is also given, and it is negative, as expected.
         \midrule
         FTSE$_{250}$ & N/A & FTSE$_{250}$ $(-5)$  & $-0.033089$ \\
         CPI & $3.157179$ & CPI $(-4)$ & $-0.921235$ \\
-        INT & $-0.1341097^{**}$ & INT $(-7)$ & $-0.034572^{****}$\\
-        EXCHG &  $-0.890146^{***}$ & EXCHG $(-7)$ & $0.122318$ \\
+        INT & $-0.1341097^{***}$ & INT $(-7)$ & $-0.034572^{****}$\\
+        EXCHG &  $-0.890146^{****}$ & EXCHG $(-7)$ & $0.122318$ \\
         M3 & $-0.1141114$ & M3 $(-4)$ & $-0.527798^{***}$ \\
         Intercept & $-3.447767$ & ECT $(-1)$ & $-0.16^{**}$ \\
         \bottomrule
@@ -607,14 +613,9 @@ spread of the basis function at each centre.
 
 \subsection{Methodology}
 
-The ARDL Bounds Test confirmed that our variable selection was sensible by virtue
-of its establishment of cointegration. The RBF-NN, it is hoped, will be able
-to capture intricate non-linear patterns in the data that the econometric model
-was unable to, and accordingly be able to predict with accuracy the future price
-movements. The RBF-NN was utilised for both short-term and long-term 
+The RBF-NN was utilised for both short-term and long-term 
 predictions. For short-term forecasting, 
-the model was tested over a 5-month horizon, based on the recommendation of the
-ARDL model, while the long-term predictions spanned 57 months. 
+the model was tested over a 5-month horizon, based on the optimum lag calculated earlier, while the long-term predictions spanned 57 months. 
 We differenced the data based on the recommendations of the 
 unit root tests conducted earlier to achieve stationarity. 
 
