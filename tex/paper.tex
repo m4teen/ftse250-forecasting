@@ -15,17 +15,17 @@
 
 
 \usepackage[
-    colorlinks=true,      % Enable colored links
-    linkcolor=green,       % Color for internal links (e.g., \ref, \pageref)
-    citecolor=blue,       % Color for citations
-    urlcolor=blue,        % Optional: Set PDF metadata
+    colorlinks=true,      
+    linkcolor=green,       
+    citecolor=blue,       
+    urlcolor=blue,        
 ]{hyperref}
 
 
 \title{Investigating the Impact of Macroeconomic Indicators 
 on the FTSE 250 Index Using Machine Learning Methods}
 \author{Mateen Khan}
-\date{}
+\date{\today}
 
 \begin{document}
 
@@ -731,7 +731,7 @@ who used an econometric model to establish that $4\%$ of the variation in monthl
 explained by variations in the money supply. It also suggests a higher level of influence 
 than the ARDL-ECM model provided, that only $R^2=3.4\%$ of the monthly FTSE250 variations 
 are affected by the selected macroeconomic variables, demonstrating the ability of machine learning
-methods to capture patterns in the data unavailable to econometric models. 
+methods to capture subtle patterns in the data unavailable to econometric models. 
 
 \begin{figure}[h]
     \centering
@@ -791,10 +791,6 @@ a different phenomenon is observed.
 
 \section{Conclusion}
 
-This study first tested the findings of previous econometric research on the 
-UK stock market, relating the impact of some especially
-relevant macroeconomic factors on the FTSE250. 
-
 Stock markets provide important information on the economy, 
 and economic policymakers are vigilant in tracking the fluctuations 
 in these markets, and try to forecast the 
@@ -814,7 +810,7 @@ should consider the factors in the study, and to raise the stock
 market's value, a lower interest rate regime should be adopted and 
 the Pound should be made more competitive.
 
-The the study also investigated the efficacy of machine learning methods in 
+The study also investigated the efficacy of machine learning methods in 
 the field of stock-econometric forecasting. The RBF-NN performed well in
 short-term forecasting of the FTSE250, and offers investors with an accurate forecasting tool, 
 to leverage in their trading strategies. The long-term forecast was able to improve on the ARDL-ECM model, and provides 
@@ -823,14 +819,13 @@ long-term influence of macroeconomic variables on the stock market.
 
 Further research should endeavour to include other macroeconomic variables such as 
 foreign direct and portfolio investment, commodity prices and economic growth.
-Falling outside the immediate scope of the current study, 
-an autoregresive model could also be tried, including the past values of the 
+An autoregresive model, falling outside the immediate scope of the current study, could also be tried, including the past values of the 
 FTSE250 in the input space to provide a more accurate model. In addition, 
 a more granular data set could be utilised by applying a 
 Brownian bridge algorithm to generate daily macroeconomic data and 
 subsequently testing the RBF-NN against other neural networks 
 such as auto-regressive LSTMs, as well as other machine learning methods suited for 
-forecasting such as Support Vector Machines (SVM). 
+forecasting such as Gradient Boosting Machines and Support Vector Machines. 
 
 \bibliographystyle{plainnat}
 \bibliography{paper}
