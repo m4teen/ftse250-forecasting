@@ -116,10 +116,7 @@ print(shapiro_test_result)
 
 
 
-recursive_residuals <- rollapply(residuals, width = 1, by = 1, FUN = function(x) x, align = "right", fill = NA)
-cusum <- cumsum(residuals)
-plot(cusum, type = "l", col = "blue", main = "CUSUM of Recursive Residuals", xlab = "Time", ylab = "CUSUM")
-abline(h = 0, col = "red", lty = 2)
+library(memochange)
 
-efp_result <- efp(residuals ~ 1, type = "OLS-CUSUM")
-plot(efp_result)
+cusum_test(residuals_vector, trend = c("none", "linear"), tau = 0.2, type = c("LKT","SK"), m = 0, simu = 0, M = 10000)
+

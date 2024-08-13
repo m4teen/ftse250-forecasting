@@ -151,12 +151,13 @@ stock prices are significantly influenced by the risk-free interest rate,
 which is, according to the monetarist liquidity preference theory, a 
 function of money supply. They found that an increase in money supply 
 positively impacts stock prices. This was disputed by \citeboth{pesando1974}, 
-who critiqued the methodology used in their study. This was disputed by \citeboth{pícha2017},
-who investigated the effect of the post-2008 quantitative easing programs on the US and UK stock markets, finding 
-that the former was significantly affected by the M2 money supply. However, he found that in this period 
-the UK stock market was not significantly affected.
+who critiqued the methodology used in their study. 
 However, later research utilising more advanced models and different data than \citeboth{palmer1970}, such as \citeboth{bahloul2017} and 
 \citeboth{synek2024} found that the money supply does significantly influences developed stock indices, including the UK. 
+\citeboth{pícha2017}
+investigated the effect of the post-2008 quantitative easing programs on the US stock markets, finding 
+that it was significantly affected by the M2 money supply. 
+\citeboth{olawale2014} also found a significant positive impact on stock returns in the US, but a negative one in the UK stock market. 
 
 
 \subsection{Forecasting}
@@ -387,7 +388,7 @@ for, $i,j = 1,2,3,4,5$, with $i\neq j$. The F-statistic is computed for the join
 significance of the lagged variables and compared against the critical values
 given by \citeboth{pesaran2001} to determine whether cointegration exists, 
 and at what significance level. If cointegration exists, then 
-the long-run coefficients $\kappa_i$ are estimating using the cointegration equation:
+the long-run coefficients $\kappa_i$ are estimated to find the cointegration equation:
 
 \begin{align}
     FTSE_{250} = \kappa_0 + \kappa_1 CPI + \kappa_2 INT + \kappa_3 EXCHG + \kappa_4 M3 + \varepsilon \label{eq:two}
@@ -508,79 +509,55 @@ coefficient of 3.16, and the negative short-term adjustment, is in line with the
 inflation exerts a positive effect on the stock market in the long-term, but a negative 
 one in the short-run. 
 
-The insignificant long-term effect of the money supply 
-was noted by \citeboth{pícha2017} and appears to be confirmed here. There are a few explanations
-for why this may be.
+The insignificant long-term effect of the money supply can be explained by several reasons.
+Firstly, as discussed in \citeboth{sellin2001}, it is possible that the FTSE250 is efficient in processing changes in the 
+money supply, at least over certain intervals if not always. This would mean anticipated changes in the money supply would not affect the stock market price, only the
+unanticipated component of a change in money supply would, as established by \citeboth{sorensen1982} and \citeboth{bernanke2005}. 
+It is also possible that the M3 measure is too broad of a measure and includes overly illiquid components that are not as impactful 
+on the stock market dynamics. In the short-run we see that the money supply does have a 
+significantly negative effect on the stock market, as outlined by \citeboth{olawale2014}. According to \citeboth{sellin2001}, 
+this supports the Keynesian argument that a positive money supply shock will lead people to
+expect a contraction in future monetary policy. 
+This leads to an increase in the demand for funds, which drives up the current rate of interest, in turn
+reducing the present value of earnings in the Discounted Cash Flow (DCF) stock valuation model. The effect is a decline in the stock market prices.
 
 Unsurprisingly, the USD/GBP exchange rate is significantly related to the FTSE250's movements. It 
 should not be forgotten that, although it is considered to be a more domestic indicator of the LSE, 
 at times $50\%$ of the FTSE250's earnings have come from abroad, indicating that 
-the value of the Pound has an important impact on this stock market. As the USD has been 
+the value of the Pound has a significant impact on this stock market. 
+In the long run, the appreciation of the Pound would increase the relative 
+cost of UK exports increases, thereby reducing the 
+competitiveness of FTSE250 companies in international markets. This in turn would lower their earnings
+and depress the FTSE250. Moreover, foreign investors may view the stronger Pound as a signal of reduced returns on their investments in the UK, which can lead to decreased investment in the FTSE250. 
+In the short-term, however, before structural shifts can materialise we see that the
+weakening of the Pound has a positive effect. As the USD has been 
 the global reserve currency for many decades, the depreciation of the Pound 
-against it by $1\%$ has an impact of $-0.89\%$ on the FTSE250. The findings 
+against it will lead to increased revenue in Pound terms for FTSE250 companies with substantial overseas operations. This is because their foreign earnings, when converted back into Pounds, will be worth more, potentially increasing profits. The findings 
 are in line with \citeboth{neifar2023} and \citeboth{khan2018}.
 
-The interest rate was also found to have significant negative long-run effects on the 
-stock market, affirming the findings of the extant literature ().
-The mechanisms by which this occurs were discussed earlier in the literature review.
+The interest rate was also found to have significant negative long-term and short-term effects on the stock market, confirming the findings of the extant literature \citep{alam2009,demir2019,neifar2023, talla2013}. 
+This can be explained by the fact that higher interest 
+rates increase the cost of borrowing for companies, leading to reduced investment 
+and lower future earnings potential, in turn depressing stock prices. 
+Furthermore, as per the flight-to-quality phenomenon, persistently higher interest rates make bonds and other fixed-income 
+investments more attractive relative to stocks, leading investors to shift 
+their portfolios away from equities and toward safer assets over time \citep{asgharian2016}. 
+In the short term, interest rate hikes immediately decrease the present value of earnings, as per the 
+DCF valuation model, and depress prices.
 
-
-Turning to the short-run dynamics, the error correction term 
+The error correction term 
 is negative and statistically significant ensuring that long-run equilibrium 
 can be achieved. The adjustment speed of $0.1001$ indicates that 
 roughly $10\%$ of the fluctuation in the previous month's price caused by the 
-macroeconomic variable movements, is adjusted back to the long-run equilibrium in the current month.
+macroeconomic variable movements is adjusted back to the long-run equilibrium in the current month.
 However, only increases in the interest rate and money supply are able to 
 significantly contribute towards this correction, with $1\%$ increases in the former 
-leading to a $-0.03\%$ change in the FTSE250 price 7-months later, and in the case of the latter
+leading to a $-0.03\%$ change in the FTSE250 price 7 months later, and in the case of the latter
 a $-0.53\%$ change after a 4-month lag. 
 
 \section{RBF Neural Network}
 
 \subsection{Model Architecture}
-
-The exact interpolation problem, which forms the motivation for RBF-NNs, 
-involves mapping a $d$-dimensional input space $\boldsymbol{\mathrm{x}}$ t
-o a one-dimensional target space $t$. The dataset consists of $N$ input
- vectors $\boldsymbol{\mathrm{x_n}}$, along with corresponding target 
- values $t_n$. The objective is to find a function
-  $h(\boldsymbol{\mathrm{x}})$ such that:
-
-
-\begin{align}
-  h(\boldsymbol{\mathrm{x_n}}) = t_n, \quad \text{for } n = 1, \ldots, N
-\end{align}
-
-The radial basis function approach (Powell, 1987) 
-introduces a set of $N$ basis functions, one for each 
-data point, which are functions of the distance
-$||\boldsymbol{\mathrm{x}} - \boldsymbol{\mathrm{x_n}}||$, where
-the basis function $\phi(\cdot)$ is some non-linear function. The output of the mapping is then expressed as a linear combination of these basis functions:
-
-\begin{align}
-    h(\boldsymbol{\mathrm{x}}) = \sum_{n=1}^{N} w_n \phi(||\boldsymbol{\mathrm{x}} - \boldsymbol{\mathrm{x_n}}||)
-\end{align}
-
-By introducing several modifications to the exact interpolation 
-procedure, the RBF-NN
-model is obtained, as outlined originally in \citeboth{broomhead1988}. 
-The RBF-NN mapping takes the following form:
-
-\begin{align}
-    y(\boldsymbol{\mathrm{x}}) =  \sum_{j=1}^{M} w_{j} \phi_j(\boldsymbol{\mathrm{x}}) + w_{0}
-\end{align}
-
-where the radial basis function $\phi$ is the Inverse Multi-Quadric:
-
-\[
-\phi(r) = \left(r^2 + \sigma^2 \right)^{-\beta}
-\]
-
-where $r = \|\boldsymbol{\mathrm{x}} - \boldsymbol{\mathrm{c}}\|$ is the Euclidean distance between the input vector 
-\(\boldsymbol{\mathrm{x}}\) and the center of the basis function 
-\(\boldsymbol{\mathrm{c}}\). The constant $\sigma$ represents the
-spread of the basis function at each centre.
-
 
 \begin{figure}[h]
     \centering
@@ -619,6 +596,45 @@ spread of the basis function at each centre.
     \label{fig:your_label}
 \end{figure}
 
+The exact interpolation problem, which forms the motivation for RBF-NNs, 
+involves mapping a $d$-dimensional input space $\boldsymbol{\mathrm{X}}$ to
+a $c$-dimensional target space $\boldsymbol{\mathrm{y}}$. The dataset consists of $N$ input
+vectors $\boldsymbol{\mathrm{x_n}}$, along with corresponding target 
+values $y_n$. The objective is to find a function
+  $h(\boldsymbol{\mathrm{x}})$ such that:
+
+
+\begin{align}
+  h(\boldsymbol{\mathrm{x_n}}) = y_n, \quad \text{for } n = 1, \ldots, N
+\end{align}
+
+The radial basis function approach 
+introduces a set of $N$ basis functions, one for each 
+data point. The radial basis function, $\phi(\cdot)$ is some non-linear function of the Euclidean distance
+$||\boldsymbol{\mathrm{x}} - \boldsymbol{\mathrm{x_n}}||$. The output of the mapping is then expressed as a linear combination of these basis functions:
+
+\begin{align}
+    h(\boldsymbol{\mathrm{x}}) = \sum_{n=1}^{N} w_n \phi(||\boldsymbol{\mathrm{x}} - \boldsymbol{\mathrm{x_n}}||)
+\end{align}
+
+By introducing several modifications to the exact interpolation 
+procedure, the RBF-NN
+model is obtained, as outlined originally in \citeboth{broomhead1988}. 
+The RBF-NN mapping takes the following form:
+
+\begin{align}
+    y(\boldsymbol{\mathrm{x}}) =  \sum_{j=1}^{M} w_{j} \phi_j(\boldsymbol{\mathrm{x}}) + w_{0}
+\end{align}
+
+
+
+\begin{align}
+    \phi_j(\boldsymbol{\mathrm{x}})  &= f(||\boldsymbol{\mathrm{x}-c_j}||), \quad{j=1\ldots,M}
+\end{align}
+
+where $\boldsymbol{c_j}$ is a RBF centre and $f$ is the radial basis function. 
+
+
 \subsection{Methodology}
 
 The RBF-NN was utilised for both short-term and long-term 
@@ -627,14 +643,14 @@ the model was tested over a 5-month horizon, based on the optimum lag calculated
 The data was differenced based on the recommendations of the 
 unit root tests conducted earlier to achieve stationarity. 
 
-First, the data was normalised using a z-score normalisation. This is because
+The data was normalised using a z-score normalisation. This is because
 neural networks work best with data
 that is between a specified range; it ensures that the data is roughly uniformly
 distributed between the network inputs and outputs 
 (Mendelsohn, 1993, Preprocessing Data for Neural Networks). Following this 
 it was necessary to program the RBF-NN into Python. As no specific RBF package exists
 in Python, the kernel regression approach outlined by 
-\citeboth{bishop1995}, using the GaussianProcessRegressor (GPR) package in Python.
+\citeboth{bishop1995}, using the GaussianProcessRegressor package in Python.
 
 \subsubsection{The Gaussian Process Regressor}
 
@@ -684,7 +700,7 @@ Using this, the posterior distribution is then obtained
 where the covariance matrix $A^{-1} = K^{-1} + \frac{XX^T}{\sigma_{n}^2}$.
 To make predictions on a test case all possible $w$
 values, weighted by their posterior probability, are averaged to obtain the
-predictive distribution, upon which predicted outputs are computed. \citep{rasmussen2006}
+predictive distribution, upon which predicted outputs are computed \citep{rasmussen2006}.
 
 \subsubsection{The Network}
 
