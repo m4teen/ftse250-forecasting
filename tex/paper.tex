@@ -82,11 +82,11 @@ Second, the efficacy of a Radial Basis Function Neural Network (RBF-NN) is teste
 economic policymakers with a tool to measure the influence of macroeconomic variables on the price of the stock market. 
 
 
-The FTSE 250 is utilised as the measure of the UK stock market, because unlike the 
+The FTSE250 is utilised as the measure of the UK stock market, because unlike the 
 FTSE100 its overseas share of earnings is 
-roughly $50\%$, similar to the S\&P 500. In contrast, nearly $80\%$ of the FTSE $100$'s earnings 
+roughly $50\%$, similar to the S\&P 500. In contrast, nearly $80\%$ of the FTSE$100$'s earnings 
 are from overseas. This is reflected in the constitution of the respective indices, with 
-the FTSE 250 historically resembling the structure 
+the FTSE250 historically resembling the structure 
 of the UK economy more closely than the FTSE100.
 
 The macroeconomic variables considered are inflation, indicated by the Consumer Price
@@ -137,7 +137,7 @@ assets like bonds, this is known as the flight-to-quality phenomenon, where risi
 Classical economic theory explains the relationship between exchange rates and stock prices through flow and portfolio balance models. The flow model suggests that currency depreciations negatively impact the cash flow of international firms, reducing their stock prices. The portfolio balance model indicates that expected currency depreciations lead investors to shift from domestic to foreign assets, decreasing demand for domestic stocks and lowering their prices. 
 Moreover, \citeboth{branson1977} established a bidirectional relation between the exchange rate and stock prices: the demand for money in each country depends on the performance of assets in that country’s currency, and conversely the demand for money is determined by real wealth, itself partly influenced by stock market returns. 
 \citeboth{aydemir2009} confirmed this, in the case of the Turkish Stock Exchange. 
-\citeboth{khan2018} also found that the exchange rate showed a positive relationship with the Karachi Stock Exchange over the long run, and a negative relationship in the short-run. 
+\citeboth{khan2018} also found that the exchange rate showed a positive relationship with the Karachi Stock Exchange over the long-run, and a negative relationship in the short-run. 
 \citeboth{wong2022} demonstrated cointegration between exchange rates and stock prices across multiple countries, including the UK.
 
 \subsubsection{Money Supply}
@@ -161,6 +161,10 @@ However, later research utilising more advanced models and different data than \
 
 \subsection{Forecasting}
 
+There is a large body of literature regarding time-series forecasting. First, 
+a discussion on the feasibility of such forecasting is presented: the Efficient 
+Market Hypothesis. Following this, machine learning methods for forecasting are 
+presented, 
 
 \subsubsection{Efficient Market Hypothesis}
 
@@ -187,17 +191,21 @@ price of stock indices on the FTSE250 using macroeconomic variables.
 
 \subsubsection{Machine Learning Methods for Forecasting}
 
-The accelerating development of Machine learning presents a challenge to the 
-EMH and traditional economic theories through its ability to leverage advanced 
-computational tools capable of uncovering patterns and inefficiencies in the
-market that were previously thought to be obscured by the ‘noise’ and randomness 
-posited by the EMH, and beyond the capability of standard econometric models. 
-ML models are able to continually improve over time as they learn from new data, 
-something which regular econometric models are incapable of doing, in particular 
-neural networks, mainly Recurrent Neural Networks (RNN) and Long-Short Term 
-Memory (LSTM) Networks, have been used extensively for forecasting time-series data, 
-including asset volatility, volume, and prices. However they are not suitable for smaller datasets
-and tend to overfit the training data \citep{foster1992}.
+The accelerating development of machine learning presents a challenge to the EMH
+and traditional economic theories. 
+Machine learning leverages advanced computational 
+tools capable of uncovering patterns and inefficiencies 
+in the market that were previously thought to be obscured by the 
+‘noise’ and randomness posited by the EMH and beyond the capability 
+of standard econometric models. Machine learning models continually 
+improve over time as they learn from new data—something regular 
+econometric models are incapable of doing. Notably, g
+radient boosting machines and neural networks, including 
+Recurrent Neural Networks (RNNs) and Long Short-Term Memory (LSTM) 
+Networks, have been extensively used for forecasting time series data, 
+such as asset volatility, volume, and prices. However they 
+are not suitable for smaller datasets and tend to overfit on the training data
+in such datasets \citep{foster1992}.
 
 Radial Basis Function Neural Networks (RBF-NN) are a type of artificial 
 neural network that use radial basis functions at each node in the 
@@ -280,7 +288,7 @@ announce a rate on a regular basis. To address the resulting irregularities the 
     \end{tabular}
 \end{table}
 
-Over the period covered by our dataset, the FTSE 250 index has 
+Over the period covered by our dataset, the FTSE250 index has 
 shown substantial growth, reflecting the structural transition of the UK economy.
 It has also experienced significant volatility, highlighting significant market shifts driven by 
 various crises such as the Dotcom bubble burst, and geopolitical shocks.
@@ -464,7 +472,7 @@ correction term is also given, and it is negative, as expected.
         \toprule
         \textbf{Variable} & \textbf{Long-Run Coefficient} & \textbf{Variable} & \textbf{Short-Run Coefficient} \\
         \midrule
-        FTSE$_{250}$ & N/A & FTSE$_{250}$ $(-5)$  & $-0.033089$ \\
+        FTSE$_{250}$ & $-$ & FTSE$_{250}$ $(-5)$  & $-0.033089$ \\
         CPI & $3.157179$ & CPI $(-4)$ & $-0.921235$ \\
         INT & $-0.1341097^{***}$ & INT $(-7)$ & $-0.034572^{****}$\\
         EXCHG &  $-0.890146^{****}$ & EXCHG $(-7)$ & $0.122318$ \\
@@ -484,14 +492,14 @@ correction term is also given, and it is negative, as expected.
         Autocorrelation & Box-Ljung Test & $0.9926$ & No autocorrelation \\
         Heteroskedascity & Breusch-Pagan Test & $0.3635$ & Homoskedascity \\
         Normality & Shapiro-Wilk Test & $3.889$e-$08$ & Normality \\
-        CUSUM & CUSUM Test & N/A & Stable \\
-        CUSUM$^2$ & CUSUM$^2$ Test & N/A & Stable \\
+        CUSUM & CUSUM Test & $-$ & Stable \\
+        CUSUM$^2$ & CUSUM$^2$ Test & $-$ & Stable \\
         \bottomrule
     \end{tabular}
 \end{table}
 
-The long term coefficients show that the interest rate and exchange rate
-interest rate have significant long term effects on the stock market price
+The long-term coefficients show that the interest rate and exchange rate
+interest rate have significant long-term effects on the stock market price
 while money supply and inflation are statistically insignificant. \citeboth{neifar2023}
 proposes that this is because deflation, that is the negative movements in the 
 CPI, is a statistically significant factor in the movement of the UK stock 
@@ -504,12 +512,12 @@ The insignificant long-term effect of the money supply
 was noted by \citeboth{pícha2017} and appears to be confirmed here. There are a few explanations
 for why this may be.
 
-Unsurprisingly, the USD/GBP exchange rate is significantly related to the FTSE 250's movements. It 
+Unsurprisingly, the USD/GBP exchange rate is significantly related to the FTSE250's movements. It 
 should not be forgotten that, although it is considered to be a more domestic indicator of the LSE, 
-at times $50\%$ of the FTSE 250's earnings have come from abroad, indicating that 
+at times $50\%$ of the FTSE250's earnings have come from abroad, indicating that 
 the value of the Pound has an important impact on this stock market. As the USD has been 
 the global reserve currency for many decades, the depreciation of the Pound 
-against it by $1\%$ has an impact of $-0.89\%$ on the FTSE 250. The findings 
+against it by $1\%$ has an impact of $-0.89\%$ on the FTSE250. The findings 
 are in line with \citeboth{neifar2023} and \citeboth{khan2018}.
 
 The interest rate was also found to have significant negative long-run effects on the 
@@ -704,7 +712,7 @@ averaging over all possible $w$, weighted by their likelihood according to \eqre
 \subsection{Results}
 
 The model returned a mean absolute error of MAE $=0.16$ and 
-$R^2 = 9\%$ for the long term prediction, outperforming the ARDL-Error Correction model by 
+$R^2 = 9\%$ for the long-term prediction, outperforming the ARDL-ECM model by 
 $2.4\%$.
 
 
@@ -718,9 +726,12 @@ $2.4\%$.
 The interpretation of this is that, over the long-run (4-5 years), the variations in the 
 Consumer Price Index, interest rate, USD/GBP exchange rate, and M3 money 
 supply explain or account for $9\%$ of the fluctuations of the
-FTSE250 value. This relates closely to the findings of \citeboth{conover1999}, 
+monthly FTSE250 value. This relates closely to the findings of \citeboth{conover1999}, 
 who used an econometric model to establish that $4\%$ of the variation in monthly UK stock returns can be 
-explained by variations in the money supply. 
+explained by variations in the money supply. It also suggests a higher level of influence 
+than the ARDL-ECM model provided, that only $R^2=3.4\%$ of the monthly FTSE250 variations 
+are affected by the selected macroeconomic variables, demonstrating the ability of machine learning
+methods to capture patterns in the data unavailable to econometric models. 
 
 \begin{figure}[h]
     \centering
