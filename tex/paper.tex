@@ -11,6 +11,11 @@
 \usepackage{parskip}
 \usepackage{tablefootnote}
 \usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+\providecommand{\keywordname}{\textbf{Keywords:}} % Customize how "Keywords:" appears
+\newcommand{\keywords}[1]{%
+  \par\addvspace{\baselineskip}% Adds some space above the keywords
+  \noindent\keywordname\enspace\ignorespaces#1 % Displays "Keywords:" followed by the actual keywords
+}
 \newcommand{\citeboth}[1]{\citeauthor{#1} \citep{#1}}
 
 
@@ -32,85 +37,65 @@ on the FTSE 250 Index Using Machine Learning Methods}
 \maketitle
 
 \begin{abstract}
-    Investment decisions and economic policy are highly influenced by 
-    macroeconomic variables and the stock market. Econometric models
-    have been the predominant tools in this context. The aim of this study is to analyse the impacts of some especially important macroeconomic
-    indicators on the FTSE250 
-    (Financial Times Stock Exchange 250 Index), using monthly data 
-    from  October 1993 to April 2024 using an ARDL model, obtaining 
-    quantifiable estimates for the long-term and short-term impacts of the variables
-    on the FTSE250. The efficacy of Radial Basis Function 
-    Neural Networks (RBF-NN) in this problem domain is then investigated. It is established 
-    the RBF-NN is a competent short-term forecasting tool, and is able to 
-    provide an alternative approach to standard econometric models in measuring the long-term influence of
-    macroeconomic variables on the stock market.
+    This study investigates the impact of the Consumer Price Index, Bank of England Base Rate, US Dollar (USD) and British Pound Sterling (GBP) exchange rate and the M3 money supply measure on the FTSE 250 index, and assesses the effectiveness of radial basis function neural networks as a tool to forecast the price of the FTSE 250 index based on the same set of macroeconomic indicators. This study shows quantitative estimates for the long-term and short-term impacts of the aforementioned macroeconomic indicators on the price of the FTSE 250 index, and demonstrates the effectiveness of radial basis function neural networks as a short-term forecasting tool for the price of the FTSE 250 index, thus providing an alternative to econometric forecasting models.
+
+    \keywords{Macroeconomic indicators; Stock market; FTSE 250 Index; Autoregressive Distributed Lag
+    (ARDL) model, RBF Neural Network; Time-series forecasting}
 \end{abstract}
 
 \section{Introduction}
 
-The stock market has played a central role in the economy and 
-political ascent of many states ever since its inception. 
-Accordingly, any instabilities that have arisen in the stock market 
-throughout history have had far-reaching destabilising effects on the 
-economy; the Mississippi Bubble (1717-1720) was an early example of the 
-dangers that stock markets carry, where the French colonial administration 
-in America went bankrupt as a result of a speculative bubble. With the
-growing interconnectedness of markets, the stock market as an institution 
-has also contributed significantly to global disasters such as the Great 
-Depression and the Global Financial Crisis of 2008/9. Thus, economic 
-policymakers and administrators require forecasts for how policy changes or 
-unexpected economic trends may impact the economy through the stock market. 
+The stock market has played a central role in the economic and political ascent of many nations ever since its inception [1].  However, whenever stock market instabilities have arisen in history they have had far-reaching destabilising effects. The Mississippi Bubble was an early example of the inherent dangers within stock markets in the form of speculative bubbles [2]. In this particular case, the stock market crashed as result of an unsustainable rise in share prices fueled by speculation, leading to panic selling, a collapse in confidence, and a massive financial meltdown that rippled through the entire French economy.. Another example is the bursting of the dot-com bubble which had a profound impact on the stock market, leading to a significant crash, particularly in technology stocks. It triggered a severe stock market crash by leading to a rapid sell-off of overvalued tech stocks, which then spread to the broader market. The collapse of key companies, along with forced selling due to margin calls, and the widespread loss of investor confidence created a downward spiral that devastated the stock market. 
 
-Investors and traders are also intimately affected by the 
-fluctuations of economic factors due to their destabilising effect on firms.
-The ability to forecast stock index price changes allows 
-investors to optimise their trading strategies, enabling them to make
-informed decisions about when to buy or sell assets. 
-Additionally, in a globalised economy, the interconnectedness of 
-markets means that events in one region may have significant effects worldwide, 
-making it even more critical for investors to stay ahead of potential market movements.
+Nevertheless, stock markets provide essential benefits by allowing companies to raise capital, offering investment opportunities for individuals, and supporting economic growth through efficient capital allocation. They enhance corporate governance through transparency and accountability, facilitate price discovery and market liquidity, and contribute to government financing through taxes.(Shahbaz et al., 2016). 
 
-The traditional methods that have been leveraged in both of these contexts have been econometric.
-Machine learning methods, particularly neural networks, have emerged as powerful alternatives capable
-of capturing complex relationships in financial data, and thereby providing more
-accurate forecasts than econometric models.
+The stock market is highly sensitive to macroeconomic indicators because these indicators provide insights into the overall health and direction of the economy. Stock markets react to macroeconomic indicators because these signals help investors anticipate future economic conditions, corporate profits, and investment returns. Positive indicators tend to boost stock prices, while negative indicators can lead to declines in stock prices.
 
-In this study, first an Autoregressive Distributed Lag (ARDL) model in conjunction with an Error Correction Model (ECM), is employed to investigate 
-the different effects of selected macroeconomic variables on the FTSE250 Index over the January 1993 - March 2024 period.
-Second, the efficacy of a Radial Basis Function Neural Network (RBF-NN) is tested in forecasting the price movements of the FTSE250 based on the selected macroeconomic indicators, over the short-term 
-(5 months) and long-term (57 months), the former intended to inform investors and the latter to provide
-economic policymakers with a tool to measure the influence of macroeconomic variables on the price of the stock market. 
+The significance of this study is to quantify the effects of macroeconomic indicators on the stock market as well as assessing the use of these indicators to forecast stock prices over the long-term and short-term, both useful to economic policy makers and stock market investors respectively.
 
+A key task which economic policy makers and investors undertake is to understand and predict how economic changes influence stock market behaviour, which is critical for making informed policy and investment decisions. This modelling of the impact of macroeconomic indicators on stock markets is typically achieved by a variety of methods: statistical analysis, econometric modelling, scenario planning, and advanced machine learning techniques. However, it is fraught with challenges that require careful consideration, advanced techniques, and a deep understanding of both economics and financial markets. In particular, there is a challenge to find a subset of macroeconomic indicators which can most accurately capture stock market dynamics. 
 
-The FTSE250 is utilised as the measure of the UK stock market, because unlike the 
-FTSE100 its overseas share of earnings is 
-roughly $50\%$, similar to the S\&P 500. In contrast, nearly $80\%$ of the FTSE$100$'s earnings 
-are from overseas. This is reflected in the constitution of the respective indices, with 
-the FTSE250 historically resembling the structure 
-of the UK economy more closely than the FTSE100.
+This study aims to explore the relationship between macroeconomic indicators and stock markets 
+through modelling. Its primary objective is to address questions such as how specific 
+macroeconomic indicators influence stock market prices in major economies and whether machine 
+learning models can substitute traditional econometric models in predicting stock market prices. 
+Ultimately, it aims to investigate three aspects of modelling the impact of macroeconomic 
+indicators on stock markets: 
+\begin{enumerate}
+    \item To investigate how macroeconomic indicators influence the FTSE 250 index
+    \item To investigate the short-term and long-term effects of macroeconomic variables on the price of the FTSE 250 index
+    \item To investigate whether machine learning techniques can provide accurate short-term and long-term forecasts of the price of the FTSE 250 index when using a low-granularity dataset.
+   
+\end{enumerate}
 
-The macroeconomic variables considered are inflation, indicated by the Consumer Price
-Index (CPI); interest rate, represented by the Bank of England policy rate; the exchange rate, 
-represented by the USD/GBP exchange rate; and the money supply, represented by the 
-M3 measure of money supply, preferred over other 
-measures of the money supply because it considers more assets than M2 money supply 
-but does not include extremely illiquid assets as the M4 measure does. The selection 
-of these variables was based on the literature and the structure of the UK economy since 
-the establishment of the FTSE250 Index.
+In order to analyse the dynamic relationship between variables in time series data, this study will employ the Autoregressive Distributed Lag (ARDL) model in conjunction with an Error Correction Model (ECM). By integrating the ARDL model with the ECM, a comprehensive understanding of both the immediate and longer-term relationships between variables is obtained, which is valuable for robust economic analysis and policy-making.
+This research also employs radial basis function neural networks to predict the price of the FTSE 250 index. This artificial deep learning network is particularly useful for tasks like function approximation, pattern recognition, and regression when the dataset is of low-granularity.
 
-The remainder of the paper is organised as follows. 
-Section 2 presents a review of the literature in this problem space, and explains the rationale behind our selection of macroeconomic variables.
-Section 3 covers the data utilised in the study. Section 4 outlines the ARDL-ECM model, our methodology, and our results describing
-the effect of the selected macroeconomic variables on the FTSE250. Section 5 constructs the RBF-NN model, and presents the short-term and long-term
-forecasts for the FTSE250 Index price movements, based on our selected macroeconomic variables. Section 6 concludes the study.
+The remainder of the paper is organised as follows. Section 2 presents a brief review of the literature in this problem space, and explains the rationale behind our selection of macroeconomic variables. Section 3 covers the data utilised in this study. Section 4 outlines the ARDL-ECM model, the methodology, and the results achieved describing the effect of the selected macroeconomic variables on the FTSE 250 index. Section 5 constructs the radial basis function neural network (RBF-NN) model, and presents the results of forecasting the short-term and long-term forecasts for the price of the FTSE 250 Index price movements based on the selected macroeconomic variables. Section 6 concludes the study.
 
 \section{Literature Review}
 
-\subsection{Stock Market-Macroeconomy Relationship}
+The traditional methods that have been leveraged in stock market forecasting, 
+besides fundamental and technical analysis, have been econometric models such as 
+linear regression \citep{shakhla2018stock,roy2015stock}; ARMA and ARCH models, both extensively used in numerous stock market forecasting problems \citep{herwartz2017stock,hu2020stock,oberholzer2015garch,rounaghi}; and cointegration models such as the 
+ARDL and ECM model have been used significantly in forecasting problems involving macroeconomic factors \citep{demir2019,khan2018,neifar2023}. 
+
+In addition to econometric models, in recent years, machine learning methods, 
+particularly artificial and deep neural networks \citep{chen2015lstm,kara2011ann,long2019deep,nelson2017lstm}, have emerged as powerful alternatives capable of overcoming the limitations of econometric models to capture complex relationships in financial data \citep{rossi2018ml}, and thereby provide more accurate forecasts than ordinary statistical models \citep{lapitskaya2021armax}. 
+
+\subsection{Stock Market-Macroeconomic Relationships}
 
 There are a number of works which investigate the impact of 
 the selected macroeconomic variables
-on the stock market.
+on the stock market. However, as of yet the effect of the entirety of the selected 
+macroeconomic variables has not been studied on the FTSE250. 
+
+\subsubsection{FTSE 250 Index}
+
+The FTSE250 has historically been considered a more closer representation of the domestic economy than the FTSE100. Roughly $50\%$ of the earnings of the FTSE250 are from overseas, similar to the S\&P 500. In contrast, nearly $80\%$ of the FTSE$100$'s earnings are from overseas. 
+This is reflected in the constitution of the respective indices, with the 
+FTSE250 historically resembling the structure of the UK economy more closely than the FTSE100 \citep{ftse250history}.
+In spite of this, the FTSE250 has seldom been utilised as the preferred indicator of the UK stock market in the literature.
 
 \subsubsection{Inflation}
 
@@ -200,11 +185,10 @@ in the market that were previously thought to be obscured by the
 ‘noise’ and randomness posited by the EMH and beyond the capability 
 of standard econometric models. Machine learning models continually 
 improve over time as they learn from new data—something regular 
-econometric models are incapable of doing. Notably, g
-radient boosting machines and neural networks, including 
+econometric models are incapable of doing. Notably, gradient boosting machines and neural networks, including 
 Recurrent Neural Networks (RNNs) and Long Short-Term Memory (LSTM) 
 Networks, have been extensively used for forecasting time series data, 
-such as asset volatility, volume, and prices. However they 
+such as stock market volatility \citep{cho2022forecasting,praveenraj2023} and prices \citep{zhang2022lstm,song2023forecasting,dutta2024hybrid}. However they 
 are not suitable for smaller datasets and tend to overfit on the training data
 in such datasets \citep{foster1992}.
 
@@ -222,17 +206,17 @@ generalise on such data \citep{sharkawy2020} as well as their efficacy on small 
 \citeboth{esfandyari2016}
 supports this, using a sample size of 70 and 29 to forecast daily NASDAQ 
 index values using an Artificial Neural Network; they achieved a minimum
-test $R^2$ of 83$\%$. RBF-NNs have been used 
-considerably for stock price forecasting. \citeboth{cao2004} 
+test $R^2$ of 83$\%$. 
+
+RBF-NNs have been used 
+considerably for stock market forecasting. \citeboth{cao2004} 
 used an RBF-NN based on the Optimal Partition Algorithm (OPA) to 
 forecast S$\&$P 500 prices. \citeboth{dass2019} use an RBF-NN, with the Back-propagation 
 Algorithm (BPA) used instead to tune parameters; their results demonstrate 
 that the RBF-NN outperformed a standard feed-forward neural network. 
-\citeboth{ji2014} also found that the RBF-NN, on a 
-small training dataset, was able to predict the value 
+\citeboth{ji2014} also found that the RBF-NN was able to predict the value 
 of the Shanghai Composite Index on a 45 day time-horizon, with a mean prediction error of 
-1.4387$\%$, suggesting that the RBF-NN is competent in time-series 
-forecasting using small training datasets. Recently, \citeboth{abotaleb2024}
+1.4387$\%$. Recently, \citeboth{abotaleb2024}
 used quarterly data from 2001 to 2023 to model the influence of economic 
 policies on the quarterly prices of various stock markets including the 
 FTSE100 using an RBF-NN, finding that the model 
@@ -240,7 +224,10 @@ achieved relative forecast error rates as low as 6.8$\%$ and an error of
 27.2$\%$ in the case of the FTSE100. Thus, it is concluded that the RBF-NN is a 
 competent tool in the sphere of financial time-series forecasting, and 
 is able to operate effectively within the constraints placed by our 
-problem domain and data.
+problem domain and data. However, with the exception of \citeboth{abotaleb2024}, who used 
+quarterly data, the effectiveness of RBF-NNs in stock market forecasting using 
+low-granularity economic time-series has not been investigated and presents an area requiring further 
+research. 
 
 \section{Data}
 
@@ -341,7 +328,7 @@ the stock market function is defined as:
 The study uses an autoregressive distributed lag (ARDL) model to determine 
 whether a long-term dependence exists for the FTSE250 and our macroeconomic 
 indicators, and if so to quantify the long-run and short-run relationships
-between the former and the latter (Panopoulou and Pittis 2004).
+between the former and the latter 
 
 \subsection{Methodology}
 
@@ -683,11 +670,14 @@ parameters before the observations are used. A covariance function or kernel
 is specified according to the characteristics of the data; in our model this 
 is the generalised inverse multiquadric
 
-$$ k(x,x') = \biggl( ||x-x'|| + \sigma^2\biggr)^{-\beta} $$
+\begin{align}
+    k(x,x') = \biggl( ||x-x'|| + \sigma^2\biggr)^{-\beta} \label{eq: gimq}
+\end{align}
 and used to construct the covariance matrix $K$, which along with 
 a mean of $0$ forms the distribution of the the weights 
-$$ w \sim \mathcal{N}\bigl(0, K\bigr)$$
-By Bayes' Theorem, 
+$$ w \sim \mathcal{N}\bigl(m(x), K\bigr)$$
+
+The mean function $m(x)$ acts as a bias, providing a baseline expectation of the function values. Then, by Bayes' Theorem, 
 
 \begin{align}
     p(w|y, X) = \frac{p(y|X,w) p(w)}{p(y|X)}
@@ -697,20 +687,15 @@ Using this, the posterior distribution is then obtained
 \begin{align}
     p(w|y, X) \sim \mathcal{N}\bigl(\frac{A^{-1}Xy}{\sigma_{n}^{2}}, A^{-1}\bigr) \label{eq:nine}
 \end{align}
-where the covariance matrix $A^{-1} = K^{-1} + \frac{XX^T}{\sigma_{n}^2}$.
-To make predictions on a test case all possible $w$
-values, weighted by their posterior probability, are averaged to obtain the
-predictive distribution, upon which predicted outputs are computed \citep{rasmussen2006}.
+Tthe covariance matrix $A^{-1} = K^{-1} + \sigma_{n}^{-2}(XX^T$).
+To make predictions on a test case all possible $w$, weighted by their probability, are averaged to obtain the
+predicted output \citep{rasmussen2006}.
 
 \subsubsection{The Network}
 
-A $4$-dimensional input space $X$
-passes inputs $\boldsymbol{\mathrm{x}}_1, \boldsymbol{\mathrm{x}}_2,\ldots \boldsymbol{\mathrm{x}}_{n}$
-and corresponding outputs \( y = \{y_1, y_2, \dots, y_n\} \), through the first
-layer, in which the covariance function $(x,x')$
-is applied, the goal being to determine the distribution of the weights. Prior to this,
-the optimal hyperparameters in the covariance function, which plays an analogous
-role to the RBF basis function, are calculated using GridSearch Cross Validation; these hyperparameters are:
+
+First, the optimal hyperparameters in the covariance function \eqref{eq: gimq} 
+are computed using GridSearch Cross Validation; these hyperparameters are:
 \begin{enumerate}
     \item $\alpha$: a regularisation parameter which represents a small quantity
     that is added to the diagonals of the covariance matrix to ensure it is 
@@ -721,9 +706,29 @@ role to the RBF basis function, are calculated using GridSearch Cross Validation
     \item Length scale: a parameter that controls the influence - analogous to 
     the width each RBF neuron possesses - that each kernel (analogous to node) is to have.
 \end{enumerate}
-following this the model uses the training observation $(y,X)$ to find
-the posterior predictive distribution, and with it the predicted output, after 
-averaging over all possible $w$, weighted by their likelihood according to \eqref{eq:nine}. 
+
+Then, training inputs $\boldsymbol{\mathrm{x}}_1, \boldsymbol{\mathrm{x}}_2,\ldots \boldsymbol{\mathrm{x}}_{n}$
+and corresponding outputs \( y = \{y_1, y_2, \dots, y_n\} \) are successively passed through the 
+covariance function $(x,x')$, to obtain the matrix of the pairwise covariance of 
+all training observations, $K$.
+
+A $4$-dimensional input space $X$ takes in an individual training observation $(\boldsymbol{\mathrm{x}}_{i}, y_i)$ and 
+calculates the posterior weights distribution using \eqref{eq:nine}. 
+Each possible weight vector $w$ represents a different function, explicitly 
+based on the covariance function, that could fit the data. The expectation is then taken, which
+effectively combines all weights and finds the mean, weighted by the 
+respective probabilities. This represents the best functional estimate of the price movement. Based on this estimate 
+the predictive output will be generated.
+
+The predictive distribution for the test observations are derived similarly. The 
+ultimate training process posterior weight distribution is used to derive the 
+first test weight disttribution, which then averages over all $w$ again to find the
+best functional estimate. It only requires past x and y.
+
+\begin{align}
+    p(y_{*}|x_{*}, X, y) \, dw = \mathcal{N}(\sigma_{n}^{2} x_{*}^{T}A^{-1}Xy, )
+\end{align}
+
 
 \subsection{Results}
 
