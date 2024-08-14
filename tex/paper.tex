@@ -77,68 +77,65 @@ The remainder of the paper is organised as follows. Section 2 presents a brief r
 
 \section{Literature Review}
 
-The traditional methods that have been leveraged in stock market forecasting, 
-besides fundamental and technical analysis, have been econometric models. Linear regression \citep{shakhla2018stock,roy2015stock} and ARMA and ARCH models have
-both extensively used in numerous stock market forecasting problems \citep{herwartz2017stock,hu2020stock,oberholzer2015garch,rounaghi}. Cointegration methods such as the 
-ARDL and ECM models have been used significantly in forecasting problems involving macroeconomic factors \citep{demir2019,khan2018,neifar2023}. 
-
-In addition to econometric models, machine learning methods, 
-particularly artificial and deep neural networks \citep{chen2015lstm,kara2011ann,long2019deep,nelson2017lstm}, have recently emerged as powerful alternatives capable of overcoming the limitations of econometric models. They are able to capture complex relationships in financial data \citep{rossi2018ml}, and are thereby able to provide more accurate forecasts than ordinary statistical models \citep{lapitskaya2021armax}. 
-
 \subsection{Stock Market-Macroeconomic Relationships}
 
-There are a number of works which investigate the impact of 
-the selected macroeconomic variables
-on the stock market.  
+The findings of \citeboth{ChenRollRoss1986} state that a long-term equilibrium relationship 
+exists between stock market prices and relevant macroeconomic indicators. Based on this, 
+\citeboth{EngleGranger1987} proposed an econometric approach utilising a causality test and an 
+error correction model (ECM) to investigate this relationship. This approach has been used extensively \citep{QuadriMasih, Plíhal2016,olomu2015} to assess the impact of macroeconomic variables on the stock market. 
+Other prominent techniques that have been developed include the Johansen cointegration model \citep{YadavKheraMishra2021,Ozcan2012,ChistiShakeelGanai2020} and the Autoregressive Distributed Lag (ARDL) model \citep{khan2018,demir2019,neifar2023}.
+
+The literature investigating the impacts of the selected variables on the stock market is now presented. A discussion on the FTSE250 as the most accurate representation of the UK stock market is also included.
 
 \subsubsection{Inflation}
 
 The Fisher hypothesis states that nominal interest rates adjust to expected 
-inflation, implying that markets are efficient as firms correctly anticipate inflation 
-and adjust prices. This was tested this in the US stock market by \citeboth{jaffe1976}, and
-\citeboth{bodie1976} who both found a negative relationship between inflation and stock returns.
+inflation as firms correctly anticipate inflation 
+and adjust prices, implying that markets are efficient and that inflation has no impact on the stock market. This was tested this in the US stock market by \citeboth{jaffe1976}, and
+\citeboth{bodie1976} who both found a negative relationship between inflation and stock returns, providing evidence against the Fisher hypothesis.
 To account for this,
 \citeboth{mogdiliani1979} proposed the Inflation Illusion Hypothesis, 
 arguing that investors overestimate the discount rate in valuations, leading to mispricing. 
 \citeboth{gultekin1983} and \citeboth{firth1979}, however, found that the relationship between nominal stock returns and inflation in the UK is positive, and that real returns on UK stocks have remained stable even as inflation varied.
-Later, \citeboth{hasan2008} provided evidence against this, challenging the Fisher hypothesis and enabling 
-the use of inflation to  
+Later, \citeboth{hasan2008} provided evidence against this, challenging the Fisher hypothesis and establishing a 
+significant causal relationship between the stock market 
 
 
 \subsubsection{Interest Rate}
 
 Interest rates, being the cost of borrowing, directly impact firms by increasing financing costs, reducing profitability, and lowering growth prospects. For consumers, higher rates raise borrowing costs, leading to reduced spending and demand, which further lowers corporate profitability \citep{boe199section}. 
-The empirical research supports this theory: \citeboth{alam2009} found a significant inverse relationship between interest rates and stock prices across multiple countries from 1988 to 2003; 
-\citeboth{talla2013} observed a negative relationship between interest rates and stock prices on the Stockholm Stock Exchange; 
-\citeboth{demir2019} reported similar findings for the Turkish Stock Exchange. In the case of the UK, \citeboth{neifar2023} used a Non-Linear ARDL model to find a significantly negative long-run relationship between interest rates and the UK stock market. Higher interest rates also encourage a shift from stocks to safer 
-assets like bonds, this is known as the flight-to-quality phenomenon, where rising bond yields make bonds more attractive compared to stocks. \citeboth{asgharian2016} provided evidence for this, particularly in developed markets like the UK. This suggests a typically negative correlation between stock prices and interest rates.
+The empirical research supports this theory. \citeboth{alam2009} found a significant inverse relationship between interest rates and stock prices across multiple countries from 1988 to 2003.
+\citeboth{talla2013} observed a negative relationship between interest rates and stock prices on the Stockholm Stock Exchange.
+\citeboth{demir2019} reported similar findings for the Turkish Stock Exchange. In the case of the UK, \citeboth{neifar2023} used a Non-Linear ARDL model to find a significantly negative long-run relationship between interest rates and the FTSE100. 
+In addition, the flight-to-quality phenomenon that igher interest rates also encourage a shift from stocks to fixed-income 
+assets such as bonds. \citeboth{asgharian2016} provided evidence for this in developed stock markets, including the UK. This suggests interest rates 
+negative impact the stock market.
 
 \subsubsection{Exchange Rate}
 
-Classical economic theory explains the relationship between exchange rates and stock prices through flow and portfolio balance models. The flow model suggests that currency depreciations negatively impact the cash flow of international firms, reducing their stock prices. The portfolio balance model indicates that expected currency depreciations lead investors to shift from domestic to foreign assets, decreasing demand for domestic stocks and lowering their prices. 
-Moreover, \citeboth{branson1977} established a bidirectional relation between the exchange rate and stock prices: the demand for money in each country depends on the performance of assets in that country’s currency, and conversely the demand for money is determined by real wealth, itself partly influenced by stock market returns. 
-\citeboth{aydemir2009} confirmed this, in the case of the Turkish Stock Exchange. 
-\citeboth{khan2018} also found that the exchange rate showed a positive relationship with the Karachi Stock Exchange over the long-run, and a negative relationship in the short-run. 
-\citeboth{wong2022} demonstrated cointegration between exchange rates and stock prices across multiple countries, including the UK.
+Classical economic theory explains the impact exchange rates have on stock prices through the portfolio balance model. The portfolio balance model indicates that expected currency depreciations lead investors to shift from domestic to foreign assets, decreasing demand for domestic stocks and lowering their prices. 
+\citeboth{branson1977} established a bidirectional relation between the exchange rate and stock prices. This was confirmed
+in the case of the Turkish Stock Exchange by \citeboth{aydemir2009}. 
+Moreover, stock markets often contain multinational firms involved in international transactions. Their profits are strongly influenced by the exchange rate, and consequently so is the stock market price \citep{Wong2018}.
+In support of this, \citeboth{khan2018} found that the exchange rate showed a positive relationship with the Karachi Stock Exchange over the long-run, and a negative impact in the short-run. 
+In the case of the UK, \citeboth{wong2022} also demonstrated a positive long-run impact by the exchange rate on the stock market.
 
 \subsubsection{Money Supply}
 
-One of the foundational studies on the relationship between money supply and 
+One of the foundational studies on the relationship between the money supply and 
 stock market prices was \citeboth{palmer1970}, who analysed the impact of M1 money supply on the S$\&$P 425 Industrial Stock Index. 
 He posited that trends in the nation's money stock could lead the 
 private sector to adjust wealth portfolios, resulting in 
 predictable movements in stock prices. \citeboth{homa1971} further argued that 
-stock prices are significantly influenced by the risk-free interest rate, 
-which is, according to the monetarist liquidity preference theory, a 
-function of money supply. They found that an increase in money supply 
-positively impacts stock prices. This was disputed by \citeboth{pesando1974}, 
-who critiqued the methodology used in their study. 
-However, later research utilising more advanced models and different data than \citeboth{palmer1970}, such as \citeboth{bahloul2017} and 
-\citeboth{synek2024} found that the money supply does significantly influences developed stock indices, including the UK. 
-\citeboth{pícha2017}
-investigated the effect of the post-2008 quantitative easing programs on the US stock markets, finding 
-that it was significantly affected by the M2 money supply. 
-\citeboth{olawale2014} also found a significant positive impact on stock returns in the US, but a negative one in the UK stock market. 
+stock prices are significantly impacted by the risk-free interest rate, 
+which is a function of money supply. This relationship was disputed by \citeboth{pesando1974}, 
+who critiqued the theoretical and empirical methodology used in their study. In addition, \citeboth{sorensen1982} and 
+\citeboth{bernanke2005} argue that only the unanticipated component of money supply changes 
+affects the stock market price. Later research, however, such as \citeboth{bahloul2017}, 
+\citeboth{synek2024}, and \citeboth{pícha2017} has found that the price of developed stock markets, such as the US and UK's, is in fact significantly influenced by the money supply. 
+The nature of this relationship is disputed and varies across countries. \citeboth{homa1971} established a positive relationship between the 
+stock market and the money supply. This was disputed by \citeboth{sellin2001}, who presents a negative theoretical relationship betwen the stock market and money supply. \citeboth{olawale2014} empirically found a significant positive impact by the money supply on stock returns in the US, but a negative one in the case of the UK. 
+
 
 \subsubsection{FTSE 250 Index}
 
@@ -146,22 +143,23 @@ The FTSE250 has historically been considered a more closer representation of the
 This is reflected in the constitution of the respective indices, with the 
 FTSE250 historically resembling the structure of the UK economy more closely than the FTSE100 \citep{ftse250history}.
 
-In spite of this, the FTSE250 has seldom been utilised as the preferred indicator of the UK stock market in the literature.
-With the exception of \citeboth{smit2023longrun}, \citeboth{khatri2024impact} and \citeboth{engstrom2006impact} who investigate the effect of variable changes on the FTSE All Share which aggregates the 
-FTSE100, FTSE250 and FTSE SmallCap indices, as of yet, the impact of the four selected variables on the FTSE250 has not been empirically studied and 
+In spite of this, the FTSE250 has seldom been utilised as the preferred indicator of the UK stock market in the literature,
+with the exception of \citeboth{smit2023longrun}, \citeboth{khatri2024impact} and \citeboth{engstrom2006impact} who investigate the effect of variable changes on the FTSE All Share, an index that aggregates the 
+FTSE100, FTSE250 and FTSE SmallCap indices. The impact of the four selected variables on the FTSE250 has not yet been empirically studied and 
 warrants further investigation.
 
 \subsection{Stock Market Forecasting}
 
-There is a large body of literature regarding time-series forecasting. First, 
+There is a large body of literature regarding stock market price forecasting. First, 
 a discussion on the feasibility of such forecasting is presented. Following this, machine learning methods for forecasting are 
 discussed.
 
+
 \subsubsection{Efficient Market Hypothesis}
 
-The Efficient Market Hypothesis proposed in \citeboth{fama1970} argues that asset prices fully 
-reflect all available information; Fama outlined three forms of the EMH - 
-weak-form, semi-strong form and strong form EMH:
+The Efficient Market Hypothesis proposed in \citeboth{fama1970} argues that stock market prices fully 
+reflect all available information. Fama outlined three forms of the EMH:
+weak-form, semi-strong form and strong form EMH.
 \begin{enumerate}
     \item Weak-form: Future stock prices cannot be predicted based on past prices.
     \item Semi-strong form: Stock prices quickly adjust to reflect all publicly available information including macroeconomic changes.  
@@ -169,42 +167,38 @@ weak-form, semi-strong form and strong form EMH:
 \end{enumerate}
 
 The consistent success of various high-profile investors in the decades 
-after the development of the EMH have challenged 
+after the development of the EMH has challenged 
 its central argument, something acknowledged in the revised formulation of the EMH 
-by \citeboth{fama1991}. Furthermore, the empirical research is not in a
-greement on whether the London Stock Exchange is efficient at any of the three levels. 
+by \citeboth{fama1991}. Furthermore, the empirical research is not in 
+agreement on whether the UK stock market is efficient at any of the three levels. 
 \citeboth{libberton2010} and \citeboth{rounaghi} give evidence of weak-form efficiency,
 however, \citeboth{borges2010}, \citeboth{asghar2023} and \citeboth{bhavsar2015} al provide evidence to reject the EMH. 
 Some studies such as \citeboth{rosini2020} even found that the 
-efficiency of the FTSE100 and FTSE250 varied over time. The empirical findings then suggest 
+efficiency of the FTSE100 and FTSE250 varied over time. Thus, the empirical findings suggest 
 that it is not impossible to forecast movements in the 
 price of stock indices on the FTSE250 using macroeconomic variables.
 
+
+
 \subsubsection{Machine Learning Methods for Forecasting}
 
-The accelerating development of machine learning presents a challenge to the EMH
-and traditional economic theories. 
-Machine learning leverages advanced computational 
-tools capable of uncovering patterns and inefficiencies 
-in the market that were previously thought to be obscured by the 
-‘noise’ and randomness posited by the EMH and beyond the capability 
-of standard econometric models. Machine learning models continually 
-improve over time as they learn from new data—something regular 
-econometric models are incapable of doing. Notably, gradient boosting machines and neural networks, including 
-Recurrent Neural Networks (RNNs) and Long Short-Term Memory (LSTM) 
-Networks, have been extensively used for forecasting time series data, 
-such as stock market volatility \citep{cho2022forecasting,praveenraj2023} and prices \citep{zhang2022lstm,song2023forecasting,dutta2024hybrid}. However they 
-are not suitable for smaller datasets and tend to overfit on the training data
-in such datasets \citep{foster1992}.
+In addition to econometric models, machine learning methods, 
+particularly gradient boosting machines \citep{gumelar,Liu2024,Chen2023} and artificial and deep neural networks \citep{chen2015lstm,kara2011ann,long2019deep,nelson2017lstm}, have recently emerged as powerful alternatives capable of overcoming the limitations of econometric models. 
+They are able to capture complex relationships in financial data \citep{rossi2018ml}, and 
+are thereby able to provide more accurate forecasts than ordinary statistical models 
+\citep{lapitskaya2021armax}. 
+
+
+Deep learning methods such as Recurrent Neural Networks (RNNs) and Long Short-Term Memory (LSTM) Neural Networks
+have been extensively used for forecasting time series data, 
+such as stock market volatility \citep{cho2022forecasting,praveenraj2023} and prices \citep{zhang2022lstm,song2023forecasting,dutta2024hybrid}. The drawback of such 
+methods is that they are not suitable for smaller datasets and tend to overfit on the training data
+in such datasets \citep{foster1992} or display unstable behaviour during performance \citeboth{lebaron1998}
 
 Radial Basis Function Neural Networks (RBF-NN) are a type of artificial 
 neural network that use radial basis functions at each node in the 
-activation layer of the network. They have since been employed in a variety of contexts such as 
-hydrological forecasting \citep{chang2001}, biomedical engineering 
-\citep{ibrikci2002} and time-series analysis \citep{xiong2015} with success. 
-Whilst neural networks trained on small datasets often display unstable 
-behaviour during performance \citep{lebaron1998}, The advantage of 
-RBF-NNs lies in their ability to 
+activation layer of the network.
+The advantage of RBF-NNs lies in their ability to 
 operate effectively in extremely volatile financial time-series 
 environments \citep{cafferata2019}, their strong ability to 
 generalise on such data \citep{sharkawy2020} as well as their efficacy on small datasets \citep{kosarac2022}. 
@@ -213,27 +207,21 @@ supports this, using a sample size of 70 and 29 to forecast daily NASDAQ
 index values using an Artificial Neural Network; they achieved a minimum
 test $R^2$ of 83$\%$. 
 
-RBF-NNs have been used 
-considerably for stock market forecasting. \citeboth{cao2004} 
+RBF-NNs have been used considerably for stock market forecasting. \citeboth{cao2004} 
 used an RBF-NN based on the Optimal Partition Algorithm (OPA) to 
 forecast S$\&$P 500 prices. \citeboth{dass2019} use an RBF-NN, with the Back-propagation 
 Algorithm (BPA) used instead to tune parameters; their results demonstrate 
 that the RBF-NN outperformed a standard feed-forward neural network. 
 \citeboth{ji2014} also found that the RBF-NN was able to predict the value 
-of the Shanghai Composite Index on a 45 day time-horizon, with a mean prediction error of 
+of the Shanghai Composite Index on a 45 day time-horizon using the closing price, with a mean prediction error of 
 1.4387$\%$. Recently, \citeboth{abotaleb2024}
-used quarterly data from 2001 to 2023 to model the influence of economic 
-policies on the quarterly prices of various stock markets including the 
-FTSE100 using an RBF-NN, finding that the model 
-achieved relative forecast error rates as low as 6.8$\%$ and an error of 
-27.2$\%$ in the case of the FTSE100. Thus, it is concluded that the RBF-NN is a 
-competent tool in the sphere of financial time-series forecasting, and 
-is able to operate effectively within the constraints placed by our 
-problem domain and data. 
+used quarterly data from 2001 to 2023 to model the influence of the economic 
+uncertainty index on the quarterly prices of various stock markets including the 
+FTSE100 using an RBF-NN. They found that the model 
+achieved a relative error of 27.2$\%$ in the case of the FTSE100.
 
-However, with the exception of \citeboth{abotaleb2024}, who used 
-quarterly data and the economic uncertainty index, the effectiveness of RBF-NNs in stock market forecasting using 
-major macroeconomic indicators and low-granularity time-series has not been investigated and presents an area for further 
+Whilst \citeboth{abotaleb2024}, used quarterly data and a relatively minor economic indicator, the effectiveness of RBF-NNs in stock market forecasting using 
+major macroeconomic indicators and coarse-grain time-series has not yet been investigated and presents an area for further 
 research. 
 
 \section{Data}
