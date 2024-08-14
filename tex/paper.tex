@@ -94,14 +94,16 @@ on the stock market.
 \subsubsection{Inflation}
 
 The Fisher hypothesis states that nominal interest rates adjust to expected 
-inflation, implying market efficiency as firms correctly anticipate inflation 
+inflation, implying that markets are efficient as firms correctly anticipate inflation 
 and adjust prices. This was tested this in the US stock market by \citeboth{jaffe1976}, and
 \citeboth{bodie1976} who both found a negative relationship between inflation and stock returns.
 To account for this,
 \citeboth{mogdiliani1979} proposed the Inflation Illusion Hypothesis, 
 arguing that investors overestimate the discount rate in valuations, leading to mispricing. 
 \citeboth{gultekin1983} and \citeboth{firth1979}, however, found that the relationship between nominal stock returns and inflation in the UK is positive, and that real returns on UK stocks have remained stable even as inflation varied.
-Later, \citeboth{hasan2008} provided evidence against this, challenging the Fisher hypothesis.
+Later, \citeboth{hasan2008} provided evidence against this, challenging the Fisher hypothesis and enabling 
+the use of inflation to  
+
 
 \subsubsection{Interest Rate}
 
@@ -109,7 +111,7 @@ Interest rates, being the cost of borrowing, directly impact firms by increasing
 The empirical research supports this theory: \citeboth{alam2009} found a significant inverse relationship between interest rates and stock prices across multiple countries from 1988 to 2003; 
 \citeboth{talla2013} observed a negative relationship between interest rates and stock prices on the Stockholm Stock Exchange; 
 \citeboth{demir2019} reported similar findings for the Turkish Stock Exchange. In the case of the UK, \citeboth{neifar2023} used a Non-Linear ARDL model to find a significantly negative long-run relationship between interest rates and the UK stock market. Higher interest rates also encourage a shift from stocks to safer 
-assets like bonds, this is known as the flight-to-quality phenomenon, where rising bond yields make bonds more attractive compared to stocks. \citeboth{asgharian2016} provided evidence for this, particularly in developed markets like the UK. This typically results in a negative correlation between stock prices and interest rates.
+assets like bonds, this is known as the flight-to-quality phenomenon, where rising bond yields make bonds more attractive compared to stocks. \citeboth{asgharian2016} provided evidence for this, particularly in developed markets like the UK. This suggests a typically negative correlation between stock prices and interest rates.
 
 \subsubsection{Exchange Rate}
 
@@ -152,9 +154,8 @@ warrants further investigation.
 \subsection{Stock Market Forecasting}
 
 There is a large body of literature regarding time-series forecasting. First, 
-a discussion on the feasibility of such forecasting is presented: the Efficient 
-Market Hypothesis. Following this, machine learning methods for forecasting are 
-presented, 
+a discussion on the feasibility of such forecasting is presented. Following this, machine learning methods for forecasting are 
+discussed.
 
 \subsubsection{Efficient Market Hypothesis}
 
@@ -170,13 +171,13 @@ weak-form, semi-strong form and strong form EMH:
 The consistent success of various high-profile investors in the decades 
 after the development of the EMH have challenged 
 its central argument, something acknowledged in the revised formulation of the EMH 
-in \citeboth{fama1991}. Furthermore, the empirical research is not in a
+by \citeboth{fama1991}. Furthermore, the empirical research is not in a
 greement on whether the London Stock Exchange is efficient at any of the three levels. 
 \citeboth{libberton2010} and \citeboth{rounaghi} give evidence of weak-form efficiency,
 however, \citeboth{borges2010}, \citeboth{asghar2023} and \citeboth{bhavsar2015} al provide evidence to reject the EMH. 
 Some studies such as \citeboth{rosini2020} even found that the 
 efficiency of the FTSE100 and FTSE250 varied over time. The empirical findings then suggest 
-that it is not impossible to determine movements in the 
+that it is not impossible to forecast movements in the 
 price of stock indices on the FTSE250 using macroeconomic variables.
 
 \subsubsection{Machine Learning Methods for Forecasting}
@@ -345,11 +346,7 @@ a coefficient in a model, where both the dependent and independent variables
 are in logarithmic form, represents the percentage change in the 
 dependent variable for a one percent change in an independent variable, 
 which furnishes us with easily interpretable results. Having done this,
-the level at which the variables are stationary\footnote{Stationarity refers to the statistical property of a time-series where 
-its mean, variance, and autocorrelation structure do not change over time. Either a variable is stationary at level ($I(0)$), requiring no alteration,
-or it is stationary after taking the first difference ($I(1)$). 
-Non-stationarity leads to spurious regression where relationships that 
-are not actually present between two time-series are produced.} is checked.
+the level at which the variables are stationary is checked.
 Various techniques exist for stationarity testing, however in this study the 
 Augmented Dickey-Fuller (ADF) unit root test, was used. 
 
