@@ -89,15 +89,7 @@ particularly artificial and deep neural networks \citep{chen2015lstm,kara2011ann
 
 There are a number of works which investigate the impact of 
 the selected macroeconomic variables
-on the stock market. However, as of yet the effect of the entirety of the selected 
-macroeconomic variables has not been studied on the FTSE250. 
-
-\subsubsection{FTSE 250 Index}
-
-The FTSE250 has historically been considered a more closer representation of the domestic economy than the FTSE100. Roughly $50\%$ of the earnings of the FTSE250 are from overseas, similar to the S\&P 500. In contrast, nearly $80\%$ of the FTSE$100$'s earnings are from overseas. 
-This is reflected in the constitution of the respective indices, with the 
-FTSE250 historically resembling the structure of the UK economy more closely than the FTSE100 \citep{ftse250history}.
-In spite of this, the FTSE250 has seldom been utilised as the preferred indicator of the UK stock market in the literature.
+on the stock market.  
 
 \subsubsection{Inflation}
 
@@ -146,8 +138,18 @@ investigated the effect of the post-2008 quantitative easing programs on the US 
 that it was significantly affected by the M2 money supply. 
 \citeboth{olawale2014} also found a significant positive impact on stock returns in the US, but a negative one in the UK stock market. 
 
+\subsubsection{FTSE 250 Index}
 
-\subsection{Forecasting}
+The FTSE250 has historically been considered a more closer representation of the domestic economy than the FTSE100. Roughly $50\%$ of the earnings of the FTSE250 are from overseas, similar to the S\&P 500. In contrast, nearly $80\%$ of the FTSE$100$'s earnings are from overseas. 
+This is reflected in the constitution of the respective indices, with the 
+FTSE250 historically resembling the structure of the UK economy more closely than the FTSE100 \citep{ftse250history}.
+
+In spite of this, the FTSE250 has seldom been utilised as the preferred indicator of the UK stock market in the literature.
+With the exception of \citeboth{smit2023longrun}, \citeboth{khatri2024impact} and \citeboth{engstrom2006impact} who investigate the effect of variable changes on the FTSE All Share which aggregates the 
+FTSE100, FTSE250 and FTSE SmallCap indices, as of yet, the impact of the four selected variables on the FTSE250 has not been empirically studied and 
+warrants further investigation.
+
+\subsection{Stock Market Forecasting}
 
 There is a large body of literature regarding time-series forecasting. First, 
 a discussion on the feasibility of such forecasting is presented: the Efficient 
@@ -226,9 +228,11 @@ achieved relative forecast error rates as low as 6.8$\%$ and an error of
 27.2$\%$ in the case of the FTSE100. Thus, it is concluded that the RBF-NN is a 
 competent tool in the sphere of financial time-series forecasting, and 
 is able to operate effectively within the constraints placed by our 
-problem domain and data. However, with the exception of \citeboth{abotaleb2024}, who used 
-quarterly data, the effectiveness of RBF-NNs in stock market forecasting using 
-low-granularity economic time-series has not been investigated and presents an area requiring further 
+problem domain and data. 
+
+However, with the exception of \citeboth{abotaleb2024}, who used 
+quarterly data and the economic uncertainty index, the effectiveness of RBF-NNs in stock market forecasting using 
+major macroeconomic indicators and low-granularity time-series has not been investigated and presents an area for further 
 research. 
 
 \section{Data}
@@ -252,9 +256,9 @@ announce a rate on a regular basis. To address the resulting irregularities the 
         \Else{
             \For{each day $d_j$ with a rate change}{
                 \textbf{Compute:} 
-                $W_{int} = \sum_{i_k \in I_m} i_k \frac{d_{j_k}}{x}$\;
+                $W_{int} = \sum_{i_k \in I_m} \frac{i_k  d_{j_k}}{x}$\;
                 where $I_m = \{i_1, i_2, \ldots, i_n\}$ is the set of interest rates on days with changes, 
-                and $d_{j_k}$ is the number of days for each rate $i_k$.
+                and $d_{j_k} \leq x$ is the number of days into the month each rate $i_k$ occurs on.
             }
             \textbf{Set:} $\text{Rate}_m \leftarrow W_{int}$\;
         }
