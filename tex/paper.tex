@@ -78,12 +78,12 @@ The remainder of the paper is organised as follows. Section 2 presents a brief r
 \section{Literature Review}
 
 The traditional methods that have been leveraged in stock market forecasting, 
-besides fundamental and technical analysis, have been econometric models such as 
-linear regression \citep{shakhla2018stock,roy2015stock}; ARMA and ARCH models, both extensively used in numerous stock market forecasting problems \citep{herwartz2017stock,hu2020stock,oberholzer2015garch,rounaghi}; and cointegration models such as the 
-ARDL and ECM model have been used significantly in forecasting problems involving macroeconomic factors \citep{demir2019,khan2018,neifar2023}. 
+besides fundamental and technical analysis, have been econometric models. Linear regression \citep{shakhla2018stock,roy2015stock} and ARMA and ARCH models have
+both extensively used in numerous stock market forecasting problems \citep{herwartz2017stock,hu2020stock,oberholzer2015garch,rounaghi}. Cointegration methods such as the 
+ARDL and ECM models have been used significantly in forecasting problems involving macroeconomic factors \citep{demir2019,khan2018,neifar2023}. 
 
-In addition to econometric models, in recent years, machine learning methods, 
-particularly artificial and deep neural networks \citep{chen2015lstm,kara2011ann,long2019deep,nelson2017lstm}, have emerged as powerful alternatives capable of overcoming the limitations of econometric models to capture complex relationships in financial data \citep{rossi2018ml}, and thereby provide more accurate forecasts than ordinary statistical models \citep{lapitskaya2021armax}. 
+In addition to econometric models, machine learning methods, 
+particularly artificial and deep neural networks \citep{chen2015lstm,kara2011ann,long2019deep,nelson2017lstm}, have recently emerged as powerful alternatives capable of overcoming the limitations of econometric models. They are able to capture complex relationships in financial data \citep{rossi2018ml}, and are thereby able to provide more accurate forecasts than ordinary statistical models \citep{lapitskaya2021armax}. 
 
 \subsection{Stock Market-Macroeconomic Relationships}
 
@@ -107,7 +107,7 @@ the use of inflation to
 
 \subsubsection{Interest Rate}
 
-Interest rates, being the cost of borrowing, directly impact firms by increasing financing costs, reducing profitability, and lowering growth prospects. For consumers, higher rates raise borrowing costs, leading to reduced spending and demand, which further lowers corporate profitability. 
+Interest rates, being the cost of borrowing, directly impact firms by increasing financing costs, reducing profitability, and lowering growth prospects. For consumers, higher rates raise borrowing costs, leading to reduced spending and demand, which further lowers corporate profitability \citep{boe199section}. 
 The empirical research supports this theory: \citeboth{alam2009} found a significant inverse relationship between interest rates and stock prices across multiple countries from 1988 to 2003; 
 \citeboth{talla2013} observed a negative relationship between interest rates and stock prices on the Stockholm Stock Exchange; 
 \citeboth{demir2019} reported similar findings for the Turkish Stock Exchange. In the case of the UK, \citeboth{neifar2023} used a Non-Linear ARDL model to find a significantly negative long-run relationship between interest rates and the UK stock market. Higher interest rates also encourage a shift from stocks to safer 
@@ -306,22 +306,22 @@ various crises such as the Dotcom bubble burst, and geopolitical shocks.
 
 
 The USD/GBP exchange rate has exhibited moderate variability, exhibiting the stable relations between 
-the two countries. Nevertheless, geopolitical shocks such as the 2008 financial crisis and Brexit both greatly affected the value of the Pound, 
+the two countries. Nonetheless, geopolitical shocks such as the 2008 financial crisis and Brexit both greatly affected the value of the Pound, 
 which accounts for the large range. 
 
 The CPI, with an average of 88.36, has 
-experienced significant fluctuations, highlight periods of high inflationary pressure such as in the late 2000s 
-near the global financial crisis, during 2021-22 as the Russia-Ukraine, and periods of stable, low
-inflation in the 2010s.
+experienced significant fluctuations, highlighting periods of high inflationary pressure such as in the late 2000s 
+near the global financial crisis, and during the onset of the Russia-Ukraine conflict in 2022, and periods of stable, low
+inflation such as the early to late 2010s.
 
 Interest rates, have varied widely from $0.1\%$ to $8.4\%$, with a standard deviation of $2.52\%$, reflecting the 
-increasing role of monetary policy in the UK. The Bank of England was forced to adjust interest rates 
+increasing role played by monetary policy in the UK since May 1997 when the Bank of England was given operational responsibility for setting interest rates \citep{king1997changes}. The Bank of England was forced to adjust interest rates 
 several times in response to worsening economic conditions, examples being the steep rate cuts during the 2008 financial crisis to stimulate the economy and the gradual rate hikes in response to 
 subsequent post-COVID inflationary pressures. 
 
 The M3 money supply has shown substantial variability, ranging from 494,181 to 3,704,873, 
 in large part influenced by the various Quantitative Easing (QE) programs implemented by the Bank of England 
-in response to the aforementioned crises. These programs aimed to inject liquidity into the economy to stimulate economic activity, thus inflating the overall money supply.
+in response to the recessions onset by the 2008 financial crisis and the COVID-19 pandemic. These programs aimed to inject liquidity into the economy to stimulate economic activity, thus inflating the overall money supply.
 
 \section{ARDL Model}
 
@@ -332,27 +332,20 @@ the stock market function is defined as:
     FTSE_{250} = f\biggl(CPI, EXCHG, INT, M3\biggr) \label{eq:implicit}
 \end{align}
 
-The study uses an autoregressive distributed lag (ARDL) model to determine 
+The study uses an autoregressive distributed lag (ARDL) model in conjunction with 
+an error correction model (ECM) to determine 
 whether a long-term dependence exists for the FTSE250 and our macroeconomic 
 indicators, and if so to quantify the long-run and short-run relationships
-between the former and the latter 
+between the former and the latter. 
 
 \subsection{Methodology}
 
 Before constructing the ARDL model a natural logarithmic transform is applied
 on the variables, this is done because in a log-transformed model,
-the coefficients can be interpreted as elasticities. Put simply, 
-a coefficient in a model, where both the dependent and independent variables
-are in logarithmic form, represents the percentage change in the 
-dependent variable for a one percent change in an independent variable, 
-which furnishes us with easily interpretable results. Having done this,
+the coefficients can be interpreted as elasticities (percentage changes). Having done this,
 the level at which the variables are stationary is checked.
 Various techniques exist for stationarity testing, however in this study the 
-Augmented Dickey-Fuller (ADF) unit root test, was used. 
-
-As the ARDL model involves lagged values of the dependent and independent 
-variables, it is necessary to determine the optimum lag for the variables 
-that minimises error; this was done using the Schwarz
+Augmented Dickey-Fuller (ADF) unit root test was used. The optimum lag for the variables in the ARDL model was then found using the Schwarz
 Information Criterion.
 
 The implicit form \eqref{eq:implicit} is represented in the ARDL model as:
@@ -363,7 +356,7 @@ The implicit form \eqref{eq:implicit} is represented in the ARDL model as:
                                & + \phi_{2} CPI_{t-1} + \phi_{3} INT_{t-1} +\phi_4 EXCHG_{t-1} + \phi_5 M3_{t-1}
 \end{align*}
 
-Here, the intercept term, denoting so and so, is given by $\alpha_0$; the 
+Here, the intercept term, represents the baseline level of \(\Delta \text{FTSE}_{250_t}\), is given by $\alpha_0$; the 
 remaining $\alpha_i$ terms represent the short-run relationships 
 between the variables, and $\phi_j$ represent the long-run relationships. 
 
