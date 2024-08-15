@@ -9,6 +9,7 @@
 \usepackage[numbers]{natbib}
 \usepackage{natbib}
 \usepackage{parskip}
+\usepackage{float}
 \usepackage{tablefootnote}
 \usepackage[linesnumbered,ruled,vlined]{algorithm2e}
 \providecommand{\keywordname}{\textbf{Keywords:}} % Customize how "Keywords:" appears
@@ -30,13 +31,13 @@
 
 \usepackage[
     colorlinks=true,      
-    linkcolor=green,       
+    linkcolor=red,       
     citecolor=blue,       
     urlcolor=blue,        
 ]{hyperref}
 
 
-\title{Investigating the Impact of Macroeconomic Indicatorspassword
+\title{Investigating the Impact of Macroeconomic Indicators
 
 on the FTSE 250 Index Using Machine Learning Methods}
 \author{Mateen Khan}
@@ -166,7 +167,7 @@ In the case of the UK, \citeboth{wong2022} also demonstrated a positive long-run
 \subsubsection{Money Supply}
 
 One of the foundational studies on the relationship between the money supply and 
-stock market prices was \citeboth{palmer1970}, who analysed the impact of M1 money supply on the S$\&$P 425 Industrial Stock index. 
+stock market prices was \citeboth{palmer1970}, who analysed the impact of M1 money supply on the S$\&$P 425 Industrial Stock Index. 
 Palmer posited that trends in the nation's money stock could lead the 
 private sector to adjust wealth portfolios, resulting in 
 predictable movements in stock prices. \citeboth{homa1971} further argued that 
@@ -246,7 +247,7 @@ environments (\citeboth{cafferata2019}), their strong ability to
 generalise on such data (\citeboth{sharkawy2020}) as well as their efficacy on small datasets (\citeboth{kosarac2022}). 
 \citeboth{esfandyari2016}
 supports this, using a sample size of 70 to forecast daily NASDAQ 
-index values using an Artificial Neural Network; they achieved a minimum
+Index values using an Artificial Neural Network; they achieved a minimum
 test $R^2$ of 83$\%$. 
 
 Radial basis function neural networks have been used considerably for stock market forecasting. \citeboth{cao2004} 
@@ -255,7 +256,7 @@ forecast S$\&$P 500 prices. \citeboth{dass2019} use a radial basis function neur
 Algorithm (BPA) instead to tune parameters; their results demonstrate 
 that the radial basis function network outperformed a standard feed-forward neural network. 
 \citeboth{ji2014} also found that the radial basis function network was able to predict the value 
-of the Shanghai Composite index on a 45 day time-horizon using the closing price, with a mean prediction error of 
+of the Shanghai Composite Index on a 45 day time-horizon using the closing price, with a mean prediction error of 
 1.4387$\%$. Recently, \citeboth{abotaleb2024}
 used quarterly data from 2001 to 2023 to model the influence of the economic 
 uncertainty index on the quarterly prices of various stock markets including the 
@@ -770,25 +771,10 @@ are calculated, and then the predictive output is found (\citeboth{rasmussen2006
 
 \subsection{Results}
 
-
-\begin{figure}[h!]
-    \centering
-    \input{long_term_monthly.tex}  
-    \caption{Long-term predicted vs real monthly FTSE250 changes}
-    \label{fig:longmonthly}
-\end{figure}
-
-\begin{figure}[h!]
-    \centering
-    \input{long_term_daily.tex}  
-    \caption{Long-term predicted vs real daily FTSE250 changes}
-    \label{fig:longdaily}
-\end{figure}
-
 The model returned a mean absolute error of MAE $=0.16$ and 
 $R^2 = 9\%$ for the long-term prediction, providing a 
 $2.4\%$ increase in the $R^2$ obtained by the ARDL-ECM model. The results are presented 
-in Figures 2 and 3, against monthly and daily FTSE250 changes respectively.
+in Figures \ref{fig:longmonthly} and \ref{fig:longdaily}, against monthly and daily FTSE250 changes respectively.
 
 The interpretation of this is that, over the long-run (4-5 years), the variations in the 
 Consumer Price Index, interest rate, USD/GBP exchange rate, and M3 money 
@@ -810,22 +796,14 @@ is by no means exhaustive; commodity prices, international trade dynamics,
 economic growth, and many other variables also exert a non-insignificant 
 effect on the stock market.
 
-
-\begin{figure}[h!]
-    \centering
-    \input{short_term_monthly.tex}  
-    \caption{Short-term predicted vs real monthly FTSE250 changes}
-    \label{fig:shortmonthly}
-\end{figure}
-
 The short-term prediction yielded MAE = $0.07$ and 
-$R^2 = 61\%$ for a 5-month time horizon. The results are presented in Figures 4 
-and 5, against monthly and daily FTSE250 changes respectively.
+$R^2 = 61\%$ for a 5-month time horizon. The results are presented in Figures \ref{fig:shortmonthly} 
+and \ref{fig:shortdaily}, against monthly and daily FTSE250 changes respectively.
 The significantly better performance of the model in the short-run
 indicates that the selected macroeconomic variables possess
 a stronger predictive power over shorter periods. This was highlighted 
 earlier in the ARDL model, with the interest rate and money supply significantly
-impacting the FTSE250 price in the short-run. 
+impacting the FTSE250 price in the short-run.
 
 In the short-term the market movements
 are more closely tied to recent deviations in the economy. This is because,
@@ -840,6 +818,34 @@ innovations and managerial efficiencies begins to outweigh the
 influence of fluctuating macroeconomic variables. Essentially, firms become accustomed 
 to the changed economic environment and over time. Thus, in the short-run 
 a different phenomenon is observed.
+
+\clearpage
+
+\begin{figure}[H]
+    \centering
+    \input{long_term_monthly.tex}  
+    \caption{Long-term predicted vs real monthly FTSE250 changes}
+    \label{fig:longmonthly}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \input{long_term_daily.tex}  
+    \caption{Long-term predicted vs real daily FTSE250 changes}
+    \label{fig:longdaily}
+\end{figure}
+
+\clearpage
+
+
+\begin{figure}[H]
+    \centering
+    \input{short_term_monthly.tex}  
+    \caption{Short-term predicted vs real monthly FTSE250 changes}
+    \label{fig:shortmonthly}
+\end{figure}
+
+
 
 
 \begin{figure}[h!]
@@ -862,7 +868,7 @@ in these markets, and try to forecast the
 forthcoming fluctuations based on policy changes that affect the macroeconomy.
 Within this context, the study examined the 
 impacts of the interest rate, USD/GBP
-exchange rate, the consumer price index, and 
+exchange rate, the Consumer Price Index, and 
 M3 money supply market activity on
 the FTSE250 over the October 1993 – April 2024 period.
 The results suggest a cointegrated long-run
