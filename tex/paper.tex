@@ -776,51 +776,6 @@ $R^2 = 9\%$ for the long-term prediction, providing a
 $2.4\%$ increase in the $R^2$ obtained by the ARDL-ECM model. The results are presented 
 in Figures \ref{fig:longmonthly} and \ref{fig:longdaily}, against monthly and daily FTSE250 changes respectively.
 
-The interpretation of this is that, over the long-run (4-5 years), the variations in the 
-Consumer Price Index, interest rate, USD/GBP exchange rate, and M3 money 
-supply explain or account for $9\%$ of the fluctuations of the
-monthly FTSE250 value. This relates closely to the findings of \citeboth{conover1999}, 
-who used an econometric model to establish that $4\%$ of the variation in monthly UK stock returns can be 
-explained by variations in the money supply. It also suggests a higher level of influence 
-than the ARDL-ECM model provided, that only $R^2=3.4\%$ of the monthly FTSE250 variations 
-are affected by the selected macroeconomic variables, demonstrating the ability of machine learning
-methods to capture subtle patterns in the data unavailable to econometric models. 
-
-
-In the context of a phenomenon as complex as the stock market,
-which is influenced by an inumerable quantity of factors such as investor sentiment
-- inherently irrational, 
-political instability, geopolitical shocks, corporate governance, and financial regulation, this result 
-unsurprising. Furthermore, the selection of economic variables in this study
-is by no means exhaustive; commodity prices, international trade dynamics,
-economic growth, and many other variables also exert a non-insignificant 
-effect on the stock market.
-
-The short-term prediction yielded MAE = $0.07$ and 
-$R^2 = 61\%$ for a 5-month time horizon. The results are presented in Figures \ref{fig:shortmonthly} 
-and \ref{fig:shortdaily}, against monthly and daily FTSE250 changes respectively.
-The significantly better performance of the model in the short-run
-indicates that the selected macroeconomic variables possess
-a stronger predictive power over shorter periods. This was highlighted 
-earlier in the ARDL model, with the interest rate and money supply significantly
-impacting the FTSE250 price in the short-run.
-
-In the short-term the market movements
-are more closely tied to recent deviations in the economy. This is because,
-theoretically, 
-the short-run is not exposed to the various unforeseen external shocks and structural changes
-that dilute the relationship between these variables and the stock market in the 
-long-run. As the prediction window expands, 
-more uncertainty and unknowns are introduced, which translates into 
-lower predictive quality. Furthermore, as the time horizon extends into the long-run, fundamental factors 
-begin to matter a lot more. The compound effect of earnings, cash flows,
-innovations and managerial efficiencies begins to outweigh the 
-influence of fluctuating macroeconomic variables. Essentially, firms become accustomed 
-to the changed economic environment and over time. Thus, in the short-run 
-a different phenomenon is observed.
-
-\clearpage
-
 \begin{figure}[H]
     \centering
     \input{long_term_monthly.tex}  
@@ -835,7 +790,37 @@ a different phenomenon is observed.
     \label{fig:longdaily}
 \end{figure}
 
-\clearpage
+
+The interpretation of this is that, over the long-run (4-5 years), the variations in the 
+Consumer Price Index, interest rate, USD/GBP exchange rate, and M3 money 
+supply explain or account for $9\%$ of the fluctuations of the
+monthly FTSE250 value. This relates closely to the findings of \citeboth{conover1999}, 
+who used an econometric model to establish that $4\%$ of the variation in monthly UK stock returns can be 
+explained by variations in the money supply. It also suggests a higher level of influence 
+than the ARDL-ECM model provided, that only $R^2=3.4\%$ of the monthly FTSE250 variations 
+are affected by the selected macroeconomic variables, demonstrating the ability of machine learning
+methods to capture subtle patterns in the data unavailable to econometric models. 
+
+In the context of a phenomenon as complex as the stock market,
+which is influenced by an inumerable quantity of factors such as investor sentiment
+- inherently irrational, 
+political instability, geopolitical shocks, corporate governance, and financial regulation, this result 
+unsurprising. Furthermore, the selection of economic variables in this study
+is by no means exhaustive; commodity prices, international trade dynamics,
+economic growth, and many other variables also exert a non-insignificant 
+effect on the stock market.
+
+
+
+The short-term prediction yielded MAE = $0.07$ and 
+$R^2 = 61\%$ for a 5-month time horizon. The results are presented in Figures \ref{fig:shortmonthly} 
+and \ref{fig:shortdaily}, against monthly and daily FTSE250 changes respectively.
+The significantly better performance of the model in the short-run
+indicates that the selected macroeconomic variables possess
+a stronger predictive power over shorter periods. This was highlighted 
+earlier in the ARDL model, with the interest rate and money supply significantly
+impacting the FTSE250 price in the short-run.
+
 
 
 \begin{figure}[H]
@@ -846,8 +831,6 @@ a different phenomenon is observed.
 \end{figure}
 
 
-
-
 \begin{figure}[h!]
     \centering
     \input{short_term_daily.tex}  
@@ -856,7 +839,19 @@ a different phenomenon is observed.
 \end{figure}
 
 
-
+In the short-term the market movements
+are more closely tied to recent deviations in the economy. This is because,
+theoretically, 
+the short-run is not exposed to the various unforeseen external shocks and structural changes
+that dilute the relationship between these variables and the stock market in the 
+long-run. As the prediction window expands, 
+more uncertainty and unknowns are introduced, which translates into 
+lower predictive quality. Furthermore, as the time horizon extends into the long-run, fundamental factors 
+begin to matter a lot more. The compound effect of earnings, cash flows,
+innovations and managerial efficiencies begins to outweigh the 
+influence of fluctuating macroeconomic variables. Essentially, firms become accustomed 
+to the changed economic environment and over time. Thus, in the short-run 
+a different phenomenon is observed.
 
 
 
