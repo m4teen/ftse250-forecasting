@@ -18,6 +18,15 @@
 }
 \newcommand{\citeboth}[1]{\citeauthor{#1} \citep{#1}}
 
+% Define a command to create a hyperlink with only the figure number
+\newcommand{\figref}[1]{%
+    \hyperref[fig:#1]{Figure \ref{fig:#1}}%
+}
+
+% Define a command to create a hyperlink with only the algorithm number
+\newcommand{\algoref}[1]{%
+    \hyperref[alg:#1]{Algorithm \ref{alg:#1}}%
+}
 
 \usepackage[
     colorlinks=true,      
@@ -37,7 +46,7 @@ on the FTSE 250 Index Using Machine Learning Methods}
 \maketitle
 
 \begin{abstract}
-    This study investigates the impact of the Consumer Price Index, Bank of England Base Rate, US Dollar (USD) and British Pound Sterling (GBP) exchange rate and the M3 money supply measure on the FTSE 250 index, and assesses the effectiveness of radial basis function neural networks as a tool to forecast the price of the FTSE 250 index based on the same set of macroeconomic indicators. This study shows quantitative estimates for the long-term and short-term impacts of the aforementioned macroeconomic indicators on the price of the FTSE 250 index, and demonstrates the effectiveness of radial basis function neural networks as a short-term forecasting tool for the price of the FTSE 250 index, thus providing an alternative to econometric forecasting models.
+    This study investigates the impact of the Consumer Price Index, Bank of England Base Rate, US Dollar (USD) and British Pound Sterling (GBP) exchange rate and the money supply (M3) measure on the FTSE 250 index, and assesses the effectiveness of radial basis function neural networks as a tool to forecast the price of the FTSE 250 index based on the same set of macroeconomic indicators. This study shows quantitative estimates for the long-term and short-term impacts of the aforementioned macroeconomic indicators on the price of the FTSE 250 index, and demonstrates the effectiveness of radial basis function neural networks as a short-term forecasting tool for the price of the FTSE 250 index, thus providing an alternative to econometric forecasting models.
 
     \keywords{Macroeconomic indicators; Stock market; FTSE 250 Index; Autoregressive Distributed Lag
     (ARDL) model, RBF Neural Network; Time-series forecasting}
@@ -45,15 +54,48 @@ on the FTSE 250 Index Using Machine Learning Methods}
 
 \section{Introduction}
 
-The stock market has played a central role in the economic and political ascent of many nations ever since its inception [1].  However, whenever stock market instabilities have arisen in history they have had far-reaching destabilising effects. The Mississippi Bubble was an early example of the inherent dangers within stock markets in the form of speculative bubbles [2]. In this particular case, the stock market crashed as result of an unsustainable rise in share prices fueled by speculation, leading to panic selling, a collapse in confidence, and a massive financial meltdown that rippled through the entire French economy.. Another example is the bursting of the dot-com bubble which had a profound impact on the stock market, leading to a significant crash, particularly in technology stocks. It triggered a severe stock market crash by leading to a rapid sell-off of overvalued tech stocks, which then spread to the broader market. The collapse of key companies, along with forced selling due to margin calls, and the widespread loss of investor confidence created a downward spiral that devastated the stock market. 
+The stock market has played a central role in the economic and 
+political ascent of many nations ever since its inception \citep{levine2002}.  
+However, whenever stock market instabilities have arisen in history they 
+have had far-reaching destabilising effects. The Mississippi Bubble was 
+an early example of the inherent dangers within stock markets in the form of 
+speculative bubbles \citep{mississippibubble}. The role of
+the macroeconomy in this crash was central. The French central bank, the 
+\textit{Banque Royale}, aimed to convert its vast national debt into shares through the issuance of large 
+amounts of government bonds and paper notes. This considerably increased the money supply, in turn 
+greatly facilitating the ease of obtaining credit by individuals, many of whom invested in the Mississippi Company.
+A mass sell-off began after the \textit{Banque Royale} announced the number of paper notes exceeded the 
+value of metal coinage it possessed. This large-scale expansion of the money supply led to 
+inflation burgeoning, reaching $23\%$ at its peak, and devastating France \citep{moen2001john}.  Nonetheless, stock markets also provide essential benefits by allowing companies to 
+raise capital, offering investment opportunities for individuals, and 
+supporting economic growth through efficient capital allocation. 
+They enhance corporate governance through transparency and accountability, 
+facilitate price discovery and market liquidity, and contribute to government 
+financing through taxes \citep{shahbaz2016}. Effective and sustainable
+macroeconomic policy can greatly aid in this beneficial process. Therefore, it is essential 
+for economic policymakers to understand the impact of macroeconomic changes 
+on the stock market. 
 
-Nevertheless, stock markets provide essential benefits by allowing companies to raise capital, offering investment opportunities for individuals, and supporting economic growth through efficient capital allocation. They enhance corporate governance through transparency and accountability, facilitate price discovery and market liquidity, and contribute to government financing through taxes.(Shahbaz et al., 2016). 
 
-The stock market is highly sensitive to macroeconomic indicators because these indicators provide insights into the overall health and direction of the economy. Stock markets react to macroeconomic indicators because these signals help investors anticipate future economic conditions, corporate profits, and investment returns. Positive indicators tend to boost stock prices, while negative indicators can lead to declines in stock prices.
+The sensitivity of the stock market to macroeconomic indicators is also of great 
+relevance to investors. Macroeconomic indicators provide 
+insights into the overall health and direction of the 
+economy, which affect investor sentiment and in turn influence market trends.
+Changes in the macroeconomy have an effect on both consumers and firms 
+which impacts their profitability, because these signals 
+help investors anticipate future economic conditions and corporate profits
+and consequently investment returns. Positive indicators tend to boost stock prices, while 
+negative indicators can lead to declines in stock prices.
 
-The significance of this study is to quantify the effects of macroeconomic indicators on the stock market as well as assessing the use of these indicators to forecast stock prices over the long-term and short-term, both useful to economic policy makers and stock market investors respectively.
+The significance of this study is to quantify the effects of macroeconomic 
+indicators on the stock market as well as assessing the use of these indicators 
+to forecast stock prices over the long-term and short-term, both useful to 
+economic policy makers and stock market investors respectively.
 
-A key task which economic policy makers and investors undertake is to understand and predict how economic changes influence stock market behaviour, which is critical for making informed policy and investment decisions. This modelling of the impact of macroeconomic indicators on stock markets is typically achieved by a variety of methods: statistical analysis, econometric modelling, scenario planning, and advanced machine learning techniques. However, it is fraught with challenges that require careful consideration, advanced techniques, and a deep understanding of both economics and financial markets. In particular, there is a challenge to find a subset of macroeconomic indicators which can most accurately capture stock market dynamics. 
+A key task which economic policy makers and investors undertake is to 
+understand and predict how economic changes influence stock market behaviour, 
+which is critical for making informed policy and investment decisions. 
+This modelling of the impact of macroeconomic indicators on stock markets is typically achieved by a variety of methods: statistical analysis, econometric modelling, scenario planning, and advanced machine learning techniques. However, it is fraught with challenges that require careful consideration, advanced techniques, and a deep understanding of both economics and financial markets. In particular, there is a challenge to find a subset of macroeconomic indicators which can most accurately capture stock market dynamics. 
 In addition, macroeconomic indicator data is of such low-granularity that it precludes the use of certain deep learning neural network methods for prediction purposes.
 
 
@@ -107,9 +149,9 @@ Interest rates, being the cost of borrowing, directly impact firms by increasing
 The empirical research supports this theory. \citeboth{alam2009} found a significant inverse relationship between interest rates and stock prices across multiple countries from 1988 to 2003.
 \citeboth{talla2013} observed a negative relationship between interest rates and stock prices on the Stockholm Stock Exchange.
 \citeboth{demir2019} reported similar findings for the Turkish Stock Exchange. In the case of the UK, \citeboth{neifar2023} used a Non-Linear ARDL model to find a significantly negative long-run relationship between interest rates and the FTSE100. 
-In addition, the flight-to-quality phenomenon that igher interest rates also encourage a shift from stocks to fixed-income 
+In addition, the flight-to-quality phenomenon that higher interest rates also encourage a shift from stocks to fixed-income 
 assets such as bonds. \citeboth{asgharian2016} provided evidence for this in developed stock markets, including the UK. This suggests interest rates 
-negative impact the stock market.
+have a negative impact the stock market.
 
 \subsubsection{Exchange Rate}
 
@@ -124,7 +166,7 @@ In the case of the UK, \citeboth{wong2022} also demonstrated a positive long-run
 
 One of the foundational studies on the relationship between the money supply and 
 stock market prices was \citeboth{palmer1970}, who analysed the impact of M1 money supply on the S$\&$P 425 Industrial Stock Index. 
-He posited that trends in the nation's money stock could lead the 
+Palmer posited that trends in the nation's money stock could lead the 
 private sector to adjust wealth portfolios, resulting in 
 predictable movements in stock prices. \citeboth{homa1971} further argued that 
 stock prices are significantly impacted by the risk-free interest rate, 
@@ -228,9 +270,27 @@ research.
 
 FTSE-250 monthly price data between Oct 1992 to March 2024 has been utilised for this study giving 379 observations.
 
+
+\begin{table}[h!]
+    \centering
+    \caption{Data sources}
+    \begin{tabular}{lll}
+        \toprule
+        \textbf{Variable} & \textbf{Notation} & \textbf{Source} \\
+        \midrule
+        FTSE 250 Index & FTSE$_{250}$ & Yahoo Finance \\
+        Consumer Price Index & CPI & Office for National Statistics (ONS) \\
+        USD/GBP Exchange Rate (£) & EXCHG & Federal Reserve of St Louis \\
+        Interest Rate ($\%$) & INT & Bank of England \\
+        Money Supply (M3) (millions £) & M3 & Bank of England \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
 During the data collection process, it was necessary to deal with an issue raised by the fact that the Bank of England’s Monetary Policy Committee (MPC) 
 does not convene on a monthly basis, and are not obligated to 
-announce a rate on a regular basis. To address the resulting irregularities the data was adjusted using the following algorithm:
+announce a rate on a regular basis. To address the resulting irregularities the data was adjusted using \algoref{interest_rate_adjustment}.
+
 
 \begin{algorithm}[H]
     \caption{Calculate monthly interest rate}
@@ -254,22 +314,6 @@ announce a rate on a regular basis. To address the resulting irregularities the 
     }
 \end{algorithm}
 
-
-\begin{table}[h!]
-    \centering
-    \caption{Data sources}
-    \begin{tabular}{lll}
-        \toprule
-        \textbf{Variable} & \textbf{Notation} & \textbf{Source} \\
-        \midrule
-        FTSE 250 Index & FTSE$_{250}$ & Yahoo Finance \\
-        Consumer Price Index & CPI & Office for National Statistics (ONS) \\
-        USD/GBP Exchange Rate (£) & EXCHG & Federal Reserve of St Louis \\
-        Interest Rate ($\%$) & INT & Bank of England \\
-        Money Supply (M3) (millions £) & M3 & Bank of England \\
-        \bottomrule
-    \end{tabular}
-\end{table}
 
 Over the period covered by our dataset, the FTSE250 index has 
 shown substantial growth, reflecting the structural transition of the UK economy.
@@ -298,8 +342,7 @@ the two countries. Nonetheless, geopolitical shocks such as the 2008 financial c
 which accounts for the large range. 
 
 The CPI, with an average of 88.36, has 
-experienced significant fluctuations, highlighting periods of high inflationary pressure such as in the late 2000s 
-near the global financial crisis, and during the onset of the Russia-Ukraine conflict in 2022, and periods of stable, low
+experienced significant fluctuations, highlighting periods of high inflationary pressure such as the onset of the Russia-Ukraine conflict in 2022, and periods of stable, low
 inflation such as the early to late 2010s.
 
 Interest rates, have varied widely from $0.1\%$ to $8.4\%$, with a standard deviation of $2.52\%$, reflecting the 
@@ -328,15 +371,14 @@ between the former and the latter.
 
 \subsection{Methodology}
 
-Before constructing the ARDL model a natural logarithmic transform is applied
-on the variables, this is done because in a log-transformed model,
-the coefficients can be interpreted as elasticities (percentage changes). Having done this,
-the level at which the variables are stationary is checked.
-Various techniques exist for stationarity testing, however in this study the 
-Augmented Dickey-Fuller (ADF) unit root test was used. The optimum lag for the variables in the ARDL model was then found using the Schwarz
+Prior to constructing the ARDL model a natural logarithmic transform was applied
+on the variables. This was done so that the coefficients appear as elasticities, 
+which we can interpret easily as percentage changes. Subsequently,
+the level at which the variables are stationary was ascertained using the 
+Augmented Dickey-Fuller (ADF) unit root test. The optimum lag for the variables in the ARDL model was then determined using the Schwarz
 Information Criterion.
 
-The implicit form \eqref{eq:implicit} is represented in the ARDL model as:
+The implicit form \eqref{eq:implicit} was represented in the ARDL model as:
 
 \begin{align*}
     \Delta \text{FTSE}_{250_t} &= \alpha_0 + \sum_{i=1}^{p} \alpha_i \Delta \text{FTSE}_{250_{t-i}} + \sum_{j_{1}=0}^{q_1} \beta_{1j_{1}} \Delta \text{CPI}_{t-j_{1}} + \sum_{j_{2}=0}^{q_2} \beta_{2j_{2}} \Delta \text{INT}_{t-j_{2}} \\
@@ -344,7 +386,7 @@ The implicit form \eqref{eq:implicit} is represented in the ARDL model as:
                                & + \phi_{2} CPI_{t-1} + \phi_{3} INT_{t-1} +\phi_4 EXCHG_{t-1} + \phi_5 M3_{t-1}
 \end{align*}
 
-Here, the intercept term, represents the baseline level of \(\Delta \text{FTSE}_{250_t}\), is given by $\alpha_0$; the 
+Here, the intercept term was given by $\alpha_0$. The 
 remaining $\alpha_i$ terms represent the short-run relationships 
 between the variables, and $\phi_j$ represent the long-run relationships. 
 
@@ -355,7 +397,7 @@ In the ARDL bounds test, the null and alternate hypothesis are:
     H_{1}: \phi_i &\neq \phi_j
 \end{align*}
 
-for, $i,j = 1,2,3,4,5$, with $i\neq j$. The F-statistic is computed for the joint
+for, $i,j = 1,2,3,4,5$, with $i\neq j$. The F-statistic was computed for the joint
 significance of the lagged variables and compared against the critical values
 given by \citeboth{pesaran2001} to determine whether cointegration exists, 
 and at what significance level. If cointegration exists, then 
@@ -365,14 +407,14 @@ the long-run coefficients $\kappa_i$ are estimated to find the cointegration equ
     FTSE_{250} = \kappa_0 + \kappa_1 CPI + \kappa_2 INT + \kappa_3 EXCHG + \kappa_4 M3 + \varepsilon \label{eq:two}
 \end{align}
 
-Then, an Error Correction Model (ECM) is constructed:
+Then, an Error Correction Model (ECM) was constructed:
 
 \begin{align*}
     \Delta \text{FTSE}_{250_t} &= \alpha_0 + \sum_{i=1}^{p} \alpha_i \Delta \text{FTSE}_{250_{t-i}} + \sum_{j_{1}=0}^{q_1} \beta_{1j_{1}} \Delta \text{CPI}_{t-j_{1}} + \sum_{j_{2}=0}^{q_2} \beta_{2j_{2}} \Delta \text{INT}_{t-j_{2}} \\
                                & \sum_{j_{3}=0}^{q_3} \beta_{3j_{3}} \Delta \text{EXCHG}_{t-j_{3}} + \sum_{j_{4}=0}^{q_4} \beta_{4j_{4}} \Delta \text{M3}_{t-j_{4}} + \gamma\text{ECT}_{t-1} + \varepsilon_t
 \end{align*}
 
-where the error correction term ECT is found by calculating the residual 
+where the error correction term, ECT, was found by calculating the residual 
 produced by \eqref{eq:two}:
 
 \begin{align*}
@@ -382,13 +424,15 @@ produced by \eqref{eq:two}:
 The parameter $\gamma$ describes the speed at which short-run deviations from the long-run equilibrium
 are adjusted. A negative $\gamma$ implies that there exists a correction mechanism that converges the deviation 
 to the long-run equilibrium. To estimate the short-run coefficients, $\alpha_i$ and $\beta_k$, as 
-well as the short-run correction speed $\gamma$ OLS regression is used.
+well as the short-run correction speed $\gamma$ Ordinary Least Squares (OLS) regression was used.
+
+Finally, diagnostic tests are conducted to confirm that the model does not
+display autocorrelation, heteroskedascity, non-normality and that the cumulative 
+sum of residuals and squared residuals are both stable.
 
 \subsection{Results}
 
-First, a natural logarithmic transform was applied on the variables, and 
-then conducting the ADF unit root test on the data. The null hypothesis of the 
-ADF Unit Root test is that of non-stationarity, and the alternate hypothesis 
+The null hypothesis of the ADF Unit Root test is that of non-stationarity, and the alternate hypothesis 
 is that the variables are stationary.
 
 
@@ -412,7 +456,7 @@ is that the variables are stationary.
 
 Subsequently, the optimum lag of the variables was calculated using the 
 Schwarz Information Criterion, to obtain the optimum model 
-of ARDL(5, 4, 7, 7, 4). The resulting F-statistic of $4.0798$ was compared against the critical values
+of ARDL(5, 4, 7, 7, 4). The resulting F-statistic of $4.1$ was compared against the critical values
 given by \citeboth{pesaran2001}, providing evidence of cointegration 
 at the $10\%$, $5\%$ and $2.5\%$ significance levels, but not at the $1\%$ 
 level.
@@ -433,9 +477,8 @@ level.
 The long-run and short-run coefficients were then estimated, and presented 
 alonsgide the diagnostic test results which confirm that the model does not
 display autocorrelation, heteroskedascity, non-normality and the cumulative 
-sum of residuals and squared residuals are both stable, indicating that the 
-relationship between the variables has not changed over time. The error
-correction term is also given, and it is negative, as expected.
+sum of residuals and squared residuals are both stable. The error
+correction term is also given, and it was negative, as expected.
 
 \begin{table}[h!]
     \centering
@@ -449,7 +492,7 @@ correction term is also given, and it is negative, as expected.
         INT & $-0.1341097^{***}$ & INT $(-7)$ & $-0.034572^{****}$\\
         EXCHG &  $-0.890146^{****}$ & EXCHG $(-7)$ & $0.122318$ \\
         M3 & $-0.1141114$ & M3 $(-4)$ & $-0.527798^{***}$ \\
-        Intercept & $-3.447767$ & ECT $(-1)$ & $-0.1001^{**}$ \\
+        Intercept & $-3.447767$ & ECT $(-1)$ & $-0.1794^{**}$ \\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -492,7 +535,7 @@ expect a contraction in future monetary policy.
 This leads to an increase in the demand for funds, which drives up the current rate of interest, in turn
 reducing the present value of earnings in the Discounted Cash Flow (DCF) stock valuation model. The effect is a decline in the stock market prices.
 
-Unsurprisingly, the USD/GBP exchange rate is significantly related to the FTSE250's movements. It 
+Unsurprisingly, the USD/GBP exchange rate was significantly related to the FTSE250's movements. It 
 should not be forgotten that, although it is considered to be a more domestic indicator of the LSE, 
 at times $50\%$ of the FTSE250's earnings have come from abroad, indicating that 
 the value of the Pound has a significant impact on this stock market. 
@@ -517,14 +560,13 @@ In the short term, interest rate hikes immediately decrease the present value of
 DCF valuation model, and depress prices.
 
 The error correction term 
-is negative and statistically significant ensuring that long-run equilibrium 
-can be achieved. The adjustment speed of $0.1001$ indicates that 
-roughly $10\%$ of the fluctuation in the previous month's price caused by the 
-macroeconomic variable movements is adjusted back to the long-run equilibrium in the current month.
-However, only increases in the interest rate and money supply are able to 
-significantly contribute towards this correction, with $1\%$ increases in the former 
-leading to a $-0.03\%$ change in the FTSE250 price 7 months later, and in the case of the latter
-a $-0.53\%$ change after a 4-month lag. 
+was negative and statistically significant ensuring that long-run equilibrium 
+can be achieved. The adjustment speed of $0.1794$ indicates that 
+roughly $18\%$ of the fluctuation in the previous month's price caused by the 
+macroeconomic variable movements is adjusted back to the long-run equilibrium in the subsequent month. This implies 
+that it takes approximately 6 months for the FTSE250 to return to its long-run equilibrium following 
+changes in the selected macroeconomic variables.
+
 
 \section{RBF Neural Network}
 
@@ -532,39 +574,44 @@ a $-0.53\%$ change after a 4-month lag.
 
 \begin{figure}[h]
     \centering
-    \hspace{-2.6cm} 
-    \begin{tikzpicture}[node distance=3cm,
-                        thick, 
-                        main node/.style={circle, draw, font=\sffamily\Large\bfseries}]
-                        
-      
-      \node[main node] (1) {$y_{1}$};
-      \node[main node] (2) [right of=1] {$y_{c}$};
-      \node[main node] (3) [below left of=1] {$\phi_{1}$};
-      \node[main node] (4) [below right of=2] {$\phi_{M}$};
-      \node[main node] (5) [below right of=3] {$x_{1}$};
-      \node[main node] (6) [below left of=4] {$x_{d}$};
-      \node[main node] (7) [left of=3] {$\phi_{0}$};
-      
-      
-      \draw[thick, dashed] (1) -- (2);
-      \draw[thick, dashed] (3) -- (4);
-      \draw[thick, dashed] (5) -- (6);
-      \draw[thick] (1) -- (3);
-      \draw[thick] (1) -- (4);
-      \draw[thick] (2) -- (4);
-      \draw[thick] (7) -- (1);
-      \draw[thick] (7) -- (2);
-      \draw[thick] (3) -- (1);
-      \draw[thick] (3) -- (2);
-      \draw[thick] (3) -- (6);
-      \draw[thick] (3) -- (5);
-      \draw[thick] (4) -- (5);
-      \draw[thick] (4) -- (6);
+    \begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=2cm']
 
+        % Labels for the layers
+        \node[align=center] (inputlabel) at (-2,-2.8) {Input Layer};
+        \node[align=center] (hiddenlabel) at (3,-7) {Hidden Layer};
+        \node[align=center] (hiddenlabel) at (4,-0.3) {Bias};
+        \node[align=center] (outputlabel) at (8,-2.8) {Output Layer};
+
+        % Input Layer Nodes
+        \node[circle, draw, minimum size=1cm] (I-1) at (0,-1) {$x_1$};
+        \node[circle, draw, minimum size=1cm] (I-2) at (0,-2.5) {$x_2$};
+        \node[] (I-dots) at (0,-4) {$\vdots$};
+        \node[circle, draw, minimum size=1cm] (I-d) at (0,-5.5) {$x_d$};
+    
+        % Hidden Layer Nodes
+        \node[circle, draw, minimum size=1cm] (H-0) at (3,-0.5) {$\phi_0$};
+        \node[circle, draw, minimum size=1cm] (H-1) at (3,-2) {$\phi_1$};
+        \node[] (H-dots) at (3,-3.5) {$\vdots$};
+        \node[circle, draw, minimum size=1cm] (H-M) at (3,-6) {$\phi_M$};
+    
+        % Output Layer Node
+        \node[circle, draw, minimum size=1cm] (O) at (6,-2.75) {$y$};
+    
+        % Connect input layer to hidden layer (excluding phi_0)
+        \foreach \i in {1,2,d}
+            \foreach \j in {1,M}
+                \draw[->] (I-\i) -- (H-\j);
+    
+        % Connect phi_0 directly to output layer
+        \draw[->] (H-0) -- (O);
+
+        % Connect other hidden layer nodes to output layer
+        \foreach \j in {1,M}
+            \draw[->] (H-\j) -- (O);
+    
     \end{tikzpicture}
     \caption{RBF-NN Architecture}
-    \label{fig:your_label}
+    \label{fig:rbf_nn_architecture}
 \end{figure}
 
 The exact interpolation problem, which forms the motivation for RBF-NNs, 
@@ -581,7 +628,7 @@ values $y_n$. The objective is to find a function
 
 The radial basis function approach 
 introduces a set of $N$ basis functions, one for each 
-data point. The radial basis function, $\phi(\cdot)$ is some non-linear function of the Euclidean distance
+data point. The radial basis function, $\phi(\cdot)$, is some non-linear function of the Euclidean distance
 $||\boldsymbol{\mathrm{x}} - \boldsymbol{\mathrm{x_n}}||$. The output of the mapping is then expressed as a linear combination of these basis functions:
 
 \begin{align}
@@ -590,7 +637,7 @@ $||\boldsymbol{\mathrm{x}} - \boldsymbol{\mathrm{x_n}}||$. The output of the map
 
 By introducing several modifications to the exact interpolation 
 procedure, the RBF-NN
-model is obtained, as outlined originally in \citeboth{broomhead1988}. 
+model is obtained, as presented in \figref{rbf_nn_architecture}. 
 The RBF-NN mapping takes the following form:
 
 \begin{align}
@@ -603,77 +650,84 @@ The RBF-NN mapping takes the following form:
     \phi_j(\boldsymbol{\mathrm{x}})  &= f(||\boldsymbol{\mathrm{x}-c_j}||), \quad{j=1\ldots,M}
 \end{align}
 
-where $\boldsymbol{c_j}$ is a RBF centre and $f$ is the radial basis function. 
+where $\boldsymbol{c_j}$ is a RBF centre and $f$ is the radial basis function \citep{bishop1995}. 
 
 
 \subsection{Methodology}
 
 The RBF-NN was utilised for both short-term and long-term 
-predictions. For short-term forecasting, 
-the model was tested over a 5-month horizon, based on the optimum lag calculated earlier, while the long-term predictions spanned 57 months. 
+forecasting. For the short-term, 
+the model was tested over a 5-month horizon, based on the optimum lag calculated earlier. 
+The long-term forecst spanned 57 months. 
 The data was differenced based on the recommendations of the 
 unit root tests conducted earlier to achieve stationarity. 
 
-The data was normalised using a z-score normalisation. This is because
-neural networks work best with data
-that is between a specified range; it ensures that the data is roughly uniformly
-distributed between the network inputs and outputs 
-(Mendelsohn, 1993, Preprocessing Data for Neural Networks). Following this 
-it was necessary to program the RBF-NN into Python. As no specific RBF package exists
-in Python, the kernel regression approach outlined by 
-\citeboth{bishop1995}, using the GaussianProcessRegressor package in Python.
+The data was normalised using a z-score normalisation, because neural networks work best with data
+that is between a specified range \citep{mendelsohn1993}. Following this 
+it was necessary to program the RBF-NN into Python. The kernel regression approach outlined by 
+\citeboth{bishop1995}, using the GaussianProcessRegressor package in Python was employed to model the RBF-NN.
 
 \subsubsection{The Gaussian Process Regressor}
 
-The Scikit GaussianProcessRegressor is based on the 
-standard linear regression 
-model, equipped with Gaussian noise,
+The GaussianProcessRegressor function in Python's Scikit library is based on the 
+standard function
 
 \begin{align} 
     f(x) = x^{T}w, \quad{y = f(x) + \varepsilon}
 \end{align}
 
 where $y$ differs from the function values $f(x)$ by noise which is assumed
-to follow an independent and identically distributed Gaussian distribution
+to follow an iid Gaussian distribution
 $\mathcal{N}_1$
 \begin{align*}
     \varepsilon \sim \mathcal{N}_1 \bigl(0, \sigma_{n}^2\bigr)
 \end{align*}
 This assumption together with the model produces the 
 probability density of the observations given the inputs, 
-which is factored over cases in the training set, 
-permissible because of the independence assumption,
+which is factored over cases in the training set. This is
+permissible because of the independence assumption \citep{rasmussen2006}.
 
 \begin{align}
     p(y|X,w) = \prod_{i=1}^{n} p(y_i|x_i ,w) = \mathcal{N}\bigl(X^T, \sigma_{n}^2 I\bigr)
 \end{align}
 
-As this is a Bayesian model a \textit{prior distribution} over the parameters must be specified, 
-expressing our beliefs about the prior
-parameters before the observations are used. A covariance function or kernel
-is specified according to the characteristics of the data; in our model this 
+The weights \( w \) represent the parameters that define the relationship between the inputs and outputs. 
+They are treated as random variables defined by the Gaussian distribution \eqref{eq: weight}.
+
+
+A covariance function or kernel
+is specified according to the characteristics of the data. In our model this 
 is the generalised inverse multiquadric
 
 \begin{align}
     k(x,x') = \biggl( ||x-x'|| + \sigma^2\biggr)^{-\beta} \label{eq: gimq}
 \end{align}
 and used to construct the covariance matrix $K$, which along with 
-a mean of $0$ forms the distribution of the the weights 
-$$ w \sim \mathcal{N}\bigl(m(x), K\bigr)$$
-
-The mean function $m(x)$ acts as a bias, providing a baseline expectation of the function values. Then, by Bayes' Theorem, 
+a mean function $m(x)$ forms the distribution of the the weights 
 
 \begin{align}
-    p(w|y, X) = \frac{p(y|X,w) p(w)}{p(y|X)}
+    w \sim \mathcal{N}\bigl(m(x), K\bigr) \label{eq: weight}
 \end{align}
-Using this, the posterior distribution is then obtained
+
+
+The mean function $m(x)$ acts as a bias, 
+providing a baseline expectation of the function values. 
+This forms the prior distribution over the weights \eqref{eq: weight}.
+
+Then, by Bayes' Theorem, 
+
+\begin{align}
+    p(w|y, X) = \frac{p(y|X,w) p(w)}{p(y|X)} \label{eq: post}
+\end{align}
+Using this, the posterior distribution \eqref{eq:nine} is obtained \citep{rasmussen2006}.
 
 \begin{align}
     p(w|y, X) \sim \mathcal{N}\bigl(\frac{A^{-1}Xy}{\sigma_{n}^{2}}, A^{-1}\bigr) \label{eq:nine}
 \end{align}
-Tthe covariance matrix $A^{-1} = K^{-1} + \sigma_{n}^{-2}(XX^T$).
-To make predictions on a test case all possible $w$, weighted by their probability, are averaged to obtain the
-predicted output \citep{rasmussen2006}.
+
+The covariance matrix $A^{-1} = K^{-1} + \sigma_{n}^{-2}(XX^T$).
+All possible $w$, weighted by their probability, are then averaged to obtain the
+most likely functional estimate of the output \citep{rasmussen2006}.
 
 \subsubsection{The Network}
 
@@ -681,14 +735,13 @@ predicted output \citep{rasmussen2006}.
 First, the optimal hyperparameters in the covariance function \eqref{eq: gimq} 
 are computed using GridSearch Cross Validation; these hyperparameters are:
 \begin{enumerate}
-    \item $\alpha$: a regularisation parameter which represents a small quantity
+    \item $\alpha$: a regularisation parameter representing a small quantity
     that is added to the diagonals of the covariance matrix to ensure it is 
     invertible. 
     \item $\beta$: the power in the covariance function, which controls the shape of the function.
-    \item $\sigma$: a parameter which controls how much of the noise in the data the kernel accounts for; naturally, 
-    it moderates the risk of overfitting and underfitting.
-    \item Length scale: a parameter that controls the influence - analogous to 
-    the width each RBF neuron possesses - that each kernel (analogous to node) is to have.
+    \item $\sigma$: a parameter which controls how much of the noise in the data the kernel accounts for. It moderates the risk of overfitting and underfitting.
+    \item Length scale: a parameter that controls the influence that each kernel is to have. Analogous to 
+    the width each RBF neuron possesses.
 \end{enumerate}
 
 Then, training inputs $\boldsymbol{\mathrm{x}}_1, \boldsymbol{\mathrm{x}}_2,\ldots \boldsymbol{\mathrm{x}}_{n}$
@@ -697,37 +750,36 @@ covariance function $(x,x')$, to obtain the matrix of the pairwise covariance of
 all training observations, $K$.
 
 A $4$-dimensional input space $X$ takes in an individual training observation $(\boldsymbol{\mathrm{x}}_{i}, y_i)$ and 
-calculates the posterior weights distribution using \eqref{eq:nine}. 
+calculates the posterior weights distribution. 
 Each possible weight vector $w$ represents a different function, explicitly 
-based on the covariance function, that could fit the data. The expectation is then taken, which
-effectively combines all weights and finds the mean, weighted by the 
+based on the RBF covariance function, that could fit the data. In the 
+hidden layer the expectation is then taken, which
+combines all weights and finds the mean, weighted by the 
 respective probabilities. This represents the best functional estimate of the price movement. Based on this estimate 
-the predictive output will be generated.
+the predicted output generated.
 
-The predictive distribution for the test observations are derived similarly. The 
-ultimate training process posterior weight distribution is used to derive the 
-first test weight disttribution, which then averages over all $w$ again to find the
-best functional estimate. It only requires past x and y.
+The testing process is conducted similarly. The 
+posterior weight distribution that contains the information of the training phase becomes the new 
+prior distribution. From this the posterior weight distributions for the test observations \eqref{eq: testw}
+are calculated, and then the predictive output is found \citep{rasmussen2006}.
 
 \begin{align}
-    p(y_{*}|x_{*}, X, y) \, dw = \mathcal{N}(\sigma_{n}^{2} x_{*}^{T}A^{-1}Xy, )
+    p(y_{*}|x_{*}, X, y) \, dw = \mathcal{N}(\sigma_{n}^{2} x_{*}^{T}A^{-1}Xy, x_{*}^{T}A^{-1}x_{*}) \label{eq: testw}
 \end{align}
 
 
 \subsection{Results}
 
 The model returned a mean absolute error of MAE $=0.16$ and 
-$R^2 = 9\%$ for the long-term prediction, outperforming the ARDL-ECM model by 
-$2.4\%$.
+$R^2 = 9\%$ for the long-term prediction, providing a 
+$2.4\%$ increase in the $R^2$ obtained by the ARDL-ECM model.
 
-
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
-    \includegraphics[width=0.8\textwidth]{long-term-monthly.png}
-    \caption{Long-term predicted vs monthly real FTSE250 price changes}
-    \label{fig:lmonthly}
+    \input{long_term_monthly.tex}  
+    \caption{Long-term predicted vs real monthly FTSE250 changes}
+    \label{fig:longmonthly}
 \end{figure}
-
 The interpretation of this is that, over the long-run (4-5 years), the variations in the 
 Consumer Price Index, interest rate, USD/GBP exchange rate, and M3 money 
 supply explain or account for $9\%$ of the fluctuations of the
@@ -738,12 +790,13 @@ than the ARDL-ECM model provided, that only $R^2=3.4\%$ of the monthly FTSE250 v
 are affected by the selected macroeconomic variables, demonstrating the ability of machine learning
 methods to capture subtle patterns in the data unavailable to econometric models. 
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
-    \includegraphics[width=0.8\textwidth]{long-term-daily.png}
-    \caption{Long-term predicted vs daily real FTSE250 price changes}
-    \label{fig:ldaily}
+    \input{long_term_daily.tex}  
+    \caption{Long-term predicted vs real daily FTSE250 changes}
+    \label{fig:longdaily}
 \end{figure}
+
 
 In the context of a phenomenon as complex as the stock market,
 which is influenced by an inumerable quantity of factors such as investor sentiment
@@ -754,28 +807,28 @@ is by no means exhaustive; commodity prices, international trade dynamics,
 economic growth, and many other variables also exert a non-insignificant 
 effect on the stock market.
 
-\begin{figure}[h]
+
+\begin{figure}[h!]
     \centering
-    \includegraphics[width=0.8\textwidth]{short-term-monthly.png}
-    \caption{Short-term predicted vs monthly real FTSE250 price changes}
-    \label{fig:smonthly}
+    \input{short_term_monthly.tex}  
+    \caption{Short-term predicted vs real monthly FTSE250 changes}
+    \label{fig:shortmonthly}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \input{short_term_daily.tex}  
+    \caption{Short-term predicted vs real daily FTSE250 changes}
+    \label{fig:shortdaily}
 \end{figure}
 
 The short-term prediction yielded MAE = $0.07$ and 
-$R^2 = 61\%$, for a 5-month time horizon.
+$R^2 = 61\%$ for a 5-month time horizon.
 The significantly better performance of the model in the short-run
-indicates that the selected macroeconomic variables possesses
+indicates that the selected macroeconomic variables possess
 a stronger predictive power over shorter periods. This was highlighted 
 earlier in the ARDL model, with the interest rate and money supply significantly
 impacting the FTSE250 price in the short-run. 
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.8\textwidth]{short-term-daily.png}
-    \caption{Short-term predicted vs daily real FTSE250 price changes}
-    \label{fig:sdaily}
-\end{figure}
-
 
 In the short-term, which defined as 5 months, 
 as per the optimum lag for the FTSE250 in the ARDL model, the market movements
