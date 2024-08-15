@@ -36,7 +36,8 @@
 ]{hyperref}
 
 
-\title{Investigating the Impact of Macroeconomic Indicators 
+\title{Investigating the Impact of Macroeconomic Indicatorspassword
+
 on the FTSE 250 Index Using Machine Learning Methods}
 \author{Mateen Khan}
 \date{\today}
@@ -46,10 +47,10 @@ on the FTSE 250 Index Using Machine Learning Methods}
 \maketitle
 
 \begin{abstract}
-    This study investigates the impact of the Consumer Price Index (CPI), Bank of England Base Rate, US Dollar (USD) and British Pound Sterling (GBP) exchange rate and the money supply (M3) measure on the price of the FTSE 250 index (FTSE250).
+    This study investigates the impact of the Consumer Price Index (CPI), Bank of England Base Rate, US Dollar (USD) and British Pound Sterling (GBP) exchange rate and the money supply (M3) measure on the price of the FTSE 250 Index (FTSE250).
     In addition, it assesses the effectiveness of radial basis function neural networks as a tool to forecast the price of the FTSE 250 Index based on the same set of macroeconomic variables. This study finds quantitative estimates for the long-term and short-term impacts of the aforementioned macroeconomic indicators on the price of the FTSE 250 Index, and demonstrates the effectiveness of radial basis function neural networks as a short-term forecasting tool for the price of the FTSE 250 Index, thus providing an alternative to econometric forecasting models.
 
-    \keywords{macroeconomic indicators, FTSE 250, autoregressive distributed lag model, RBF neural network, time-series forecasting}
+    \keywords{macroeconomic indicators, FTSE 250, autoregressive distributed lag model, radial basis function neural network, time-series forecasting}
 \end{abstract}
 
 \section{Introduction}
@@ -96,7 +97,7 @@ A key task which economic policy makers and investors undertake is to
 understand and predict how economic changes influence stock market behaviour, 
 which is critical for making informed policy and investment decisions. 
 This modelling of the impact of macroeconomic indicators on stock markets is typically achieved by a variety of methods: statistical analysis, econometric modelling, scenario planning, and advanced machine learning techniques. However, it is fraught with challenges that require careful consideration, advanced techniques, and a deep understanding of both economics and financial markets. In particular, there is a challenge to find a subset of macroeconomic indicators which can most accurately capture stock market dynamics. 
-In addition, coarse-grain macroeconomic indicator data is often so small in size that it precludes the use of certain deep learning neural network methods for prediction purposes.
+In addition, certain macroeconomic indicator data is often so small in size that it precludes the use of certain deep learning neural network methods for prediction purposes.
 
 
 This study aims to explore the relationship between macroeconomic indicators and stock markets 
@@ -113,7 +114,7 @@ indicators on stock markets:
 \end{enumerate}
 
 In order to analyse the dynamic relationship between variables in time series data, this study will employ the Autoregressive Distributed Lag (ARDL) model in conjunction with an Error Correction Model (ECM). By integrating the ARDL model with the ECM, a comprehensive understanding of both the immediate and longer-term relationships between variables is obtained, which is valuable for robust economic analysis and policy-making.
-This research also employs radial basis function neural networks to predict the price of the FTSE250. This artificial deep learning network is particularly useful for tasks like function approximation, pattern recognition, and regression when the dataset is small and of low granularity.
+This research also employs radial basis function neural networks to predict the price of the FTSE250. This artificial deep learning network is particularly useful for tasks like function approximation, pattern recognition, and regression when the dataset is small.
 
 The remainder of the paper is organised as follows. Section 2 presents a brief review of the literature in this problem space, and explains the rationale behind the selection of macroeconomic variables. Section 3 covers the data utilised in this study. Section 4 outlines the ARDL-ECM model, the methodology, and the results achieved. Section 5 constructs the radial basis function neural network (RBF-NN) model, and presents the results of forecasting the short-term and long-term forecasts for the price of the FTSE250 based on the selected macroeconomic variables. Section 6 concludes the study.
 
@@ -183,17 +184,16 @@ stock market and the money supply. This was disputed by \citeboth{sellin2001}, w
 
 The FTSE250 has historically been considered a more closer representation of the domestic economy than the FTSE 100 Index. Roughly $50\%$ of the earnings of the FTSE250 are from overseas, similar to the S\&P 500. In contrast, nearly $80\%$ of the FTSE 100 Index's earnings are from overseas. 
 This is reflected in the constitution of the respective indices, with the 
-FTSE250 historically resembling the structure of the UK economy more closely than the FTSE100 (\citeboth{ftse250history}).
+FTSE250 historically resembling the structure of the UK economy more closely than the FTSE 100 Index (\citeboth{ftse250history}).
 
 In spite of this, the FTSE250 has seldom been utilised as the preferred indicator of the UK stock market in the literature,
 with the exception of \citeboth{smit2023longrun}, \citeboth{khatri2024impact} and \citeboth{engstrom2006impact} who investigate the effect of variable changes on the FTSE All Share, an index that aggregates the 
-FTSE 100 Index, FTSE 250 Index and FTSE SmallCap Indices. The impact of the four selected variables on the FTSE250 has not yet been empirically studied and 
+FTSE 100 Index, FTSE 250 Index and FTSE SmallCap indices. The impact of the four selected variables on the FTSE250 has not yet been empirically studied and 
 warrants further investigation.
 
 \subsection{Stock Market Forecasting}
 
-First, 
-a discussion on the feasibility of stock market price forecasting is presented. Following this, machine learning methods for forecasting are 
+A discussion on the feasibility of stock market price forecasting is presented. Following this, machine learning methods for forecasting are 
 discussed.
 
 
@@ -216,7 +216,7 @@ agreement on whether the UK stock market is efficient at any of the three levels
 \citeboth{libberton2010} and \citeboth{rounaghi} give evidence of weak-form efficiency,
 however, \citeboth{borges2010}, \citeboth{asghar2023} and \citeboth{bhavsar2015} al provide evidence to reject the EMH. 
 Some studies such as \citeboth{rosini2020} even found that the 
-efficiency of the FTSE 100 Index and FTSE250 varied over time. Thus, the empirical findings suggest 
+efficiency of the FTSE 100 and FTSE 250 indices varied over time. Thus, the empirical findings suggest 
 that it is not impossible to forecast movements in the 
 price of stock indices on the FTSE250 using macroeconomic variables.
 
