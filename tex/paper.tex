@@ -96,7 +96,7 @@ A key task which economic policy makers and investors undertake is to
 understand and predict how economic changes influence stock market behaviour, 
 which is critical for making informed policy and investment decisions. 
 This modelling of the impact of macroeconomic indicators on stock markets is typically achieved by a variety of methods: statistical analysis, econometric modelling, scenario planning, and advanced machine learning techniques. However, it is fraught with challenges that require careful consideration, advanced techniques, and a deep understanding of both economics and financial markets. In particular, there is a challenge to find a subset of macroeconomic indicators which can most accurately capture stock market dynamics. 
-In addition, macroeconomic indicator data is of such low-granularity that it precludes the use of certain deep learning neural network methods for prediction purposes.
+In addition, macroeconomic indicator data is of such low granularity that it precludes the use of certain deep learning neural network methods for prediction purposes.
 
 
 This study aims to explore the relationship between macroeconomic indicators and stock markets 
@@ -108,12 +108,12 @@ indicators on stock markets:
 \begin{enumerate}
     \item To investigate how macroeconomic indicators influence the FTSE 250 index
     \item To investigate the short-term and long-term effects of macroeconomic variables on the price of the FTSE 250 index
-    \item To investigate whether machine learning techniques can provide accurate short-term and long-term forecasts of the price of the FTSE 250 index when using a low-granularity dataset.
+    \item To investigate whether machine learning techniques can provide accurate short-term and long-term forecasts of the price of the FTSE 250 index when using a coarse-grain dataset.
    
 \end{enumerate}
 
 In order to analyse the dynamic relationship between variables in time series data, this study will employ the Autoregressive Distributed Lag (ARDL) model in conjunction with an Error Correction Model (ECM). By integrating the ARDL model with the ECM, a comprehensive understanding of both the immediate and longer-term relationships between variables is obtained, which is valuable for robust economic analysis and policy-making.
-This research also employs radial basis function neural networks to predict the price of the FTSE 250 index. This artificial deep learning network is particularly useful for tasks like function approximation, pattern recognition, and regression when the dataset is of low-granularity.
+This research also employs radial basis function neural networks to predict the price of the FTSE 250 index. This artificial deep learning network is particularly useful for tasks like function approximation, pattern recognition, and regression when the dataset is of low granularity.
 
 The remainder of the paper is organised as follows. Section 2 presents a brief review of the literature in this problem space, and explains the rationale behind our selection of macroeconomic variables. Section 3 covers the data utilised in this study. Section 4 outlines the ARDL-ECM model, the methodology, and the results achieved describing the effect of the selected macroeconomic variables on the FTSE 250 index. Section 5 constructs the radial basis function neural network (RBF-NN) model, and presents the results of forecasting the short-term and long-term forecasts for the price of the FTSE 250 Index price movements based on the selected macroeconomic variables. Section 6 concludes the study.
 
@@ -830,17 +830,18 @@ a stronger predictive power over shorter periods. This was highlighted
 earlier in the ARDL model, with the interest rate and money supply significantly
 impacting the FTSE250 price in the short-run. 
 
-In the short-term, which defined as 5 months, 
-as per the optimum lag for the FTSE250 in the ARDL model, the market movements
-are more closely tied to recent deviations in the economy, because theoretically
+In the short-term the market movements
+are more closely tied to recent deviations in the economy. This is because,
+theoretically, 
 the short-run is not exposed to the various unforeseen external shocks and structural changes
 that dilute the relationship between these variables and the stock market in the 
-long-run. Essentially, as the prediction window expands, 
+long-run. As the prediction window expands, 
 more uncertainty and unknowns are introduced, which translates into 
 lower predictive quality. Furthermore, as the time horizon extends into the long-run, fundamental factors 
-begin to matter a lot more. The compound effect of earnings, cash flows and
-managerial efficiencies begins to outweigh the 
-influence of fluctuating macroeconomic sentiment. Thus, in the short-run 
+begin to matter a lot more. The compound effect of earnings, cash flows,
+innovations and managerial efficiencies begins to outweigh the 
+influence of fluctuating macroeconomic variables. Essentially, firms become accustomed 
+to the changed economic environment and over time. Thus, in the short-run 
 a different phenomenon is observed.
 
 
@@ -877,13 +878,14 @@ long-term influence of macroeconomic variables on the stock market.
 
 Further research should endeavour to include other macroeconomic variables such as 
 foreign direct and portfolio investment, commodity prices and economic growth.
-An autoregresive model, falling outside the immediate scope of the current study, could also be tried, including the past values of the 
+An autoregressive neural network could also be tried, including the past values of the 
 FTSE250 in the input space to provide a more accurate model. In addition, 
 a more granular data set could be utilised by applying a 
-Brownian bridge algorithm to generate daily macroeconomic data and 
-subsequently testing the RBF-NN against other neural networks 
-such as auto-regressive LSTMs, as well as other machine learning methods suited for 
-forecasting such as Gradient Boosting Machines and Support Vector Machines. 
+Brownian bridge algorithm to generate daily macroeconomic data. This would allow 
+the testing of the RBF-NN against other neural networks 
+such as the LSTM. Other machine learning methods suited for 
+forecasting such as Gradient Boosting Machines and Support Vector Machines could 
+also be investigated in future work in this problem domain. 
 
 \bibliographystyle{plainnat}
 \bibliography{paper}
