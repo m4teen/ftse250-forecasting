@@ -39,7 +39,7 @@
 
 \title{Investigating the Impact of Macroeconomic Indicators
 
-on the FTSE 250 Index Using Machine Learning Methods}
+on the FTSE 250 Index Using Statistical \& Machine Learning Methods}
 \author{Mateen Khan}
 \date{\today}
 
@@ -55,64 +55,41 @@ on the FTSE 250 Index Using Machine Learning Methods}
 
 \section{Introduction}
 
-The stock market has played a central role in the economic and 
-political ascent of many nations ever since its inception (\citeboth{levine2002}).  
-However, whenever stock market instabilities have arisen in history they 
-have had far-reaching destabilising effects. The Mississippi Bubble was 
-an early example of the inherent dangers within stock markets in the form of 
-speculative bubbles (\citeboth{mississippibubble}). The role of 
-macroeconomic policy in this crash was central, and the effects of the crash 
-devastated the economy through rampant inflation. Nonetheless, stock markets also provide essential benefits by allowing companies to 
-raise capital, offering investment opportunities for individuals, and 
-supporting economic growth through efficient capital allocation (\citeboth{shahbaz2016}). Effective, sustainable
-macroeconomic policy can greatly aid in this beneficial process. Therefore, it is essential 
-for economic policymakers to understand the impact of macroeconomic changes 
-on the stock market. 
+The stock market is a significant component of the financial system and 
+plays a crucial role in the broader economy. Consequently, economic policy 
+makers take the stock market into account when making fiscal policy 
+decisions using a combination of quantitative and qualitative methods. 
+These methods such as econometric modelling and forecasting, and empirical 
+analysis allow them to understand the short-term and long-term effects of 
+macroeconomic indicators such as taxation rates, interest rates and exchange rates,
+on the wider economy through the stock market.
 
-The sensitivity of the stock market to macroeconomic indicators is also of great 
-relevance to investors. Changes in macroeconomic indicators have an effect on both consumer preferences
-and business costs which impacts the profitability of firms. This 
-leads to discrepancies between the valuation of firms by investors and 
-stock prices, which in turn drives trends in the stock 
-market price. 
+Macroeconomic indicators can be effectively used in machine learning 
+methods to forecast stock prices by serving as input features that capture 
+the economic environment’s influence on market behaviour. By carefully 
+selecting the most relevant indicators and preprocessing data, 
+as well as choosing appropriate models, machine learning can enhance the accuracy of stock price forecasts (\citeboth{Sarma2023,Prasad2023}).
 
-The significance of this study is to quantify the effects of macroeconomic 
-indicators on the stock market as well as assessing the use of these indicators 
-to forecast stock market prices over the long-term and short-term, both useful to 
-economic policy makers and stock market investors respectively. 
-Modelling of this kind typically involves choosing 
-the most appropriate method from a variety: statistical analysis, 
-econometric modelling, scenario planning, and machine learning 
-techniques. Also, careful economic analysis is required to select
-the macroeconomic indicators most relevant in 
-the dynamics of a nation's stock market.
+The significance of this study is to quantify the effects of macroeconomic indicators on the stock market as well as assessing the use of these indicators to forecast stock market prices over the short-term and long-term. In addition, the study seeks to understand which macroeconomic indicators are most relevant in capturing the dynamics of a stock market to aid forecasting.
 
-The objective of this study is to address how specific 
-macroeconomic indicators influence stock market prices in a developed economy, and whether machine 
-learning models can substitute traditional econometric models in predicting stock market prices. 
-Ultimately, it aims to investigate two aspects of the influence of macroeconomic 
-indicators on stock markets: 
+In particular, the objectives of this study are to address how specific macroeconomic indicators influence stock market prices in a developed economy, and whether machine learning models can substitute traditional econometric models in predicting stock market prices. It aims to:
 \begin{enumerate}
-    \item To examine the short-term and long-term effects of macroeconomic indicators on the price of the FTSE250 
-    \item To investigate whether machine learning techniques can provide accurate short-term and long-term forecasts of the price of the FTSE250 when using a small, coarse-grain dataset.
-   
+    \item examine the short-term and long-term effects of macroeconomic indicators on the price of the FTSE250
+    \item investigate whether machine learning techniques can provide accurate short-term and long-term forecasts of the price of the FTSE250 when using a small, coarse-grain dataset.
 \end{enumerate}
 
-In order to analyse the dynamic relationship between variables in 
-time series data, this study will employ the Autoregressive Distributed 
-Lag (ARDL) model in conjunction with an Error Correction Model (ECM). 
-This research also employs a radial basis function neural network (RBFNN) to 
-predict the price movements of the FTSE250.
+In order to analyse the dynamic relationship between variables in time series data, this study
+will employ the Autoregressive Distributed Lag (ARDL) model in conjunction with an Error
+Correction Model (ECM). This research also employs a radial basis function neural network
+(RBFNN) to predict the price movements of the FTSE250.
 
-The remainder of the paper is organised as follows. 
-Section 2 presents a brief review of the literature in this problem space, 
-and explains the rationale behind the selection of macroeconomic variables. 
-Section 3 covers the data utilised in this study. Section 4 outlines the 
-ARDL-ECM model and the results achieved. 
-Section 5 constructs the RBFNN 
-model, and presents the forecasting results. Section 6 concludes the study.
+The remainder of this paper will be organised as follows. 
+Section 2 provides a brief review of the literature in this problem space, and explains the rationale behind the selection of macroeconomic variables.
+Section 3 presents the methodology of the paper. Section 4 discusses the results and Section 5 concludes
+the study.
 
 \section{Literature Review}
+\label{sec:lit}
 
 \subsection{Stock Market-Macroeconomic Relationships}
 
