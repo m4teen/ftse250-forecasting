@@ -84,7 +84,7 @@ Correction Model (ECM). This research also employs a radial basis function neura
 (RBFNN) to predict the price movements of the FTSE250.
 
 The remainder of this paper will be organised as follows. 
-Section 2 provides a brief review of the literature in this problem space, and explains the rationale behind the selection of macroeconomic variables.
+Section \ref{sec:lit} provides a brief review of the literature in this problem space, and explains the rationale behind the selection of macroeconomic variables.
 Section 3 presents the methodology of the paper. Section 4 discusses the results and Section 5 concludes
 the study.
 
@@ -103,7 +103,7 @@ The literature investigating the impacts of the selected variables on the stock 
 
 \subsubsection{Inflation}
 
-The Fisher hypothesis states that nominal interest rates adjust to expected 
+The impact of inflation on stock market prices has been a subject of debate. The Fisher hypothesis states that nominal interest rates adjust to expected 
 inflation as firms correctly anticipate inflation 
 and adjust prices, implying that markets are efficient and that inflation has no impact on the stock market. This was tested this in the US stock market by \citeboth{jaffe1976}, and
 \citeboth{bodie1976} who both found a negative relationship between inflation and stock returns, providing evidence against the Fisher hypothesis.
@@ -117,6 +117,8 @@ significant causal relationship between the stock market
 
 \subsubsection{Interest Rate}
 
+The interest rate has been confirmed to have a definite effect on the 
+stock market price by the findings of \citeboth{ChenRollRoss1986} and later research. 
 Interest rates, being the cost of borrowing, directly impact firms by increasing financing costs, reducing profitability, and lowering growth prospects. For consumers, higher rates raise borrowing costs, leading to reduced spending and demand, which further lowers corporate profitability \citep{boe199section}. 
 The empirical research supports this theory. \citeboth{alam2009} found a significant inverse relationship between interest rates and stock prices across multiple countries from 1988 to 2003.
 \citeboth{talla2013} observed a negative relationship between interest rates and stock prices on the Stockholm Stock Exchange.
@@ -127,18 +129,19 @@ have a negative impact the stock market.
 
 \subsubsection{Exchange Rate}
 
-Classical economic theory explains the impact exchange rates have on stock prices through the portfolio balance model. The portfolio balance model indicates that expected currency depreciations lead investors to shift from domestic to foreign assets, decreasing demand for domestic stocks and lowering their prices. 
-\citeboth{branson1977} established a bidirectional relation between the exchange rate and stock prices. This was confirmed
-in the case of the Turkish Stock Exchange by \citeboth{aydemir2009}. 
+Economic theory posits that the exchange rate, through the portfolio 
+balance model and flow model, has a definite impact on stock prices. The portfolio balance model indicates that expected currency depreciations lead investors to shift from domestic to foreign assets, decreasing demand for domestic stocks and lowering their prices (\citeboth{branson1977}). 
+In addition, variations in the exchange rate affect future cash flows, which in turn affect the present value of a stock and thus stock prices (\citeboth{dornbusch1980}).
+This was confirmed
+in the case of the US and Turkish Stock Exchanges by \citeboth{aggarwal1981} and \citeboth{aydemir2009}, respectively. 
 Moreover, stock markets often contain multinational firms involved in international transactions. Their profits are strongly influenced by the exchange rate, and consequently so is the stock market price \citep{Wong2018}.
 In support of this, \citeboth{khan2018} found that the exchange rate showed a positive relationship with the Karachi Stock Exchange over the long-run, and a negative impact in the short-run. 
 In the case of the UK, \citeboth{wong2022} also demonstrated a positive long-run impact by the exchange rate on the stock market.
 
 \subsubsection{Money Supply}
 
-One of the foundational studies on the relationship between the money supply and 
-stock market prices was \citeboth{palmer1970}, who analysed the impact of M1 money supply on the S$\&$P 425 Industrial Stock Index. 
-Palmer posited that trends in the nation's money stock could lead the 
+The nature of the impact of the money supply on the stock market price is also 
+in debate. \citeboth{palmer1970} posited that trends in the nation's money stock could lead the 
 private sector to adjust wealth portfolios, resulting in 
 predictable movements in stock prices. \citeboth{homa1971} further argued that 
 stock prices are significantly impacted by the risk-free interest rate, 
@@ -156,6 +159,31 @@ stock market and the money supply. This was disputed by \citeboth{sellin2001}, w
 The FTSE250 has historically been considered a more closer representation of the domestic economy than the FTSE 100 Index. Roughly $50\%$ of the earnings of the FTSE250 are from overseas, similar to the S\&P 500. In contrast, nearly $80\%$ of the FTSE 100 Index's earnings are from overseas. 
 This is reflected in the constitution of the respective indices, with the 
 FTSE250 historically resembling the structure of the UK economy more closely than the FTSE 100 Index (\citeboth{ftse250history}).
+
+Initially, the FTSE 250's composition was broadly distributed across 
+various industrial and service sectors. Roughly $47\%$ of its constituents 
+were involved in the industrial and utilities sectors, reflecting the UK's 
+slower transition from an industrial-based to a service-based economy. 
+Over time, the FTSE250 has evolved to align more closely with the 
+structural transformation of the UK economy. 
+By 2022, 73.39$\%$ of the index was comprised of service firms, 
+with a significant 43.37$\%$ of these being financial services companies (\citeboth{ftse250history}) .
+
+As a result, the relevance of the selected macroeconomic indicators for the FTSE250 
+has increased. The M3 money supply and interest rates significantly 
+impact the ability of financial firms 
+to provide loans, facilitate investments, and manage assets, thereby affecting their profitability. 
+Financial services firms also play a crucial role in supporting the 
+operations of firms in all sectors of the economy, meaning 
+changes in the interest rate and money supply affects their profitability too. 
+The CPI is also of critical importance across all sectors, 
+as inflation, measured by the CPI, erodes the purchasing power of money. 
+This erosion diminishes consumer spending and negatively affects the 
+profitability of service-oriented companies that depend on consumer 
+expenditure. The exchange rate is especially relevant for transnational 
+firms within the FTSE250. The profits of these companies, which make up a substantial 
+portion of the index, are directly impacted by fluctuations in exchange 
+rates that affect the value of their earnings.
 
 In spite of this, the FTSE250 has seldom been utilised as the preferred indicator of the UK stock market in the literature,
 with the exception of \citeboth{smit2023longrun}, \citeboth{khatri2024impact} and \citeboth{engstrom2006impact} who investigate the effect of variable changes on the FTSE All Share, an index that aggregates the 
