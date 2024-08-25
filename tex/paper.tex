@@ -64,9 +64,9 @@ analysis allow them to understand the short-term and long-term effects of
 macroeconomic indicators
 on the wider economy through the stock market (\citeboth{DemirgucKunt1996}).
 
-Macroeconomic indicators can be effectively used in machine learning 
+Macroeconomic indicators can also be effectively used in machine learning 
 methods to forecast stock prices by serving as input features that capture 
-the economic environment’s influence on market behaviour. By carefully 
+the economic environment’s influence on stock market behaviour. By carefully 
 selecting the most relevant indicators and preprocessing data, 
 as well as choosing appropriate models, machine learning can enhance the accuracy of stock price forecasts (\citeboth{Prasad2023}).
 
@@ -85,7 +85,7 @@ Correction Model (ECM). This research also employs a radial basis function neura
 
 The remainder of this paper will be organised as follows. 
 Section \ref{sec:lit} provides a brief review of the literature in this problem space, and explains the rationale behind the selection of macroeconomic variables.
-Section \ref{sec:meth} presents the methodology of the paper. Section 4 discusses the results and Section 5 concludes
+Section \ref{sec:meth} presents the methodology of the paper. Section \ref{sec: results} discusses the results and Section \ref{sec: conc} concludes
 the study.
 
 \section{Literature Review}
@@ -270,13 +270,18 @@ research.
 \section{Methodology}
 \label{sec:meth}
 
-\subsection{Data}
-Monthly FTSE 250 Index price data between Oct 1992 to March 2024 has been utilised for this study giving us a dataset with 379 observations.
+\subsection{Data Sources}
+Monthly FTSE 250 Index price data, 
+monthly CPI data, monthly M3 money supply data, monthly USD/GBP exchange 
+rate data and interest rate data between Oct 1992 to March 2024 has been 
+utilised for this study giving a dataset with 379 observations. The sources 
+are presented in Table \ref{table: tabl}.
 
-
+\clearpage
 \begin{table}[h!]
     \centering
     \caption{Data sources}
+    \label{table: tabl}
     \begin{tabular}{lll}
         \toprule
         \textbf{Variable} & \textbf{Notation} & \textbf{Source} \\
@@ -290,20 +295,21 @@ Monthly FTSE 250 Index price data between Oct 1992 to March 2024 has been utilis
     \end{tabular}
 \end{table}
 
+\subsection{Data Preprocessing}
 For the interest rate data, it was necessary to address an issue raised by the fact that the Bank of England’s Monetary Policy Committee (MPC) 
 does not convene on a monthly basis, and are not obligated to 
-announce a rate on a regular basis. To address the resulting irregularities the data was adjusted using \ref{alg:interest_rate_adjustment}.
+announce a rate on a regular basis. To address the resulting irregularities the data was adjusted using Algorithm \ref{alg:interest_rate_adjustment}.
 
 
 \begin{algorithm}[H]
     \caption{Calculate monthly interest rate}
     \label{alg:interest_rate_adjustment}
     \KwData{Interest rate data adjustments by the Bank of England’s MPC}
-    \KwResult{Monthly interest rate data}
+    \KwResult{Monthly interest rate data (INT)}
     
     \For{each month $m$}{
         \If{$\forall d \in D_m \; \text{(interest rate unchanged)}$}{
-            \textbf{Set:} $\text{Rate}_m \leftarrow \text{Rate}_{m-1}$\;
+            \textbf{Set:} $\text{INT}_m \leftarrow \text{INT}_{m-1}$\;
         }
         \Else{
             \For{each day $d_j$ with a rate change}{
@@ -312,11 +318,15 @@ announce a rate on a regular basis. To address the resulting irregularities the 
                 where $I_m = \{i_1, i_2, \ldots, i_n\}$ is the set of interest rates on days with changes, 
                 and $d_{j_k} \leq x$ is the number of days into the month each rate $i_k$ occurs on.
             }
-            \textbf{Set:} $\text{Rate}_m \leftarrow W_{int}$\;
+            \textbf{Set:} $\text{INT}_m \leftarrow W_{int}$\;
         }
     }
 \end{algorithm}
 
+The result is a dataset $X$ composed of monthly values for the FTSE250
+price, CPI value, USD/GBP exchange rate, interest rate, and M3 money supply. 
+
+\subsection{Descriptive Statistics}
 
 Over the period covered by the dataset, the FTSE250 has 
 shown substantial growth, reflecting the structural transition of the UK economy.
@@ -430,11 +440,11 @@ Radial basis function neural networks are a type of artificial
 neural network that use radial basis functions at each node in the 
 activation layer of the network. They are able to identify complex, 
 non-linear relationships between time-series variables and have been used
-extensively in this aspect (\ref{subsubsec: fore}). The advantages of radial basis function neural networks over other 
+extensively in this aspect. The advantages of radial basis function neural networks over other 
 neural networks in time-series forecasting lies in their 
 ability to operate effectively on small sample sizes.
 
-\subsubsection{Model Architecture}
+\subsubsection{Network Architecture}
 The exact interpolation problem, which forms the motivation for radial basis function neural networks, 
 involves mapping a $d$-dimensional input space $\boldsymbol{\mathrm{X}}$ to
 a $c$-dimensional target space $\boldsymbol{\mathrm{y}}$. The dataset consists of $N$ input
@@ -515,12 +525,34 @@ where $\boldsymbol{c_j}$ is a radial basis function centre and $f$ is the radial
     \label{fig:rbf_nn_architecture}
 \end{figure}
 
-\subsubsection{Methodology}
+\subsubsection{Network Construction}
 
-First, the dataset was normalised using a z-score normalisation, because neural networks work best with data
-that is between a specified range (\citeboth{mendelsohn1993}).
+Neural networks work best with data that is specified between a specific 
+range (\citeboth{mendelsohn1993}). Also, to achieve stationarity
+it was required to take the first difference all of the variables. Therefore, all of the 
+variables in the dataset described in were normalised using a z-score normalisation
+and differenced, as described in Algorithm \ref{alg:z_score_differencing}. 
 
-The inputs into the network are 4-dimensional input vectors, \(\boldsymbol{\mathrm{x_i}}\),
+\begin{algorithm}[H]
+    \caption{Z-Score Normalisation and Differencing of Variables}
+    \label{alg:z_score_differencing}
+    \KwData{Dataset $X$ with variables $X_1 = FTSE_{250}, X_2 = CPI, X_3 = EXCHG, X_4 = INT, X_5 = M3$}
+    \KwResult{Normalised and differenced dataset $Z$}
+    
+    \For{each variable $X_i$ in $X$}{
+        \textbf{Compute:} $\mu_i \leftarrow \frac{1}{m} \sum_{j=1}^{m} X_{ij}$\;
+        \textbf{Compute:} $\sigma_i \leftarrow \sqrt{\frac{1}{m} \sum_{j=1}^{m} (X_{ij} - \mu_i)^2}$\;
+        \For{each observation $X_{ij}$ in $X_i$}{
+            \textbf{Normalise:} $Z_{ij} \leftarrow \frac{X_{ij} - \mu_i}{\sigma_i}$\;
+        }
+        \For{each observation $Z_{ij}$ from the second observation to the last}{
+            \textbf{Difference:} $D_{ij} \leftarrow Z_{ij} - Z_{i(j-1)}$\;
+        }
+    }
+    \textbf{Update:} $Z_i \leftarrow D_i$ \;
+\end{algorithm}
+
+The inputs into the network are 4-dimensional input vectors, \(\boldsymbol{\mathrm{x_i}}\), from the differenced, normalised dataset $Z$
 
 \begin{align}
     \boldsymbol{\mathrm{x_i}} = \{\Delta \text{CPI}_i, \Delta \text{EXCHG}_i, \Delta \text{INT}_i, \Delta \text{M3}_i\}
@@ -529,23 +561,22 @@ The inputs into the network are 4-dimensional input vectors, \(\boldsymbol{\math
 where \(\Delta \text{CPI}_i\), \(\Delta \text{EXCHG}_i\), \(\Delta \text{INT}_i\), and \(\Delta \text{M3}_i\) 
 represent differenced monthly values in the CPI, USD/GBP exchange rate, interest rate, and M3 money supply, respectively. 
 
-The output is a one-dimensional output vector, \(\boldsymbol{\mathrm{y_i}}\), representing differenced monthly values in the FTSE250.
+The output is a one-dimensional output vector, \(\boldsymbol{\mathrm{y_i}}\) from the dataset $Z$, representing differenced monthly values in the FTSE250.
 
 
 \begin{align}
     \boldsymbol{\mathrm{y_i}} = \{\Delta \text{FTSE}_{250_i}\}
 \end{align}
 
-Following this 
-it was necessary to program the radial basis function neural network into Python. The Bayesian kernel regression approach outlined by 
+The radial basis function neural network was programmed into Python. The Bayesian kernel regression approach outlined by 
 \citeboth{bishop1995}, using the GaussianProcessRegressor package in Python was employed to model the network. For a 
 detailed description of this construction please refer to the \hyperref[sec: appendix]{Appendix}.
 
 
-Based on this, the train-test process is then conducted:
+Based on this, the train-test process was conducted:
 \begin{enumerate}
-    \item First, the optimal hyperparameters in the covariance function \eqref{eq: gimq} 
-    are computed using GridSearch Cross Validation; these hyperparameters are:
+    \item The optimal hyperparameters in the covariance function \eqref{eq: gimq} 
+    are computed using GridSearch Cross Validation. These hyperparameters are:
     \begin{enumerate}
         \item $\alpha$: a regularisation parameter representing a small quantity
         that is added to the diagonals of the covariance matrix to ensure it is 
@@ -555,7 +586,7 @@ Based on this, the train-test process is then conducted:
         \item Length scale: a parameter that controls the influence that each kernel is to have. Analogous to 
         the width each radial basis function neuron possesses.
     \end{enumerate}
-    \item Then, training inputs $\boldsymbol{\mathrm{x}}_1, \boldsymbol{\mathrm{x}}_2,\ldots \boldsymbol{\mathrm{x}}_{n}$
+    \item Training inputs $\boldsymbol{\mathrm{x}}_1, \boldsymbol{\mathrm{x}}_2,\ldots \boldsymbol{\mathrm{x}}_{n}$
     and corresponding outputs \( y = \{y_1, y_2, \dots, y_n\} \) are successively passed through the 
     covariance function $(x,x')$, to obtain the matrix of the pairwise covariance of 
     all training observations, $K$.
@@ -567,10 +598,10 @@ Based on this, the train-test process is then conducted:
     combines all weights and finds the mean, weighted by the 
     respective probabilities. This represents the best functional estimate of the price movement. Based on this estimate 
     the predicted output generated.
-    \item The testing process is conducted similarly. The 
+    \item The testing process was conducted similarly. The 
     posterior weight distribution that contains the information of the training phase becomes the new 
     prior distribution. From this the posterior weight distributions for the test observations \eqref{eq: testw}
-    are calculated, and then the predictive output is found (\citeboth{rasmussen2006}).
+    were calculated, and then the predictive output was found (\citeboth{rasmussen2006}).
     
     \begin{align}
         p(y_{*}|x_{*}, X, y) = \mathcal{N}(\sigma_{n}^{2} x_{*}^{T}A^{-1}Xy, x_{*}^{T}A^{-1}x_{*}) \label{eq: testw}
@@ -581,6 +612,7 @@ A short-term and long-term forecast is conducted using this process. For the sho
 
 
 \section{Results}
+\label{sec: results}
 
 \subsection{ARDL-ECM}
 
@@ -755,40 +787,6 @@ DCF valuation model, and depress prices.
 
 \subsection{RBFNN}
 
-\subsubsection{Long-term Forecast}
-The model returned a mean absolute error of MAE $=0.16$ and 
-$R^2 = 9\%$ for the long-term prediction, providing a 
-$2.4\%$ increase in the $R^2$ obtained by the ARDL-ECM model. The results are presented 
-in Figure \ref{fig:longmonthly}.
-
-\begin{figure}[H]
-    \centering
-    \hspace*{-1.5cm}
-    \input{long_term_monthly.tex}  
-    \caption{Long-term predicted vs real monthly FTSE250 changes}
-    \label{fig:longmonthly}
-\end{figure}
-
-
-The interpretation of this is that, over the long-run (4-5 years), the variations in the 
-Consumer Price Index, interest rate, USD/GBP exchange rate, and M3 money 
-supply explain or account for $9\%$ of the fluctuations of the
-monthly FTSE250 value. This relates closely to the findings of \citeboth{conover1999}, 
-who used an econometric model to establish that $4\%$ of the variation in monthly UK stock returns can be 
-explained by variations in the money supply. It also suggests a higher level of influence 
-than the ARDL-ECM model provided, that only $R^2=3.4\%$ of the monthly FTSE250 variations 
-are affected by the selected macroeconomic variables, demonstrating the ability of machine learning
-methods to capture subtle patterns in the data unavailable to econometric models. 
-
-In the context of a phenomenon as complex as the stock market,
-which is influenced by an inumerable quantity of factors such as investor sentiment
-- inherently irrational, 
-political instability, geopolitical shocks, corporate governance, and financial regulation, this result 
-unsurprising. Furthermore, the selection of economic variables in this study
-is by no means exhaustive; commodity prices, international trade dynamics,
-economic growth, and many other variables also exert a non-insignificant 
-effect on the stock market.
-
 \subsubsection{Short-term Forecast}
 
 
@@ -828,9 +826,44 @@ a different phenomenon is observed.
 
 
 
+\subsubsection{Long-term Forecast}
+The model returned a mean absolute error of MAE $=0.16$ and 
+$R^2 = 9\%$ for the long-term prediction, providing a 
+$2.4\%$ increase in the $R^2$ obtained by the ARDL-ECM model. The results are presented 
+in Figure \ref{fig:longmonthly}.
+
+The interpretation of this is that, over the long-run (4-5 years), the variations in the 
+Consumer Price Index, interest rate, USD/GBP exchange rate, and M3 money 
+supply explain or account for $9\%$ of the fluctuations of the
+monthly FTSE250 value. This relates closely to the findings of \citeboth{conover1999}, 
+who used an econometric model to establish that $4\%$ of the variation in monthly UK stock returns can be 
+explained by variations in the money supply. It also suggests a higher level of influence 
+than the ARDL-ECM model provided, that only $R^2=3.4\%$ of the monthly FTSE250 variations 
+are affected by the selected macroeconomic variables, demonstrating the ability of machine learning
+methods to capture subtle patterns in the data unavailable to econometric models. 
+
+\begin{figure}[H]
+    \centering
+    \hspace*{-1.5cm}
+    \input{long_term_monthly.tex}  
+    \caption{Long-term predicted vs real monthly FTSE250 changes}
+    \label{fig:longmonthly}
+\end{figure}
+
+
+
+In the context of a phenomenon as complex as the stock market,
+which is influenced by an inumerable quantity of factors such as investor sentiment
+- inherently irrational, 
+political instability, geopolitical shocks, corporate governance, and financial regulation, this result 
+unsurprising. Furthermore, the selection of economic variables in this study
+is by no means exhaustive; commodity prices, international trade dynamics,
+economic growth, and many other variables also exert a non-insignificant 
+effect on the stock market.
 
 
 \section{Conclusion}
+\label{sec: conc}
 
 
 Stock markets provide important information on the economy, 
