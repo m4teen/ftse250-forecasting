@@ -49,7 +49,7 @@ on the FTSE 250 Index Using Statistical and Machine Learning Methods}
 
 \begin{abstract}
     This study investigates the impact of the Consumer Price Index (CPI), Bank of England Base Rate, US Dollar (USD) and British Pound Sterling (GBP) exchange rate, and the money supply (M3) measure on the price of the FTSE 250 Index (FTSE250).
-    In addition, it assesses the effectiveness of radial basis function neural networks as a tool to forecast the price of the FTSE 250 Index based on the same set of macroeconomic variables. This study finds quantitative estimates for the short-term and long-term impacts of the aforementioned macroeconomic indicators on the price of the FTSE 250 Index. It also demonstrates the effectiveness of radial basis function neural networks as a short-term forecasting tool for the price of the FTSE 250 Index.
+    In addition, it assesses the effectiveness of radial basis function neural networks (RBFNN) as a tool to forecast the price of the FTSE 250 Index based on the same set of macroeconomic variables. This study finds quantitative estimates for the short-term and long-term impacts of the aforementioned macroeconomic indicators on the price of the FTSE 250 Index. It also demonstrates the effectiveness of radial basis function neural networks as a short-term forecasting tool for the price of the FTSE 250 Index.
     \keywords{macroeconomic indicators, FTSE 250, autoregressive distributed lag model, radial basis function neural network, time-series forecasting}
 \end{abstract}
 
@@ -67,8 +67,8 @@ on the wider economy through the stock market (\citeboth{DemirgucKunt1996}).
 Macroeconomic indicators can also be effectively used in machine learning 
 methods to forecast stock prices by serving as input features that capture 
 the economic environment’s influence on stock market behaviour. By carefully 
-selecting the most relevant indicators and preprocessing data, 
-as well as choosing appropriate models, machine learning can enhance the accuracy of stock price forecasts (\citeboth{Prasad2023}).
+selecting the most relevant indicators, 
+as well as choosing the appropriate models, machine learning can enhance the accuracy of stock price forecasts (\citeboth{Prasad2023}).
 
 The significance of this study is to quantify the effects of macroeconomic indicators on the stock market as well as assessing the use of these indicators to forecast stock market prices over the short-term and long-term. In addition, the study seeks to understand which macroeconomic indicators are most relevant in capturing the dynamics of a stock market to aid forecasting.
 
@@ -78,14 +78,13 @@ In particular, the objectives of this study are to address how specific macroeco
     \item investigate whether machine learning techniques can provide accurate short-term and long-term forecasts of the price of the FTSE250 when using a small dataset.
 \end{enumerate}
 
-In order to analyse the dynamic relationship between variables in time series data, this study
+In order to analyse the dynamic relationship between the variables in the time series data, this study
 will employ the Autoregressive Distributed Lag (ARDL) model in conjunction with an Error
-Correction Model (ECM). This research also employs a radial basis function neural network
-(RBFNN) to predict the price movements of the FTSE250.
+Correction Model (ECM). This research also employs a radial basis function neural network to predict the price movements of the FTSE250.
 
 The remainder of this paper will be organised as follows. 
-Section \ref{sec:lit} provides a brief review of the literature in this problem space, and explains the rationale behind the selection of macroeconomic variables.
-Section \ref{sec:meth} presents the methodology of the paper. Section \ref{sec: results} discusses the results and Section \ref{sec: conc} concludes
+Section \ref{sec:lit} provides a brief review of the literature in this problem space and explains the rationale behind the selection of macroeconomic variables.
+Section \ref{sec:meth} presents the methodology. Section \ref{sec: results} discusses the results and Section \ref{sec: conc} concludes
 the study.
 
 \section{Literature Review}
@@ -271,10 +270,16 @@ research.
 \label{sec:meth}
 
 \subsection{Data Sources}
-Monthly FTSE 250 Index price data, 
-monthly CPI data, monthly M3 money supply data, monthly USD/GBP exchange 
-rate data and interest rate data between Oct 1992 to March 2024 has been 
-utilised for this study giving a dataset with 379 observations. The sources 
+
+The study uses monthly FTSE250 price data between October 1992 and March 2024,
+thus providing 379 observations. The data for the macroeconomic indicators 
+was also captured on a monthly basis in the same time frame, except for the 
+interest rate. This is because the Bank of England's Monetary Policy 
+Committee, 
+which is responsible for setting interest rates, meets on an \textit{ad hoc} 
+basis\footnote{The MPC typically meets roughly every six weeks, however, in uncertain economic 
+climes it may convene far more frequently.}
+to decide on whether the interest rate should be changed. The sources 
 are presented in Table \ref{table: tabl}.
 
 \clearpage
@@ -282,23 +287,27 @@ are presented in Table \ref{table: tabl}.
     \centering
     \caption{Data sources}
     \label{table: tabl}
-    \begin{tabular}{lll}
+    \begin{tabular}{llll}
         \toprule
-        \textbf{Variable} & \textbf{Notation} & \textbf{Source} \\
+        \textbf{Variable} & \textbf{Frequency} & \textbf{Notation} & \textbf{Source} \\
         \midrule
-        FTSE 250 Index & FTSE$_{250}$ & Yahoo Finance \\
-        Consumer Price Index & CPI & Office for National Statistics (ONS) \\
-        USD/GBP Exchange Rate (£) & EXCHG & Federal Reserve of St Louis \\
-        Interest Rate ($\%$) & INT & Bank of England \\
-        Money Supply (M3) (millions £) & M3 & Bank of England \\
+        FTSE 250 Index & Monthly & FTSE$_{250}$ & Yahoo Finance \\
+        Consumer Price Index & Monthly & CPI & Office for National Statistics (ONS) \\
+        USD/GBP Exchange Rate (£) & Monthly & EXCHG & Federal Reserve of St Louis \\
+        Interest Rate ($\%$) & Variable & INT & Bank of England \\
+        Money Supply (M3) (millions £) & Monthly & M3 & Bank of England \\
         \bottomrule
     \end{tabular}
 \end{table}
 
+
+
 \subsection{Data Preprocessing}
-For the interest rate data, it was necessary to address an issue raised by the fact that the Bank of England’s Monetary Policy Committee (MPC) 
-does not convene on a monthly basis, and are not obligated to 
-announce a rate on a regular basis. To address the resulting irregularities the data was adjusted using Algorithm \ref{alg:interest_rate_adjustment}.
+\label{section: prep}
+
+To address the variability in the interest data, Algorithm \ref{alg:interest_rate_adjustment}
+was used to convert the data into a monthly format, ensuring a uniform
+frequency across the variables.
 
 
 \begin{algorithm}[H]
@@ -359,7 +368,7 @@ experienced significant fluctuations, highlighting periods of high inflationary 
 inflation such as the early to late 2010s.
 
 Interest rates, have varied widely from $0.1\%$ to $8.4\%$, with a standard deviation of $2.52\%$, reflecting the 
-increasing role played by monetary policy in the UK since May 1997 when the Bank of England was given operational responsibility for setting interest rates (\citeboth{king1997changes}). The Bank of England was forced to adjust interest rates 
+increasing role played by monetary policy in the UK since May 1997 when operational responsibility for setting interest rates was tranferred from the Chancellor of the Exchequer to the Bank of England (\citeboth{king1997changes}). The Bank of England was forced to adjust interest rates 
 several times in response to worsening economic conditions, examples being the steep rate cuts during the 2008 financial crisis to stimulate the economy and the gradual rate hikes in response to 
 post-COVID inflationary pressures. 
 
@@ -385,7 +394,7 @@ The ARDL model specifies the dependent variable as a function of its own
 lagged values and the lagged values of independent variables. 
 The variables are permitted to be of differing stationarity. The stationarity 
 of the variables was tested using the Augmented Dickey-Fuller 
-Unit Root Test found within the tseries package in R. The optimal lags for each of the 
+Unit Root Test found within the \texttt{tseries} package in R. The optimal lags for each of the 
 variables were calculated using the Schwarz Information Criterion, contained
 within the auto\_ardl function in the ARDL package in R. 
 
@@ -397,9 +406,9 @@ The implicit form \eqref{eq:implicit} was represented in the ARDL model as:
 \end{align*}
 
 The intercept term was given by $\alpha_0$. The 
-remaining $\alpha_i, \beta_i$ coefficients represent the long-run relationships 
-between the variables. The coefficients were computed using the ardl function in the 
-ARDL package in R. 
+remaining $\alpha_i, \beta_i$ coefficients represented the long-run relationships 
+between the variables. The coefficients were computed using the \texttt{ardl} function in the 
+\texttt{ARDL} library in R. 
 
 The short-term dynamics were modelled using an Error Correction Model (ECM) 
 
@@ -408,41 +417,41 @@ The short-term dynamics were modelled using an Error Correction Model (ECM)
                                & + \sum_{j_{3}=0}^{q_3} \delta_{3j_{3}} \Delta \text{EXCHG}_{t-j_{3}} + \sum_{j_{4}=0}^{q_4} \delta_{4j_{4}} \Delta \text{M3}_{t-j_{4}} + \lambda \text{ECM}_{t-1} + \varepsilon_t
 \end{align*}
  
-Here, the intercept term was given by $\gamma_0$. The 
-remaining $\gamma_i, \delta_i$ coefficients represent the short-run 
+The intercept term was given by $\gamma_0$. The 
+remaining $\gamma_i, \delta_i$ coefficients represented the short-run 
 relationships between the variables. The $\lambda$ coefficient 
-describes the speed at which short-run deviations from the long-run equilibrium
-are adjusted. A negative $\gamma$ implies that there exists a correction mechanism that guides the deviation 
-to the long-run equilibrium. These coefficients, as well 
-as the error correction term ECT, were computed using the recm function in the 
-ARDL package in R.
+described the speed at which short-run deviations from the long-run equilibrium
+were adjusted. A negative $\gamma$ implies that there existed a correction mechanism that guided the deviation 
+back to the long-run equilibrium. These coefficients, as well 
+as the error correction term ECT, were computed using the \texttt{recm} function in the 
+\texttt{ARDL} library in R.
 
-Subsequently, cointegration was checked. The null and alternate hypothesis were:
+The \texttt{{bounds\_f\_test}} in 
+the \texttt{ARDL} library, based on the bounds test approach 
+outlined in \citeboth{pesaran2001}, was used to calculate the 
+F-statistic of the ARDL model and subsequently test for cointegration.
 
 \begin{align*}
     H_{0}: \beta_i &= 0\\
     H_{1}: \beta_i &\neq 0
 \end{align*}
 
-for all $i = 1,2,3,4$. The bounds\_f\_test in 
-the ARDL library, based on the bounds test approach 
-outlined in \citeboth{pesaran2001}, was used to calculate the 
-F-statistic of the ARDL model and subsequently test for cointegration.
+for all $i = 1,2,3,4$. 
 
-Finally, diagnostic tests are conducted to confirm that the model does not
-display autocorrelation, heteroskedascity, non-normality and that the cumulative 
-sum of residuals and squared residuals are both stable. This is to 
-ensure our regression is not spurious.
+To confirm that the model did not display autocorrelation, heteroskedasticity, non-normality, or structural instability, the Box-Ljung, Breusch-Pagan, Shapiro-Wilk, and CUSUM tests were conducted, respectively
 
 \subsection{RBF Neural Network}
 
-Radial basis function neural networks are a type of artificial 
-neural network that use radial basis functions at each node in the 
-activation layer of the network. They are able to identify complex, 
-non-linear relationships between time-series variables and have been used
-extensively in this aspect. The advantages of radial basis function neural networks over other 
-neural networks in time-series forecasting lies in their 
-ability to operate effectively on small sample sizes.
+This study employed radial basis function neural networks, 
+a type of artificial neural network that utilise radial basis functions 
+at each node in the activation layer. 
+This was because radial basis function neural networks 
+are well-suited for identifying complex, non-linear relationships 
+between time-series variables, making them particularly valuable in 
+forecasting tasks. In addition, radial basis function neural networks
+have been shown to be effective in operating on small sample sizes, 
+which was critical for the data constraints of this study.
+
 
 \subsubsection{Network Architecture}
 The exact interpolation problem, which forms the motivation for radial basis function neural networks, 
@@ -528,10 +537,12 @@ where $\boldsymbol{c_j}$ is a radial basis function centre and $f$ is the radial
 \subsubsection{Network Construction}
 
 Neural networks work best with data that is specified between a specific 
-range (\citeboth{mendelsohn1993}). Also, to achieve stationarity
-it was required to take the first difference all of the variables. Therefore, all of the 
-variables in the dataset described in were normalised using a z-score normalisation
-and differenced, as described in Algorithm \ref{alg:z_score_differencing}. 
+range (\citeboth{mendelsohn1993}).
+Also, based on the unit root tests in Table \ref{table: unitroot} the variables in the dataset $X$, described in \ref{section: prep},
+only achieve stationary at first difference.
+Therefore, all of the 
+variables in the dataset $X$ were normalised using a z-score normalisation and differenced,
+as described in Algorithm \ref{alg:z_score_differencing}. 
 
 \begin{algorithm}[H]
     \caption{Z-Score Normalisation and Differencing of Variables}
@@ -552,16 +563,16 @@ and differenced, as described in Algorithm \ref{alg:z_score_differencing}.
     \textbf{Update:} $Z_i \leftarrow D_i$ \;
 \end{algorithm}
 
-The inputs into the network are 4-dimensional input vectors, \(\boldsymbol{\mathrm{x_i}}\), from the differenced, normalised dataset $Z$
+The inputs into the network were 4-dimensional input vectors, \(\boldsymbol{\mathrm{x_i}}\), from the differenced, normalised dataset $Z$
 
 \begin{align}
     \boldsymbol{\mathrm{x_i}} = \{\Delta \text{CPI}_i, \Delta \text{EXCHG}_i, \Delta \text{INT}_i, \Delta \text{M3}_i\}
 \end{align}
 
 where \(\Delta \text{CPI}_i\), \(\Delta \text{EXCHG}_i\), \(\Delta \text{INT}_i\), and \(\Delta \text{M3}_i\) 
-represent differenced monthly values in the CPI, USD/GBP exchange rate, interest rate, and M3 money supply, respectively. 
+represented differenced monthly values in the CPI, USD/GBP exchange rate, interest rate, and M3 money supply, respectively. 
 
-The output is a one-dimensional output vector, \(\boldsymbol{\mathrm{y_i}}\) from the dataset $Z$, representing differenced monthly values in the FTSE250.
+The output was a one-dimensional output vector, \(\boldsymbol{\mathrm{y_i}}\) from the dataset $Z$, representing differenced monthly values in the FTSE250.
 
 
 \begin{align}
@@ -572,34 +583,33 @@ The radial basis function neural network was programmed into Python. The Bayesia
 \citeboth{bishop1995}, using the GaussianProcessRegressor package in Python was employed to model the network. For a 
 detailed description of this construction please refer to the \hyperref[sec: appendix]{Appendix}.
 
-
-Based on this, the train-test process was conducted:
+The approach outlined in the \hyperref[sec: appendix]{Appendix} was used to conduct the train-test process:
 \begin{enumerate}
     \item The optimal hyperparameters in the covariance function \eqref{eq: gimq} 
-    are computed using GridSearch Cross Validation. These hyperparameters are:
+    were computed using GridSearch Cross Validation. These hyperparameters were:
     \begin{enumerate}
         \item $\alpha$: a regularisation parameter representing a small quantity
-        that is added to the diagonals of the covariance matrix to ensure it is 
+        that was added to the diagonals of the covariance matrix to ensure it was 
         invertible. 
-        \item $\beta$: the power in the covariance function, which controls the shape of the function.
-        \item $\sigma$: a parameter which controls how much of the noise in the data the kernel accounts for. It moderates the risk of overfitting and underfitting.
-        \item Length scale: a parameter that controls the influence that each kernel is to have. Analogous to 
-        the width each radial basis function neuron possesses.
+        \item $\beta$: the power in the covariance function, which controlled the shape of the function.
+        \item $\sigma$: a parameter which controlled how much of the noise in the data the kernel accounted for. It moderated the risk of overfitting and underfitting.
+        \item Length scale: a parameter that controlled the influence that each kernel was to have. Analogous to 
+        the width that each radial basis function neuron possesses.
     \end{enumerate}
     \item Training inputs $\boldsymbol{\mathrm{x}}_1, \boldsymbol{\mathrm{x}}_2,\ldots \boldsymbol{\mathrm{x}}_{n}$
-    and corresponding outputs \( y = \{y_1, y_2, \dots, y_n\} \) are successively passed through the 
+    and corresponding outputs \( y = \{y_1, y_2, \dots, y_n\} \) were successively passed through the 
     covariance function $(x,x')$, to obtain the matrix of the pairwise covariance of 
     all training observations, $K$.
-    \item A $4$-dimensional input space $X$ takes in an individual training observation $(\boldsymbol{\mathrm{x}}_{i}, y_i)$ and 
-    calculates the posterior weights distribution. 
-    Each possible weight vector $w$ represents a different function, explicitly 
+    \item A $4$-dimensional input space $X$ took in an individual training observation $(\boldsymbol{\mathrm{x}}_{i}, y_i)$ and 
+    calculated the posterior weights distribution. 
+    Each possible weight vector $w$ represented a different function, explicitly 
     based on the radial basis function covariance function, that could fit the data. In the 
-    hidden layer the expectation is then taken, which
-    combines all weights and finds the mean, weighted by the 
-    respective probabilities. This represents the best functional estimate of the price movement. Based on this estimate 
-    the predicted output generated.
+    hidden layer the expectation of this distribution was then taken, which
+    combined all the weights and found the mean, weighted by the 
+    respective probabilities. This represented the best functional estimate of the price movement. Based on this estimate 
+    the predicted output was generated.
     \item The testing process was conducted similarly. The 
-    posterior weight distribution that contains the information of the training phase becomes the new 
+    posterior weight distribution that contained the information of the training phase became the new 
     prior distribution. From this the posterior weight distributions for the test observations \eqref{eq: testw}
     were calculated, and then the predictive output was found (\citeboth{rasmussen2006}).
     
@@ -608,7 +618,7 @@ Based on this, the train-test process was conducted:
     \end{align}
 \end{enumerate}
 
-A short-term and long-term forecast is conducted using this process. For the short-term forecast a test set of 5 months was used, and for the long-term forecast a test set of 57 months was used.
+A short-term and long-term forecast was conducted using this process. For the short-term forecast a test set of 5 months was used, and for the long-term forecast a test set of 57 months was used.
 
 
 \section{Results}
@@ -618,6 +628,7 @@ A short-term and long-term forecast is conducted using this process. For the sho
 
 \begin{table}[h!]
     \centering
+    \label{table: unitroot}
     \caption{Augmented Dickey-Fuller (ADF) Unit Root Test\tablefootnote{All of the variables are tested in natural logarithmic form. The asterisks *, **, ***, and **** denote statistical significance
     at the 1$\%$, 2.5$\%$, 5$\%$ and 10$\%$ significance levels.}}
     \begin{tabular}{lccc}
@@ -634,7 +645,7 @@ A short-term and long-term forecast is conducted using this process. For the sho
 \end{table}
 
 
-The optimum lags for the ARDL model were ($FTSE_{250} = 5$, $CPI = 4$, $EXCHG=7$, $INT =7$, $M3=4$) for  The resulting F-statistic of $4.1$ was compared against the critical values
+The optimum lags for the ARDL model were ($FTSE_{250} = 5$, $CPI = 4$, $EXCHG=7$, $INT =7$, $M3=4$). The resulting F-statistic of $4.1$ was compared against the critical values
 given by \citeboth{pesaran2001}, providing evidence of cointegration 
 at the $10\%$, $5\%$ and $2.5\%$ significance levels, but not at the $1\%$ 
 level.
@@ -687,28 +698,28 @@ level.
 
 \subsubsection{Short-term Impacts}
 
-The interest rate has a significantly
+The interest rate had a significantly
 negative short-term impact on the FTSE250 price in the short term. 
 This can be attributed to the immediate effect of interest rate hikes, 
 which decrease the present value of future earnings according to the 
 Discounted Cash Flow (DCF) valuation model, thereby 
 affecting investor sentiment and depressing stock prices. 
-This finding is consistent with the studies by 
+This finding was consistent with the studies by 
 \citeboth{alam2009}, \citeboth{demir2019}, and \citeboth{neifar2023}.
 
-The money supply has a significantly negative short-term effect on the 
+The money supply had a significantly negative short-term effect on the 
 FTSE250 price, as noted by \citeboth{olawale2014}. 
-According to \citeboth{sellin2001}, this supports the Keynesian argument 
+According to \citeboth{sellin2001}, this aligned with the Keynesian argument 
 that an increase in money supply leads to expectations of a future 
 monetary contraction. This expectation increases the demand for 
 funds, driving up current interest rates and reducing stock prices 
 through the same mechanism as described previously.
 
 In the short-term, before structural shifts can materialise, the
-weakening of the Pound against the Dollar has a positive, but 
+weakening of the Pound against the Dollar had a positive, but 
 insignificant effect. As the USD has been 
 the global reserve currency for many decades, the depreciation of the Pound 
-against it will lead to increased revenue in Pound terms for FTSE250 
+against it would lead to increased revenue in Pound terms for FTSE250 
 companies with substantial overseas operations. 
 This is because their foreign earnings, 
 when converted back into Pounds, will be worth more, 
@@ -720,7 +731,7 @@ their profits and they use hedging strategies involving financial instruments
 such as currency forwards which protect against volatility. 
 
 The insignificance of inflation, defined as a positive 
-increase in the CPI, confirms the findings of 
+increase in the CPI, confirmed the findings of 
 \citeboth{gultekin1983}, \citeboth{firth1979} and \citeboth{neifar2023}. 
 The CPI as a measure does not uniformly represent all sectors of the economy, 
 and may consequently be unrepresentative of inflationary changes in the 
@@ -731,9 +742,9 @@ by investors and already be factored into stock prices.
 
 The error correction term 
 was negative and statistically significant ensuring that long-run equilibrium 
-can be achieved. The adjustment speed of $0.1794$ indicates that 
+can be achieved. The adjustment speed of $0.1794$ indicated that 
 roughly $18\%$ of the fluctuation in the previous month's price caused by the 
-macroeconomic variable movements is adjusted back to the long-run equilibrium in the subsequent month. This implies 
+macroeconomic variable movements was adjusted back to the long-run equilibrium in the subsequent month. This implies 
 that it takes approximately 6 months for the FTSE250 to return to its long-run equilibrium following 
 changes in the selected macroeconomic variables.
 
@@ -752,7 +763,7 @@ The freer role of the Bank of England in setting monetary policy could be
 another factor in this, as a stricter monetary policy would keep inflation
 in check and obscure any long-term equilibrium relationship. 
 
-The insignificant long-term effect of the money supply can be explained by several reasons.
+The insignificant long-term effect of the money supply can be explained by several factors.
 Firstly, as discussed in \citeboth{sellin2001}, it is possible that the FTSE250 is efficient in processing changes in the 
 money supply, at least over certain intervals if not always. This would mean anticipated changes in the money supply would not affect the stock market price, only the
 unanticipated component of a change in money supply would, as established by \citeboth{sorensen1982} and \citeboth{bernanke2005}. 
@@ -760,8 +771,7 @@ It is also possible that the M3 measure is too broad of a measure and includes o
 on the stock market dynamics. 
 
 The USD/GBP exchange rate significantly positively impacted the FTSE250 price, confirming the findings of 
-\citeboth{wong2022}. That there is a 
-significant relationship is not surprising, because whilst the FTSE250 is a more domestic indicator of the London Stock Exchange than the FTSE 100 Index, 
+\citeboth{wong2022}. That there is a significant relationship is not surprising, because whilst the FTSE250 is a more domestic indicator of the London Stock Exchange than the FTSE 100 Index, 
 at times nearly $50\%$ of its earnings have come from abroad, indicating that 
 the value of the Pound has a significant impact on this stock market. There are many reasons for why this effect is observed.
 In the long run, the appreciation of the Pound would decrease the 
@@ -784,14 +794,13 @@ DCF valuation model, and depress prices.
 
 
 
-
 \subsection{RBFNN}
 
 \subsubsection{Short-term Forecast}
 
 
 The short-term prediction yielded MAE = $0.07$ and 
-$R^2 = 61\%$ for a 5-month time horizon. The results are presented in Figure \ref{fig:shortmonthly}.
+$R^2 = 61\%$ for a 5-month time horizon. The results obtained are presented in Figure \ref{fig:shortmonthly}.
 The significantly better performance of the model in the short-run
 indicates that the selected macroeconomic variables possess
 a stronger predictive power over shorter periods. This was highlighted 
@@ -875,9 +884,9 @@ impacts of the interest rate, USD/GBP
 exchange rate, the Consumer Price Index, and 
 M3 money supply market activity on
 the FTSE250 over the October 1993 – April 2024 period.
-The results suggest a cointegrated long-run
+The results suggested a cointegrated long-run
 relationship between the macroeconomic variables and the stock market index. 
-The long-run coefficients imply that
+The long-run coefficients implied that
 increases in the interest rate and depreciation in the exchange rate
 significantly depress the FTSE250 value. 
 Policymakers dealing with forecasting the UK stock markets
