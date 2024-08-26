@@ -43,7 +43,7 @@
 on the FTSE 250 Index Using Statistical and Machine Learning Methods}}
 \author{
   \textbf{Mateen Khan} \\
-  Mathematics Institute, University of Warwick  \\ 
+  University of Warwick  \\ 
   \\
   \textbf{Supervisor: Dr. Randa Herzallah} \\
   Mathematics Institute, University of Warwick
@@ -54,7 +54,7 @@ on the FTSE 250 Index Using Statistical and Machine Learning Methods}}
 
 \begin{abstract}
     This study investigates the impact of the Consumer Price Index (CPI), Bank of England Base Rate, US Dollar (USD) and British Pound Sterling (GBP) exchange rate, and the money supply (M3) measure on the price of the FTSE 250 Index (FTSE250).
-    In addition, it assesses the effectiveness of radial basis function neural networks (RBFNN) as a tool to forecast the price of the FTSE 250 Index based on the same set of macroeconomic variables. This study finds quantitative estimates for the short-term and long-term impacts of the aforementioned macroeconomic indicators on the price of the FTSE 250 Index. It also demonstrates the effectiveness of radial basis function neural networks as a short-term forecasting tool for the price of the FTSE 250 Index.
+    In addition, it assesses the effectiveness of radial basis function neural networks (RBFNN) as a tool to forecast the price of the FTSE 250 Index based on the same set of macroeconomic variables. This study finds quantitative estimates for the short-term and long-term impacts of the aforementioned macroeconomic indicators on the price of the FTSE 250 Index. It also demonstrates the effectiveness of RBFNN as a short-term forecasting tool for the price of the FTSE 250 Index.
     \keywords{macroeconomic indicators, FTSE 250, autoregressive distributed lag model, radial basis function neural network, time-series forecasting}
 \end{abstract}
 
@@ -63,11 +63,11 @@ on the FTSE 250 Index Using Statistical and Machine Learning Methods}}
 The stock market is a significant component of the financial system and 
 plays a crucial role in the broader economy. Consequently, economic policy 
 makers take the stock market into account when making fiscal policy 
-decisions using a combination of quantitative and qualitative methods. 
+decisions using a combination of quantitative and qualitative methods (\citeboth{DemirgucKunt1996}). 
 These methods such as econometric modelling and forecasting, and empirical 
 analysis allow them to understand the short-term and long-term effects of 
 macroeconomic indicators
-on the wider economy through the stock market (\citeboth{DemirgucKunt1996}).
+on the wider economy through the stock market.
 
 Macroeconomic indicators can also be effectively used in machine learning 
 methods to forecast stock prices by serving as input features that capture 
@@ -75,7 +75,7 @@ the economic environment’s influence on stock market behaviour. By carefully
 selecting the most relevant indicators, 
 as well as choosing the appropriate models, machine learning can enhance the accuracy of stock price forecasts (\citeboth{Prasad2023}).
 
-The significance of this study is to quantify the effects of macroeconomic indicators on the stock market as well as assessing the use of these indicators to forecast stock market prices over the short-term and long-term. In addition, the study seeks to understand which macroeconomic indicators are most relevant in capturing the dynamics of a stock market to aid forecasting.
+The significance of this study is to quantify the effects of macroeconomic indicators on the stock market as well as assessing the use of these indicators to forecast stock market prices over the short-term and long-term. In addition, this study seeks to understand which macroeconomic indicators are most relevant in capturing the dynamics of a stock market to aid forecasting.
 
 In particular, the objectives of this study are to address how specific macroeconomic indicators influence stock market prices in a developed economy, and whether machine learning models can substitute traditional econometric models in predicting stock market prices. It aims to:
 \begin{enumerate}
@@ -85,12 +85,12 @@ In particular, the objectives of this study are to address how specific macroeco
 
 In order to analyse the dynamic relationship between the variables in the time series data, this study
 will employ the Autoregressive Distributed Lag (ARDL) model in conjunction with an Error
-Correction Model (ECM). This research also employs a radial basis function neural network to predict the price movements of the FTSE250.
+Correction Model (ECM). This research also employs an RBFNN to predict the price movements of the FTSE250.
 
 The remainder of this paper will be organised as follows. 
 Section \ref{sec:lit} provides a brief review of the literature in this problem space and explains the rationale behind the selection of macroeconomic variables.
 Section \ref{sec:meth} presents the methodology of this study. Section \ref{sec: results} discusses the results and Section \ref{sec: conc} concludes
-the study.
+this study.
 
 \section{Literature Review}
 \label{sec:lit}
@@ -242,10 +242,10 @@ such as stock market volatility (\citeboth{cho2022forecasting,praveenraj2023}) a
 methods is that they are not suitable for smaller datasets and tend to overfit on the training data
 in such datasets (\citeboth{foster1992}) or display unstable behaviour during performance (\citeboth{lebaron1998})
 
-Radial basis function neural networks are a type of artificial 
+RBFNN are a type of artificial 
 neural network that use radial basis functions at each node in the 
 activation layer of the network.
-The advantage of radial basis function neural networks lies in their ability to 
+The advantage of RBFNN lies in their ability to 
 operate effectively in volatile financial time-series 
 environments (\citeboth{cafferata2019}), their strong ability to 
 generalise on such data (\citeboth{sharkawy2020}) as well as their efficacy on small datasets (\citeboth{kosarac2022}). 
@@ -254,12 +254,12 @@ supports this, using a sample size of 70 to forecast daily NASDAQ
 Index values using an Artificial Neural Network; they achieved a minimum
 test $R^2$ of 83$\%$. 
 
-Radial basis function neural networks have been used considerably for stock market forecasting. \citeboth{cao2004} 
-used a radial basis function network based on the Optimal Partition Algorithm (OPA) to 
-forecast S$\&$P 500 prices. \citeboth{dass2019} use a radial basis function neural network, utilising the Back-propagation 
+RBFNN have been used considerably for stock market forecasting. \citeboth{cao2004} 
+used a RBFNN based on the Optimal Partition Algorithm (OPA) to 
+forecast S$\&$P 500 prices. \citeboth{dass2019} use a RBFNN, utilising the Back-propagation 
 Algorithm (BPA) instead to tune parameters; their results demonstrate 
-that the radial basis function network outperformed a standard feed-forward neural network. 
-\citeboth{ji2014} also found that the radial basis function network was able to predict the value 
+that the RBFNN outperformed a standard feed-forward neural network. 
+\citeboth{ji2014} also found that the RBFNN was able to predict the value 
 of the Shanghai Composite Index on a 45 day time-horizon using the closing price, with a mean prediction error of 
 1.4387$\%$. Recently, \citeboth{abotaleb2024}
 used quarterly data from 2001 to 2023 to model the influence of the economic 
@@ -267,7 +267,7 @@ uncertainty index on the quarterly prices of various stock markets including the
 FTSE 100 Index using a radial basis function. They found that the model 
 achieved a relative error of 27.2$\%$ in the case of the FTSE 100 Index.
 
-Whilst \citeboth{abotaleb2024}, used quarterly data and a relatively minor economic indicator, the effectiveness of radial basis function neural networks in stock market forecasting using 
+Whilst \citeboth{abotaleb2024}, used quarterly data and a relatively minor economic indicator, the effectiveness of RBFNN in stock market forecasting using 
 major macroeconomic indicators and coarse-grain time-series has not yet been investigated and presents an area for further 
 research. 
 
@@ -340,8 +340,8 @@ price, CPI value, USD/GBP exchange rate, interest rate, and M3 money supply.
 
 \subsection{Descriptive Statistics}
 
-Over the period covered by the dataset, the FTSE250 has 
-shown substantial growth, reflecting the structural transition of the UK economy.
+Over the period covered by the dataset, the FTSE250 
+showed substantial growth, reflecting the structural transition of the UK economy.
 It has also experienced significant volatility, highlighting significant market shifts driven by 
 various crises such as the Dotcom bubble burst, and geopolitical shocks.
 
@@ -362,29 +362,34 @@ various crises such as the Dotcom bubble burst, and geopolitical shocks.
 \end{table}
 
 
-The USD/GBP exchange rate has exhibited moderate variability, exhibiting the stable relations between 
+The USD/GBP exchange rate exhibited moderate variability, highlighting the stable relations between 
 the two countries. Nonetheless, geopolitical shocks such as the 2008 financial crisis and Brexit both greatly affected the value of the Pound, 
-which accounts for the large range. 
+which accounted for the large range. 
 
-The CPI, with an average of 88.36, has 
-experienced significant fluctuations, highlighting periods of high inflationary pressure such as the onset of the Russia-Ukraine conflict in 2022, and periods of stable, low
+The CPI, with an average of 88.36, 
+experienced significant fluctuations, which highlighted periods of high inflationary pressure such as the onset of the Russia-Ukraine conflict in 2022, and periods of stable, low
 inflation such as the period between the early to late 2010s.
 
-Interest rates have ranged from $0.1\%$ to $8.4\%$ with a standard deviation of $2.52\%$, reflecting the 
-increasing role played by monetary policy in the UK since May 1997. This was when operational responsibility for setting interest rates was tranferred from the Chancellor of the Exchequer to the Bank of England (\citeboth{king1997changes}). The Bank of England was forced to adjust interest rates 
-several times in response to worsening economic conditions, examples being the steep rate cuts during the 2008 financial crisis to stimulate the economy and the gradual rate hikes in response to 
+Interest rates ranged from $0.1\%$ to $8.4\%$ with a standard deviation of $2.52\%$, which reflected the 
+increasing role played by monetary policy in the UK since May 1997. It was at this time when operational responsibility for setting interest rates was tranferred from the Chancellor of the Exchequer to the Bank of England (\citeboth{king1997changes}). 
+The Bank of England was forced to adjust interest rates 
+several times in response to worsening economic conditions. For example, 
+it made steep rate cuts during the 2008 financial crisis
+to stimulate the economy and a series gradual rate hikes in response to 
 post-COVID inflationary pressures. 
 
-The M3 money supply has shown substantial variability, ranging from 494,181 to 3,704,873, 
+The M3 money supply showed substantial variability, ranging from 494,181 to 3,704,873, 
 in large part influenced by the various Quantitative Easing (QE) programs implemented by the Bank of England 
 in response to the recessions caused by the 2008 financial crisis and the COVID-19 pandemic. These programs aimed to inject liquidity into the economy to stimulate economic activity, thus inflating the overall money supply.
 
 \subsection{ARDL-ECM Model}
 
-The study used an autoregressive distributed lag (ARDL) model in conjunction with 
+This study used an autoregressive distributed lag (ARDL) model in conjunction with 
 an error correction model (ECM) to examine the short-term and long-term effects of macroeconomic indicators on the price of the FTSE250
-and to quantify these relationships. Prior to constructing the model a natural logarithmic transform was applied
-on the variables. This was done so that the coefficients can be interpreted easily as percentage changes. 
+and to quantify these relationships. Prior to constructing the model,
+a natural logarithmic transform was applied
+on the variables to enable the coefficients to be interpreted 
+easily as percentage changes. 
 
 Based on the selected macroeconomic indicators,
 the stock market function was defined as:
@@ -430,34 +435,35 @@ as the error correction term ECT, were computed using the \texttt{recm} function
 \texttt{ARDL} library in R.
 
 The \texttt{{bounds\_f\_test}} function in 
-the \texttt{ARDL} library, based on the bounds test approach 
+the \texttt{ARDL} library, which is based on the bounds test approach 
 outlined in \citeboth{pesaran2001}, was used to calculate the 
-F-statistic of the ARDL model and then test for cointegration.
+F-statistic and then test for cointegration. The hypotheses were:
 
 \begin{align*}
     H_{0}: \beta_i &= 0\\
     H_{1}: \beta_i &\neq 0
 \end{align*}
 
-for all $i = 1,2,3,4$. 
+where $\beta_{1\leq i\leq4}$ represented the long-term coefficients in 
+the ARDL model.
 
-To confirm that the model did not display autocorrelation, heteroskedasticity, {non-normality}, or structural instability, the Box-Ljung, Breusch-Pagan, Shapiro-Wilk, and CUSUM tests were conducted, respectively
+To confirm that the model did not display autocorrelation, heteroskedasticity, {non-normality}, or structural instability, the Box-Ljung, Breusch-Pagan, Shapiro-Wilk, and CUSUM tests were conducted respectively
 
-\subsection{RBF Neural Network}
+\subsection{RBFNN}
 
-This study employed radial basis function neural networks, 
+This study employed RBFNN, 
 a type of artificial neural network that utilise radial basis functions 
 at each node in the activation layer. 
-This was because radial basis function neural networks 
+The primary reason for this is that they
 are well-suited for identifying complex, non-linear relationships 
 between time-series variables, making them particularly valuable in 
-forecasting tasks. In addition, radial basis function neural networks
+forecasting tasks. In addition, RBFNN
 have been shown to be effective in operating on small sample sizes, 
-which was critical for the data constraints of this study.
+which was a significant issue in this study.
 
 
 \subsubsection{Network Architecture}
-The exact interpolation problem, which forms the motivation for radial basis function neural networks, 
+The exact interpolation problem, which forms the motivation for RBFNN, 
 involves mapping a $d$-dimensional input space $\boldsymbol{\mathrm{X}}$ to
 a $c$-dimensional target space $\boldsymbol{\mathrm{y}}$. The dataset consists of $N$ input
 vectors $\boldsymbol{\mathrm{x_n}}$, along with corresponding target 
@@ -479,8 +485,9 @@ $||\boldsymbol{\mathrm{x}} - \boldsymbol{\mathrm{x_n}}||$. The output of the map
 \end{align}
 
 By introducing several modifications to the exact interpolation 
-procedure, the radial basis function neural network
-model is obtained, as presented in Figure \ref{fig:rbf_nn_architecture}. 
+procedure, the RBFNN
+model as shown in Figure \ref{fig:rbf_nn_architecture} is obtained.
+
 The network mapping takes the following form:
 
 \begin{align}
@@ -533,7 +540,7 @@ where $\boldsymbol{c_j}$ is a radial basis function centre and $f$ is the radial
             \draw[->] (H-\j) -- (O);
     
     \end{tikzpicture}
-    \caption{Radial basis function neural network}
+    \caption{RBFNN Architecture}
     \label{fig:rbf_nn_architecture}
 \end{figure}
 
@@ -582,10 +589,15 @@ The output was a one-dimensional output vector, \(\boldsymbol{\mathrm{y_i}}\) fr
     \boldsymbol{\mathrm{y_i}} = \{\Delta \text{FTSE}_{250_i}\}
 \end{align}
 
-The radial basis function neural network was programmed in Python. The Bayesian kernel regression approach outlined by 
-\citeboth{bishop1995}, using the \texttt{GaussianProcessRegressor} package in Python was employed to model the network\footnote{See \hyperref[sec: appendix]{Appendix}}. 
+The RBFNN was programmed in Python. The Bayesian kernel regression approach outlined by 
+\citeboth{bishop1995}, using the \texttt{GaussianProcessRegressor} 
+package in the \texttt{sci-kit} library was employed to construct the
+network\footnote{See \hyperref[sec: appendix]{Appendix}}.
 
-This approach was then used to conduct the train-test process as follows:
+\subsubsection{Network Training and Testing}
+
+The Bayesian kernel regression 
+framework was then used to conduct the train-test process as follows:
 \begin{enumerate}
     \item The optimal hyperparameters in the covariance function \eqref{eq: gimq} 
     were computed using GridSearch Cross Validation. These hyperparameters were:
@@ -600,7 +612,7 @@ This approach was then used to conduct the train-test process as follows:
     \end{enumerate}
     \item Training inputs $\boldsymbol{\mathrm{x}}_1, \boldsymbol{\mathrm{x}}_2,\ldots \boldsymbol{\mathrm{x}}_{n}$
     and corresponding outputs \( y = \{y_1, y_2, \dots, y_n\} \) were successively passed through the 
-    covariance function $(x,x')$, to obtain the matrix of the pairwise covariance of 
+    covariance function $(x,x')$ to obtain the matrix of the pairwise covariance of 
     all training observations, $K$.
     \item A $4$-dimensional input space $X$ took in an individual training observation $(\boldsymbol{\mathrm{x}}_{i}, y_i)$ and 
     calculated the posterior weights distribution. 
@@ -886,14 +898,14 @@ Within this context, this study examined the
 impacts of the interest rate, USD/GBP
 exchange rate, the Consumer Price Index, and 
 M3 money supply market activity on
-the FTSE250 over the October 1992 – March 2024 period.
+the FTSE250 between October 1992 and March 2024.
 The results suggested a cointegrated long-run
 relationship between the macroeconomic variables and the stock market index. 
 The long-run coefficients implied that
 increases in the interest rate and depreciation in the exchange rate
 significantly depress the FTSE250 value. 
 Policymakers dealing with forecasting the UK stock markets
-should consider the factors in the study, and to raise the stock
+should consider the factors in this study, and in order to raise the stock
 market's value, a lower interest rate regime should be adopted. This will 
 stimulate consumer activity, reduce operating costs for firms, and make 
 stocks more attractive investments, thereby increasing the stock market value. 
@@ -910,8 +922,8 @@ undermining any positive changes. Any policy changes must cautiously be made
 with this at the forefront.
 
 
-The study also investigated the efficacy of machine learning methods in 
-the field of stock-econometric forecasting. The radial basis function network performed well in
+This study also investigated the efficacy of machine learning methods in 
+the field of stock-econometric forecasting. The RBFNN performed well in
 short-term forecasting of the FTSE250, and offers investors with an accurate forecasting tool, 
 to leverage in their trading strategies. The long-term forecast was able to improve on the ARDL-ECM model, and provides 
 economists with a tool to compute non-econometric, quantitative measures of the 
@@ -923,24 +935,24 @@ An autoregressive neural network could also be tried, including the past values 
 FTSE250 in the input space to provide a more accurate model. In addition, 
 a more granular data set could be utilised by applying a 
 Brownian bridge algorithm to generate daily macroeconomic data. This would allow 
-the testing of the radial basis function neural network against other neural networks 
+the testing of the RBFNN against other neural networks 
 such as the LSTM. Other machine learning methods suited for 
 forecasting such as Gradient Boosting Machines could 
 also be investigated in future work in this problem domain. 
 
 \newpage
 
-\section*{Appendix}
+\section{Appendix}
 \label{sec: appendix}
 
 The \texttt{GaussianProcessRegressor} function in Python's \texttt{scikit-learn} library is based on the 
 standard function
 
 \begin{align} 
-    f(x) = x^{T}w, \quad{y = f(x) + \varepsilon}
+    f(\boldsymbol{\mathrm{x}}) = \boldsymbol{\mathrm{x}}^{T}\boldsymbol{\mathrm{w}}, \quad{\boldsymbol{\mathrm{y}} = f(\boldsymbol{\mathrm{x}}) + \varepsilon}
 \end{align}
 
-where $y$ differs from the function values $f(x)$ by noise which is assumed
+where $\boldsymbol{\mathrm{y}}$ differs from the function values $f(x)$ by noise which is assumed
 to follow an iid Gaussian distribution 
 $\mathcal{N}_1$ (\citeboth{rasmussen2006}).
 \begin{align*}
@@ -952,10 +964,10 @@ which is factored over cases in the training set. This is
 permissible because of the independence assumption (\citeboth{rasmussen2006}).
 
 \begin{align}
-    p(y|X,w) = \prod_{i=1}^{n} p(y_i|x_i ,w) = \mathcal{N}\bigl(X^T, \sigma_{n}^2 I\bigr)
+    p(\boldsymbol{\mathrm{y}}|X,\boldsymbol{\mathrm{w}}) = \prod_{i=1}^{n} p(\boldsymbol{\mathrm{y}}_i|\boldsymbol{\mathrm{x}}_i ,\boldsymbol{\mathrm{w}}) = \mathcal{N}\bigl(X^T, \sigma_{n}^2 I\bigr)
 \end{align}
 
-The weights \( w \) represent the parameters that define the relationship between the inputs and outputs. 
+The weights \( \boldsymbol{\mathrm{w}} \) represent the parameters that define the relationship between the inputs and outputs. 
 They are treated as random variables defined by the Gaussian distribution \eqref{eq: weight}.
 
 
@@ -964,29 +976,29 @@ is specified according to the characteristics of the data. In this study the
 generalised inverse multiquadric is used.
 
 \begin{align}
-    k(x,x') = \biggl( ||x-x'|| + \sigma^2\biggr)^{-\beta} \label{eq: gimq}
+    k(\boldsymbol{\mathrm{x}},\boldsymbol{\mathrm{x}}') = \biggl( ||\boldsymbol{\mathrm{x}}-\boldsymbol{\mathrm{x}}'|| + \sigma^2\biggr)^{-\beta} \label{eq: gimq}
 \end{align}
 and used to construct the covariance matrix $K$, which along with 
-a mean function $m(x)$ forms the distribution of the the weights 
+a mean function $m(\boldsymbol{\mathrm{x}})$ forms the distribution of the the weights 
 
 \begin{align}
-    w \sim \mathcal{N}\bigl(m(x), K\bigr) \label{eq: weight}
+    \boldsymbol{\mathrm{w}} \sim \mathcal{N}\bigl(m(\boldsymbol{\mathrm{x}}), K\bigr) \label{eq: weight}
 \end{align}
 
 
-The mean function $m(x)$ acts as a bias, 
+The mean function $m(\boldsymbol{\mathrm{x}})$ acts as a bias, 
 providing a baseline expectation of the function values. 
 This forms the prior distribution over the weights \eqref{eq: weight}.
 
 Then, by Bayes' Theorem, 
-
+  
 \begin{align}
-    p(w|y, X) = \frac{p(y|X,w) p(w)}{p(y|X)} \label{eq: post}
+    p(\boldsymbol{\mathrm{w}}|\boldsymbol{\mathrm{y}}, X) = \frac{p(\boldsymbol{\mathrm{y}}|X,\boldsymbol{\mathrm{w}}) p(\boldsymbol{\mathrm{w}})}{p(\boldsymbol{\mathrm{y}}|X)} \label{eq: post}
 \end{align}
 Using this, the posterior distribution \eqref{eq:nine} is obtained (\citeboth{rasmussen2006}).
 
 \begin{align}
-    p(w|y, X) \sim \mathcal{N}\bigl(\frac{A^{-1}Xy}{\sigma_{n}^{2}}, A^{-1}\bigr) \label{eq:nine}
+    p(\boldsymbol{\mathrm{w}}|\boldsymbol{\mathrm{y}}, X) \sim \mathcal{N}\bigl(\frac{A^{-1}X\boldsymbol{\mathrm{y}}}{\sigma_{n}^{2}}, A^{-1}\bigr) \label{eq:nine}
 \end{align}
 
 The covariance matrix $A^{-1} = K^{-1} + \sigma_{n}^{-2}(XX^T$).
