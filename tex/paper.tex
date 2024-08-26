@@ -9,6 +9,7 @@
 \usepackage[numbers]{natbib}
 \usepackage{natbib}
 \usepackage{parskip}
+\usepackage{titlesec}
 \usepackage{float}
 \usepackage{tablefootnote}
 \usepackage[linesnumbered,ruled,vlined]{algorithm2e}
@@ -36,13 +37,17 @@
     urlcolor=blue,        
 ]{hyperref}
 
+\titleformat{\title}[block]{\normalfont\bfseries}{\thetitle}{1em}{}
 
-\title{Investigating the Impact of Macroeconomic Indicators
-
-on the FTSE 250 Index Using Statistical and Machine Learning Methods}
-\author{Mateen Khan}
-\date{\today}
-
+\title{{Investigating the Impact of Macroeconomic Indicators
+on the FTSE 250 Index Using Statistical and Machine Learning Methods}}
+\author{
+  \textbf{Mateen Khan} \\
+  Mathematics Institute, University of Warwick  \\ 
+  \\
+  \textbf{Supervisor: Dr. Randa Herzallah} \\
+  Mathematics Institute, University of Warwick
+}
 \begin{document}
 
 \maketitle
@@ -84,7 +89,7 @@ Correction Model (ECM). This research also employs a radial basis function neura
 
 The remainder of this paper will be organised as follows. 
 Section \ref{sec:lit} provides a brief review of the literature in this problem space and explains the rationale behind the selection of macroeconomic variables.
-Section \ref{sec:meth} presents the methodology. Section \ref{sec: results} discusses the results and Section \ref{sec: conc} concludes
+Section \ref{sec:meth} presents the methodology of this study. Section \ref{sec: results} discusses the results and Section \ref{sec: conc} concludes
 the study.
 
 \section{Literature Review}
@@ -271,18 +276,17 @@ research.
 
 \subsection{Data Sources}
 
-The study uses monthly FTSE250 price data between October 1992 and March 2024,
+This study used monthly FTSE250 price data between October 1992 and March 2024,
 thus providing 379 observations. The data for the macroeconomic indicators 
 was also captured on a monthly basis in the same time frame, except for the 
-interest rate. This is because the Bank of England's Monetary Policy 
-Committee, 
-which is responsible for setting interest rates, meets on an \textit{ad hoc} 
+interest rate. This is due to the
+\textit{ad hoc} 
 basis\footnote{The MPC typically meets roughly every six weeks, however, in uncertain economic 
-climes it may convene far more frequently.}
-to decide on whether the interest rate should be changed. The sources 
+conditions it may convene far more frequently.} on which the
+Bank of England's Monetary Policy 
+Committee decides to set interest rates. The sources 
 are presented in Table \ref{table: tabl}.
 
-\clearpage
 \begin{table}[h!]
     \centering
     \caption{Data sources}
@@ -305,9 +309,8 @@ are presented in Table \ref{table: tabl}.
 \subsection{Data Preprocessing}
 \label{section: prep}
 
-To address the variability in the interest data, Algorithm \ref{alg:interest_rate_adjustment}
-was used to convert the data into a monthly format, ensuring a uniform
-frequency across the variables.
+To address the variable frequency of the interest rate data, Algorithm \ref{alg:interest_rate_adjustment}
+was used to convert the data into a monthly format.
 
 
 \begin{algorithm}[H]
@@ -332,7 +335,7 @@ frequency across the variables.
     }
 \end{algorithm}
 
-The result is a dataset $X$ composed of monthly values for the FTSE250
+The result was a dataset $X$ composed of monthly values for the FTSE250
 price, CPI value, USD/GBP exchange rate, interest rate, and M3 money supply. 
 
 \subsection{Descriptive Statistics}
@@ -365,20 +368,20 @@ which accounts for the large range.
 
 The CPI, with an average of 88.36, has 
 experienced significant fluctuations, highlighting periods of high inflationary pressure such as the onset of the Russia-Ukraine conflict in 2022, and periods of stable, low
-inflation such as the early to late 2010s.
+inflation such as the period between the early to late 2010s.
 
-Interest rates, have varied widely from $0.1\%$ to $8.4\%$, with a standard deviation of $2.52\%$, reflecting the 
-increasing role played by monetary policy in the UK since May 1997 when operational responsibility for setting interest rates was tranferred from the Chancellor of the Exchequer to the Bank of England (\citeboth{king1997changes}). The Bank of England was forced to adjust interest rates 
+Interest rates have ranged from $0.1\%$ to $8.4\%$ with a standard deviation of $2.52\%$, reflecting the 
+increasing role played by monetary policy in the UK since May 1997. This was when operational responsibility for setting interest rates was tranferred from the Chancellor of the Exchequer to the Bank of England (\citeboth{king1997changes}). The Bank of England was forced to adjust interest rates 
 several times in response to worsening economic conditions, examples being the steep rate cuts during the 2008 financial crisis to stimulate the economy and the gradual rate hikes in response to 
 post-COVID inflationary pressures. 
 
 The M3 money supply has shown substantial variability, ranging from 494,181 to 3,704,873, 
 in large part influenced by the various Quantitative Easing (QE) programs implemented by the Bank of England 
-in response to the recessions onset by the 2008 financial crisis and the COVID-19 pandemic. These programs aimed to inject liquidity into the economy to stimulate economic activity, thus inflating the overall money supply.
+in response to the recessions caused by the 2008 financial crisis and the COVID-19 pandemic. These programs aimed to inject liquidity into the economy to stimulate economic activity, thus inflating the overall money supply.
 
 \subsection{ARDL-ECM Model}
 
-The study uses an autoregressive distributed lag (ARDL) model in conjunction with 
+The study used an autoregressive distributed lag (ARDL) model in conjunction with 
 an error correction model (ECM) to examine the short-term and long-term effects of macroeconomic indicators on the price of the FTSE250
 and to quantify these relationships. Prior to constructing the model a natural logarithmic transform was applied
 on the variables. This was done so that the coefficients can be interpreted easily as percentage changes. 
@@ -392,11 +395,11 @@ the stock market function was defined as:
 
 The ARDL model specifies the dependent variable as a function of its own 
 lagged values and the lagged values of independent variables. 
-The variables are permitted to be of differing stationarity. The stationarity 
+In this model the variables are permitted to be of differing stationarity. The stationarity 
 of the variables was tested using the Augmented Dickey-Fuller 
 Unit Root Test found within the \texttt{tseries} package in R. The optimal lags for each of the 
 variables were calculated using the Schwarz Information Criterion, contained
-within the auto\_ardl function in the ARDL package in R. 
+within the \texttt{auto\_ardl} function in the \texttt{ARDL} library in R. 
 
 The implicit form \eqref{eq:implicit} was represented in the ARDL model as:
 
@@ -421,15 +424,15 @@ The intercept term was given by $\gamma_0$. The
 remaining $\gamma_i, \delta_i$ coefficients represented the short-run 
 relationships between the variables. The $\lambda$ coefficient 
 described the speed at which short-run deviations from the long-run equilibrium
-were adjusted. A negative $\gamma$ implies that there existed a correction mechanism that guided the deviation 
+were adjusted. A negative $\gamma$ implied that there existed a correction mechanism that guided the deviation 
 back to the long-run equilibrium. These coefficients, as well 
 as the error correction term ECT, were computed using the \texttt{recm} function in the 
 \texttt{ARDL} library in R.
 
-The \texttt{{bounds\_f\_test}} in 
+The \texttt{{bounds\_f\_test}} function in 
 the \texttt{ARDL} library, based on the bounds test approach 
 outlined in \citeboth{pesaran2001}, was used to calculate the 
-F-statistic of the ARDL model and subsequently test for cointegration.
+F-statistic of the ARDL model and then test for cointegration.
 
 \begin{align*}
     H_{0}: \beta_i &= 0\\
@@ -438,7 +441,7 @@ F-statistic of the ARDL model and subsequently test for cointegration.
 
 for all $i = 1,2,3,4$. 
 
-To confirm that the model did not display autocorrelation, heteroskedasticity, non-normality, or structural instability, the Box-Ljung, Breusch-Pagan, Shapiro-Wilk, and CUSUM tests were conducted, respectively
+To confirm that the model did not display autocorrelation, heteroskedasticity, {non-normality}, or structural instability, the Box-Ljung, Breusch-Pagan, Shapiro-Wilk, and CUSUM tests were conducted, respectively
 
 \subsection{RBF Neural Network}
 
@@ -538,10 +541,10 @@ where $\boldsymbol{c_j}$ is a radial basis function centre and $f$ is the radial
 
 Neural networks work best with data that is specified between a specific 
 range (\citeboth{mendelsohn1993}).
-Also, based on the unit root tests in Table \ref{table: unitroot} the variables in the dataset $X$, described in \ref{section: prep},
+Moreover, based on the unit root tests in Table \ref{table: unitroot} the variables in the dataset $X$, described in \ref{section: prep},
 only achieve stationary at first difference.
 Therefore, all of the 
-variables in the dataset $X$ were normalised using a z-score normalisation and differenced,
+variables in the dataset $X$ were normalised using a z-score normalisation and differenced
 as described in Algorithm \ref{alg:z_score_differencing}. 
 
 \begin{algorithm}[H]
@@ -563,7 +566,7 @@ as described in Algorithm \ref{alg:z_score_differencing}.
     \textbf{Update:} $Z_i \leftarrow D_i$ \;
 \end{algorithm}
 
-The inputs into the network were 4-dimensional input vectors, \(\boldsymbol{\mathrm{x_i}}\), from the differenced, normalised dataset $Z$
+The inputs into the network were 4-dimensional input vectors, \(\boldsymbol{\mathrm{x_i}}\), from the differenced and normalised dataset $Z$
 
 \begin{align}
     \boldsymbol{\mathrm{x_i}} = \{\Delta \text{CPI}_i, \Delta \text{EXCHG}_i, \Delta \text{INT}_i, \Delta \text{M3}_i\}
@@ -572,18 +575,17 @@ The inputs into the network were 4-dimensional input vectors, \(\boldsymbol{\mat
 where \(\Delta \text{CPI}_i\), \(\Delta \text{EXCHG}_i\), \(\Delta \text{INT}_i\), and \(\Delta \text{M3}_i\) 
 represented differenced monthly values in the CPI, USD/GBP exchange rate, interest rate, and M3 money supply, respectively. 
 
-The output was a one-dimensional output vector, \(\boldsymbol{\mathrm{y_i}}\) from the dataset $Z$, representing differenced monthly values in the FTSE250.
+The output was a one-dimensional output vector, \(\boldsymbol{\mathrm{y_i}}\) from the dataset $Z$, representing differenced, normalised monthly values in the FTSE250.
 
 
 \begin{align}
     \boldsymbol{\mathrm{y_i}} = \{\Delta \text{FTSE}_{250_i}\}
 \end{align}
 
-The radial basis function neural network was programmed into Python. The Bayesian kernel regression approach outlined by 
-\citeboth{bishop1995}, using the GaussianProcessRegressor package in Python was employed to model the network. For a 
-detailed description of this construction please refer to the \hyperref[sec: appendix]{Appendix}.
+The radial basis function neural network was programmed in Python. The Bayesian kernel regression approach outlined by 
+\citeboth{bishop1995}, using the \texttt{GaussianProcessRegressor} package in Python was employed to model the network\footnote{See \hyperref[sec: appendix]{Appendix}}. 
 
-The approach outlined in the \hyperref[sec: appendix]{Appendix} was used to conduct the train-test process:
+This approach was then used to conduct the train-test process as follows:
 \begin{enumerate}
     \item The optimal hyperparameters in the covariance function \eqref{eq: gimq} 
     were computed using GridSearch Cross Validation. These hyperparameters were:
@@ -611,7 +613,7 @@ The approach outlined in the \hyperref[sec: appendix]{Appendix} was used to cond
     \item The testing process was conducted similarly. The 
     posterior weight distribution that contained the information of the training phase became the new 
     prior distribution. From this the posterior weight distributions for the test observations \eqref{eq: testw}
-    were calculated, and then the predictive output was found (\citeboth{rasmussen2006}).
+    were calculated, and then the predictive output was found by taking the expectation (\citeboth{rasmussen2006}).
     
     \begin{align}
         p(y_{*}|x_{*}, X, y) = \mathcal{N}(\sigma_{n}^{2} x_{*}^{T}A^{-1}Xy, x_{*}^{T}A^{-1}x_{*}) \label{eq: testw}
@@ -662,6 +664,7 @@ level.
         \bottomrule
     \end{tabular}
 \end{table}
+\clearpage
 
 \begin{table}[h!]
     \centering
@@ -698,7 +701,7 @@ level.
 
 \subsubsection{Short-term Impacts}
 
-The interest rate had a significantly
+The interest rate has a significantly
 negative short-term impact on the FTSE250 price in the short term. 
 This can be attributed to the immediate effect of interest rate hikes, 
 which decrease the present value of future earnings according to the 
@@ -707,7 +710,7 @@ affecting investor sentiment and depressing stock prices.
 This finding was consistent with the studies by 
 \citeboth{alam2009}, \citeboth{demir2019}, and \citeboth{neifar2023}.
 
-The money supply had a significantly negative short-term effect on the 
+The money supply has a significantly negative short-term effect on the 
 FTSE250 price, as noted by \citeboth{olawale2014}. 
 According to \citeboth{sellin2001}, this aligned with the Keynesian argument 
 that an increase in money supply leads to expectations of a future 
@@ -716,7 +719,7 @@ funds, driving up current interest rates and reducing stock prices
 through the same mechanism as described previously.
 
 In the short-term, before structural shifts can materialise, the
-weakening of the Pound against the Dollar had a positive, but 
+weakening of the Pound against the Dollar has a positive, but 
 insignificant effect. As the USD has been 
 the global reserve currency for many decades, the depreciation of the Pound 
 against it would lead to increased revenue in Pound terms for FTSE250 
@@ -731,7 +734,7 @@ their profits and they use hedging strategies involving financial instruments
 such as currency forwards which protect against volatility. 
 
 The insignificance of inflation, defined as a positive 
-increase in the CPI, confirmed the findings of 
+increase in the CPI, confirms the findings of 
 \citeboth{gultekin1983}, \citeboth{firth1979} and \citeboth{neifar2023}. 
 The CPI as a measure does not uniformly represent all sectors of the economy, 
 and may consequently be unrepresentative of inflationary changes in the 
@@ -741,8 +744,8 @@ of inflation even further. Moreover, inflation may be anticipated
 by investors and already be factored into stock prices.
 
 The error correction term 
-was negative and statistically significant ensuring that long-run equilibrium 
-can be achieved. The adjustment speed of $0.1794$ indicated that 
+is negative and statistically significant ensuring that long-run equilibrium 
+can be achieved. The adjustment speed of $0.1794$ indicates that 
 roughly $18\%$ of the fluctuation in the previous month's price caused by the 
 macroeconomic variable movements was adjusted back to the long-run equilibrium in the subsequent month. This implies 
 that it takes approximately 6 months for the FTSE250 to return to its long-run equilibrium following 
@@ -750,7 +753,7 @@ changes in the selected macroeconomic variables.
 
 \subsubsection{Long-term Impacts}
 
-The CPI did not have a significant effect on the FTSE250 price over the 
+The CPI does not have a significant effect on the FTSE250 price over the 
 long-run, lending support to the findings of 
 \citeboth{gultekin1983} and \citeboth{firth1979}
 that the Fisher hypothesis is valid for the UK. One of the 
@@ -770,7 +773,7 @@ unanticipated component of a change in money supply would, as established by \ci
 It is also possible that the M3 measure is too broad of a measure and includes overly illiquid components that are not as impactful 
 on the stock market dynamics. 
 
-The USD/GBP exchange rate significantly positively impacted the FTSE250 price, confirming the findings of 
+The USD/GBP exchange rate significantly positively impacts the FTSE250 price, confirming the findings of 
 \citeboth{wong2022}. That there is a significant relationship is not surprising, because whilst the FTSE250 is a more domestic indicator of the London Stock Exchange than the FTSE 100 Index, 
 at times nearly $50\%$ of its earnings have come from abroad, indicating that 
 the value of the Pound has a significant impact on this stock market. There are many reasons for why this effect is observed.
@@ -781,7 +784,7 @@ Moreover, a stronger Pound makes UK assets more appealing to foreign investors, 
 This would drive up demand for UK stocks and positively influence the 
 FTSE250 price.
 
-The interest rate was also found to have significant negative long-term and short-term effects on the stock market, confirming the findings of \citeboth{alam2009}, \citeboth{demir2019} and \citeboth{neifar2023}
+The interest rate is also found to have significant negative long-term and short-term effects on the stock market, confirming the findings of \citeboth{alam2009}, \citeboth{demir2019} and \citeboth{neifar2023}
 This can be explained by the fact that higher interest 
 rates increase the cost of borrowing for companies, leading to reduced investment 
 and lower future earnings potential, in turn depressing stock prices. 
@@ -799,8 +802,8 @@ DCF valuation model, and depress prices.
 \subsubsection{Short-term Forecast}
 
 
-The short-term prediction yielded MAE = $0.07$ and 
-$R^2 = 61\%$ for a 5-month time horizon. The results obtained are presented in Figure \ref{fig:shortmonthly}.
+The model yields a mean absolute error of MAE = $0.07$ and 
+$R^2 = 61\%$ for the short-term forecast. The results obtained are presented in Figure \ref{fig:shortmonthly}.
 The significantly better performance of the model in the short-run
 indicates that the selected macroeconomic variables possess
 a stronger predictive power over shorter periods. This was highlighted 
@@ -836,8 +839,8 @@ a different phenomenon is observed.
 
 
 \subsubsection{Long-term Forecast}
-The model returned a mean absolute error of MAE $=0.16$ and 
-$R^2 = 9\%$ for the long-term prediction, providing a 
+The model returns a mean absolute error of MAE $=0.16$ and 
+$R^2 = 9\%$ for the long-term forecast, providing a 
 $2.4\%$ increase in the $R^2$ obtained by the ARDL-ECM model. The results are presented 
 in Figure \ref{fig:longmonthly}.
 
@@ -879,11 +882,11 @@ Stock markets provide important information on the economy,
 and economic policymakers are vigilant in tracking the fluctuations 
 in these markets, and try to forecast the 
 forthcoming fluctuations based on policy changes that affect the macroeconomy.
-Within this context, the study examined the 
+Within this context, this study examined the 
 impacts of the interest rate, USD/GBP
 exchange rate, the Consumer Price Index, and 
 M3 money supply market activity on
-the FTSE250 over the October 1993 – April 2024 period.
+the FTSE250 over the October 1992 – March 2024 period.
 The results suggested a cointegrated long-run
 relationship between the macroeconomic variables and the stock market index. 
 The long-run coefficients implied that
@@ -925,11 +928,12 @@ such as the LSTM. Other machine learning methods suited for
 forecasting such as Gradient Boosting Machines could 
 also be investigated in future work in this problem domain. 
 
-\section{Appendix}
+\newpage
+
+\section*{Appendix}
 \label{sec: appendix}
 
-
-The GaussianProcessRegressor function in Python's Scikit library is based on the 
+The \texttt{GaussianProcessRegressor} function in Python's \texttt{scikit-learn} library is based on the 
 standard function
 
 \begin{align} 
